@@ -5,7 +5,7 @@ const cors = require('cors');
 const express = require('express')
 const app = express()
 
-const port = 3001 // DEFAULT PORT
+const port = process.env.PORT ||3001 // DEFAULT PORT
 
 ////ROUTER DECLARATIONS
 const temperaturesRouter = require('./routes/temperatures') 
@@ -18,6 +18,10 @@ app.use(cors())
 ////ROUTE DECLARATIONS
 app.use('/temperature',temperaturesRouter) 
 app.use('/humidity',humidityRouter)
+
+app.get('/', function (req, res) {
+  res.send('Hello world')
+})
 
 app.listen(port, () => {
   console.log(`Backend running on port : ${port}`)
