@@ -2,23 +2,23 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
 import { useState } from 'react'
 import { styles } from './styles/styles';
-import NavBar from './components/NavBar';
 import MainScreen from './components/screens/MainScreen';
-import ProfileScreen from './components/screens/ProfileScreen';
+import BottomBar from './components/BottomBar'
+import ProfileScreen from './components/screens/profileScreen/ProfileScreen';
 import NotesScreen from './components/screens/NotesScreen';
 import TopBar from './components/TopBar';
 
 export default function App() {
 
   const [screen, setScreen] = useState(1);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const screens = () => {
     switch (screen) {
       case 1:
         return <MainScreen/>;      
       case 2:
-        return <ProfileScreen/>;
+        return <ProfileScreen isLoggedIn = {isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>;
       case 3:
         return <NotesScreen/>;
       default:
@@ -29,14 +29,14 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topBar}>
+      <View style = {styles.topBar}>
         <TopBar/>
       </View>
       <View style={styles.displayBox}>
         {screens()}
       </View>
       <View style={styles.navBar}>
-        <NavBar setScreen = { setScreen }/>
+        <BottomBar setScreen = { setScreen }/>
       </View>
       <StatusBar style="auto" />
     </View>

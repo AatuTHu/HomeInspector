@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     },
     displayBox: {
       height: '80%',
+      width: '100%',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -30,12 +31,4 @@ export const styles = StyleSheet.create({
       width: '100%',
       justifyContent:'space-around',
     },
-    navButtons: {
-      height: '100%',
-      width: '33%',
-      borderRadius: 5,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: "#fff",
-    }
   });

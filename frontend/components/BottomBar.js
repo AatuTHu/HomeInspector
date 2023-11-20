@@ -1,11 +1,11 @@
-import {useState} from 'react'
 import { Text, View,TouchableOpacity } from 'react-native';
 import { styles } from '../styles/styles';
+import { buttons } from '../styles/buttonStyles';
 
-export default function NavBar({setScreen}) {
+export default function BottomBar({setScreen}) {
   return (
     <View style = {styles.navContainer}>
-      <TouchableOpacity style = { styles.navButtons } onPress={ () => setScreen(3) } >
+      <TouchableOpacity style = { buttons.navButtons } onPress={ () => setScreen(3) } >
         <View>
           <Text>
             Notes
@@ -13,7 +13,7 @@ export default function NavBar({setScreen}) {
         </View>
       </TouchableOpacity>
       
-      <TouchableOpacity style = { styles.navButtons } onPress={ () => setScreen(1) } >
+      <TouchableOpacity style = { buttons.navButtons } onPress={ () => setScreen(1) } >
         <View>
           <Text>
             Home
@@ -21,7 +21,7 @@ export default function NavBar({setScreen}) {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style = { styles.navButtons } onPress={ () => setScreen(2) } >
+      <TouchableOpacity style = { buttons.navButtons } onPress={ () => setScreen(2) } >
         <View>
           <Text>
             Profile
