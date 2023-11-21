@@ -24,7 +24,7 @@ export default function BottomBar({setScreen}) {
       <TouchableOpacity style = { buttons.navButtons } onPress={ () => setScreen(2) } >
         <View>
           <Text>
-            Profile
+            Control
           </Text>
         </View>
       </TouchableOpacity>

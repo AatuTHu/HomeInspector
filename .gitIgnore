@@ -2,3 +2,4 @@
 /backend/.env
 /documents
 /arduinoCodes/ESP32CODE/CREDENTIALS.h
+/frontend/env.js

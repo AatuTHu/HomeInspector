@@ -1,72 +1,31 @@
 import { StyleSheet } from 'react-native'
 
 export const buttons = StyleSheet.create({
-    button_row_container: { 
-        marginTop: 25,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        width: '70%',
-    },
-    inputButton: {
-        width: '10%',
-        marginLeft: '2%',
-        backgroundColor:'grey',
-        borderRadius: 20,
-    },
-    buttonTexts: {
-        padding: 4,
-        fontSize: 17,
-        fontWeight: 'bold',
-        color: 'white',
-        textAlign: 'center',
-    },
-    switchButtonText: {
-        padding: 4,
-        fontSize: 15,
-        fontWeight: 'bold',
-        color: 'white',
-        textAlign: 'center',
-    },
-    signUpButton: {
-        padding: 5,
-        fontSize: 12,
-        width: '40%',
-        height: '100%',
-        borderRadius: 20,
-        backgroundColor: 'orange',
-    },
-    loginButton: {
-        padding: 5,
-        fontSize: 12,
-        width: '40%',
-        height: '100%',
-        borderRadius: 20,
-        backgroundColor: 'blue',
-    },
     updateButton: {
-        padding: 5,
+        padding: 10,
         fontSize: 12,
-        marginTop: 15,
-        width: '90%',
         borderRadius: 20,
-        backgroundColor: 'blue',
+        marginTop: 20,
+        borderWidth: 1,
+        width: '95%',
+        backgroundColor: 'lightblue',
     },
-    deleteButton: {
+    startButton: {
         padding: 5,
         fontSize: 12,
-        marginTop: 15,
-        width: '90%',
         borderRadius: 20,
-        backgroundColor: 'red',
+        borderWidth: 1,
+        width: '50%',
+        backgroundColor: 'lightgrey',
     },
-    signOutButton: {
-        padding: 5,
+    saveButton: {
+        padding: 10,
         fontSize: 12,
-        marginTop: 15,
-        width: '90%',
         borderRadius: 20,
-        backgroundColor: 'orange',
+        marginTop: 20,
+        width: '95%',
+        backgroundColor: 'green',
+        borderWidth: 1,
     },
     navButtons: {
         height: '100%',
@@ -75,5 +34,18 @@ export const buttons = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: "#fff",
-      }
+    },
+    deleteButton: {
+        padding: 10,
+        fontSize: 12,
+        borderRadius: 20,
+        marginTop: 20,
+        width: '95%',
+        backgroundColor: 'red',
+        borderWidth: 1,
+    },
+    buttonText: {
+        fontSize: 20,
+        textAlign: 'center',
+    },
 });
