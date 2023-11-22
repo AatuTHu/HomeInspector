@@ -62,8 +62,16 @@ export const styles = StyleSheet.create({
       fontSize: 20,
       textAlign: 'center',
     },
+    statusText: {
+      fontSize: 20,
+      padding: 10,
+      textAlign: 'center',
+      justifyContent: 'center',
+      color: 'darkgreen',
+    },
     block : {
       height: 100,
+      justifyContent: 'center',
     },
     buttonRowContainer: { 
       width: '95%',
