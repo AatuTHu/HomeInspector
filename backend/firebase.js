@@ -1,5 +1,5 @@
 const { initializeApp } = require("firebase/app");
-const { getFirestore, collection, onSnapshot, query, doc, getDocs,addDoc,orderBy } = require("firebase/firestore");
+const { getFirestore, collection, onSnapshot, query, doc, getDocs,addDoc,orderBy,deleteDoc } = require("firebase/firestore");
 const { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } = require("firebase/auth");
 
 
@@ -25,6 +25,7 @@ module.exports = {
   TEMPERATURE,
   collection,
   addDoc,
+  deleteDoc,
   orderBy,
   onSnapshot,
   query,
