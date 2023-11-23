@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
       backgroundColor: '#fff',
       paddingTop: Constants.statusBarHeight,
     },
-    controlContainer: {    
+    controlContainer: {
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -16,6 +16,8 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: "red",
+      borderBottomLeftRadius: 20,
+      borderBottomRightRadius: 20
     },
     displayBox: {
       flex: 1,
@@ -34,19 +36,70 @@ export const styles = StyleSheet.create({
       width: '100%',
       justifyContent:'space-around',
     },
-    headingBoxes:{
+    headingBox:{
       width: '95%',
       height: 50,
       justifyContent: 'center',
       borderRadius: 22,
       marginTop: 20,
     },
-    infoBoxes: {
+    smallInfoBox: {
       width: '95%',
       height: 50,
       backgroundColor: 'lightgrey',
       justifyContent: 'center',
       marginTop: 10,
+    },
+    dataTemperatureContainer:{
+      height: 250,
+      width: '30%',
+      overflow: 'hidden',
+      backgroundColor: 'white',
+      justifyContent: 'flex-end',
+      borderRadius: 60,
+      borderWidth:2
+    },
+    dataHumidityContainer: {
+      height: 250,
+      width: '30%',
+      overflow: 'hidden',
+      backgroundColor: 'white',
+      justifyContent: 'flex-end',
+      borderRadius: 10,
+      borderWidth:1,
+      borderTopLeftRadius: 60,
+      borderTopRightRadius: 60,
+    },
+    textDataContainer:{
+      height: 250,
+      width: '50%',
+      justifyContent: 'space-evenly',
+    },
+    mediumInfoBox: {
+      display: 'flex',
+      flexDirection: 'row',
+      width: '95%',
+      height: 300,
+      borderBottomLeftRadius: 5,
+      borderBottomRightRadius: 5,
+      backgroundColor: 'lightgrey',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      marginTop: 20,
+      borderTopWidth: 3,
+    },
+    mediumInfoBox: {
+      display: 'flex',
+      flexDirection: 'row',
+      width: '95%',
+      height: 300,
+      borderBottomLeftRadius: 5,
+      borderBottomRightRadius: 5,
+      backgroundColor: 'lightgrey',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      marginTop: 20,
+      borderTopWidth: 3,
     },
     statusBox: {
       backgroundColor: 'lightgrey',
@@ -54,11 +107,14 @@ export const styles = StyleSheet.create({
       width: '30%',
       borderRadius: 22,
     },
+    mercury: {
+      backgroundColor: 'darkred',
+    }, 
     headingText: {
       fontSize: 20,
       fontWeight: 'bold',
     },
-    subHeading: {
+    subHeadingText: {
       fontSize: 20,
       textAlign: 'center',
     },

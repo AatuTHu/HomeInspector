@@ -4,8 +4,8 @@ import React from 'react'
 
 export default function InputBox({placeholder, text, newText, onSubmitEditing}) {
   return (
-    <View style = { styles.infoBoxes }> 
-        <TextInput style = { styles.subHeading } placeholder = { placeholder } onChangeText={ (text) => newText(text)} onSubmitEditing={ onSubmitEditing }>{text}</TextInput>
+    <View style = { styles.smallInfoBox }> 
+        <TextInput style = { styles.subHeadingText } placeholder = { placeholder } onChangeText={ (text) => newText(text)} onSubmitEditing={ onSubmitEditing }>{text}</TextInput>
     </View>
   )
 }

@@ -1,31 +1,26 @@
-import { Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import { buttons } from '../../../styles/buttonStyles'
 import React from 'react'
 
 export default function Buttons({text, type, onPress}) {
     
-    const findStyle = () => { 
-        switch (type) {
-            case 'start':
-            return buttons.startButton
-            
-            case 'save':
-            return buttons.saveButton
-                
-            case 'delete':
-            return buttons.deleteButton
-            
-            case 'nav':
-            return buttons.navButtons
-        
-            case 'update':
-            return buttons.updateButton
-        
-        }
+    const getButtonStyle = () => { 
+     
+      const styleMap = {
+        start: buttons.startButton,
+        save: buttons.saveButton,
+        delete: buttons.deleteButton,
+        nav: buttons.navButtons,
+        update: buttons.updateButton,
+        nav: buttons.navButtons,
+        refresh: buttons.refreshButton
+      };
+    
+      return styleMap[type] || buttons.defaultStyle;
     }
 
     return (
-      <TouchableOpacity style={findStyle()} onPress={onPress}>
+      <TouchableOpacity style={getButtonStyle()} onPress={onPress}>
         <Text style={buttons.buttonText}>{text}</Text>
       </TouchableOpacity>
     )

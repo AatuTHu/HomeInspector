@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native'
 export const buttons = StyleSheet.create({
     updateButton: {
         padding: 10,
-        fontSize: 12,
         borderRadius: 20,
         marginTop: 20,
         borderWidth: 1,
@@ -12,7 +11,6 @@ export const buttons = StyleSheet.create({
     },
     startButton: {
         padding: 5,
-        fontSize: 12,
         borderRadius: 20,
         borderWidth: 1,
         width: '50%',
@@ -20,12 +18,17 @@ export const buttons = StyleSheet.create({
     },
     saveButton: {
         padding: 10,
-        fontSize: 12,
         borderRadius: 20,
         marginTop: 20,
         width: '95%',
         backgroundColor: 'green',
         borderWidth: 1,
+    },
+    refreshButton: {
+        margin: 20,
+        padding: 2,
+        height: 50,
+        width: 50,
     },
     navButtons: {
         height: '100%',
@@ -37,7 +40,6 @@ export const buttons = StyleSheet.create({
     },
     deleteButton: {
         padding: 10,
-        fontSize: 12,
         borderRadius: 20,
         marginTop: 20,
         width: '95%',
