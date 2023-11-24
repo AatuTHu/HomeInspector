@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { SafeAreaView,View } from 'react-native';
 import { useState } from 'react'
 import { styles } from './styles/styles';
 import HomeScreen from './components/screens/HomeScreen';

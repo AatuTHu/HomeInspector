@@ -1,0 +1,459 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ControlScreen renders correctly with custom props 1`] = `
+<RCTScrollView>
+  <View>
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "borderRadius": 22,
+            "height": 50,
+            "justifyContent": "center",
+            "marginTop": 20,
+            "width": "95%",
+          }
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "fontSize": 20,
+                "fontWeight": "bold",
+              },
+            ]
+          }
+        >
+          Wi-Fi ssid
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "backgroundColor": "lightgrey",
+            "height": 50,
+            "justifyContent": "center",
+            "marginTop": 10,
+            "width": "95%",
+          }
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "fontSize": 20,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          WiFi
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "borderRadius": 22,
+            "height": 50,
+            "justifyContent": "center",
+            "marginTop": 20,
+            "width": "95%",
+          }
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "fontSize": 20,
+                "fontWeight": "bold",
+              },
+            ]
+          }
+        >
+          Device location
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "backgroundColor": "lightgrey",
+            "height": 50,
+            "justifyContent": "center",
+            "marginTop": 10,
+            "width": "95%",
+          }
+        }
+      >
+        <TextInput
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          placeholder="where ..."
+          style={
+            {
+              "fontSize": 20,
+              "textAlign": "center",
+            }
+          }
+        >
+          LivingRoom
+        </TextInput>
+      </View>
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "backgroundColor": "green",
+            "borderRadius": 20,
+            "borderWidth": 1,
+            "marginTop": 20,
+            "opacity": 1,
+            "padding": 10,
+            "width": "95%",
+          }
+        }
+      >
+        <Text
+          style={
+            {
+              "fontSize": 20,
+              "textAlign": "center",
+            }
+          }
+        >
+          save
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "height": 100,
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          style={
+            {
+              "color": "darkgreen",
+              "fontSize": 20,
+              "justifyContent": "center",
+              "padding": 10,
+              "textAlign": "center",
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          {
+            "display": "flex",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginBottom": 10,
+            "marginTop": 25,
+            "width": "95%",
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "backgroundColor": "lightgrey",
+              "borderRadius": 20,
+              "borderWidth": 1,
+              "opacity": 1,
+              "padding": 5,
+              "width": "50%",
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "fontSize": 20,
+                "textAlign": "center",
+              }
+            }
+          >
+            start
+          </Text>
+        </View>
+        <View
+          style={
+            {
+              "backgroundColor": "lightgrey",
+              "borderRadius": 22,
+              "justifyContent": "center",
+              "width": "30%",
+            }
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "fontSize": 20,
+                  "textAlign": "center",
+                },
+              ]
+            }
+          >
+            0
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "display": "flex",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginBottom": 10,
+            "marginTop": 25,
+            "width": "95%",
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "backgroundColor": "lightgrey",
+              "borderRadius": 20,
+              "borderWidth": 1,
+              "opacity": 1,
+              "padding": 5,
+              "width": "50%",
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "fontSize": 20,
+                "textAlign": "center",
+              }
+            }
+          >
+            lights
+          </Text>
+        </View>
+        <View
+          style={
+            {
+              "backgroundColor": "lightgrey",
+              "borderRadius": 22,
+              "justifyContent": "center",
+              "width": "30%",
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "fontSize": 20,
+                "textAlign": "center",
+              }
+            }
+          >
+            <Text>
+              Off
+            </Text>
+          </Text>
+        </View>
+      </View>
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "backgroundColor": "lightblue",
+            "borderRadius": 20,
+            "borderWidth": 1,
+            "marginTop": 20,
+            "opacity": 1,
+            "padding": 10,
+            "width": "95%",
+          }
+        }
+      >
+        <Text
+          style={
+            {
+              "fontSize": 20,
+              "textAlign": "center",
+            }
+          }
+        >
+          See all the measurements
+        </Text>
+      </View>
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "backgroundColor": "red",
+            "borderRadius": 20,
+            "borderWidth": 1,
+            "marginTop": 20,
+            "opacity": 1,
+            "padding": 10,
+            "width": "95%",
+          }
+        }
+      >
+        <Text
+          style={
+            {
+              "fontSize": 20,
+              "textAlign": "center",
+            }
+          }
+        >
+          Delete measurements
+        </Text>
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;

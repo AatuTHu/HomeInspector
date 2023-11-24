@@ -3,4 +3,5 @@
 /documents
 /arduinoCodes/ESP32CODE/CREDENTIALS.h
 /frontend/env.js
-frontend/.vs/slnx.sqlite
+/frontend/.vs/slnx.sqlite
+/frontend/coverage

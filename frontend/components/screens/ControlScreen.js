@@ -7,7 +7,7 @@ import InfoBox from "./atoms/InfoBox"
 import InputBox from "./atoms/InputBox"
 
 
-export default function Control({ssid, location, setScreen}) {
+export default function ControlScreen({ssid, location, setScreen}) {
 
   const { apiKey,locationURL,lightURL,startURL } = variables
 
@@ -20,54 +20,61 @@ export default function Control({ssid, location, setScreen}) {
   const lightSwitch = async() => {
     setLights(!lights)
     let mode = lights ?  0 : 1
-    await fetch(lightURL, {
+
+    const response = await fetch(lightURL, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `apiKey=${apiKey}&lightMode=${mode}`,
-    }).then( res => {
-      if(res.status === 200) {
-        lights ? setStatusText("Lights Off") : setStatusText("Lights On")
-      } else {
-        setStatusText("There was an error, Try again later")
-        setLights(false)
-      }
     }).catch( error => {
       console.log(error)
     })
+
+    if(response.status === 200) {
+      lights ? setStatusText("Lights Off") : setStatusText("Lights On")
+    } else {
+      setStatusText("There was an error, Try again later")
+      setLights(false)
+    }
+
   }
 
   const saveLocation = async() => {
-   await fetch(locationURL, {
+
+   const response = await fetch(locationURL, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `apiKey=${apiKey}&location=${newLocation}`,
-    }).then( res => {
-      if(res.status === 200) {
-        setStatusText("Location switched")
-      } else {
-        setStatusText("There was an error, Try again later")
-      }
     }).catch( error => {
       console.log(error)
     })
+
+    if(response.status === 200) {
+      setStatusText("Location switched")
+    } else {
+      setStatusText("There was an error, Try again later")
+    }
+
   }
 
   const startMeasuring = async() => {
+
     setStart(!start)
     let mode = start? 0 : 1
-    await fetch(startURL, {
+
+    const response = await fetch(startURL, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `apiKey=${apiKey}&measuringMode=${mode}`,
-    }).then( res => {
-      if(res.status === 200) {
-        start ? setStatusText("Measurements stopped") : setStatusText("Measurements started")
-      } else {
-        setStatusText("There was an error, Try again later")
-      }
     }).catch( error => {
       console.log(error)
     })
+
+    if(response.status === 200) {
+      start ? setStatusText("Measurements stopped") : setStatusText("Measurements started")
+    } else {
+      setStatusText("There was an error, Try again later")
+    }
+
   }
 
   const showAll = () => { 
@@ -98,7 +105,7 @@ export default function Control({ssid, location, setScreen}) {
       </View>
 
       <View style = { styles.buttonRowContainer }>
-        <Buttons text = "Lights on/off" type = "start" onPress={ lightSwitch }/>
+        <Buttons text = "lights" type = "start" onPress={ lightSwitch }/>
         <View style = { styles.statusBox }>
             <Text style = { styles.subHeadingText }>{lights ? (<Text style = {{"color" : "yellow"}} >On</Text>) : (<Text>Off</Text>)}</Text>
         </View>

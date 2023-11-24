@@ -4,15 +4,11 @@ import { styles } from '../../styles/styles'
 import DataCard from './atoms/DataCard'
 import Buttons from './atoms/Buttons'
 
-export default function HomeScreenScreen({temperature, location, time}) {
+export default function HomeScreen({temperature, humidity, location, time}) {
 
-  temperature = 26
-  humidity = 21.23
-  location = 'Living Room'
-  time = '12 am'
 
   const refreshData = () => {
-
+    
   }
 
   return (
@@ -33,8 +29,7 @@ export default function HomeScreenScreen({temperature, location, time}) {
           time={time} 
           dataType = 'humidity'
           fillingColor = 'darkblue'
-          unit = '%'
-          />
+          unit = '%'/>
         <Buttons type = 'update' onPress = { refreshData } text = 'refresh'/>
         </View>
       </ScrollView>

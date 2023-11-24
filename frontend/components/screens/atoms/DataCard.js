@@ -8,7 +8,6 @@ export default function DataCard({data,location,time, dataType, fillingColor, un
 
     const percentage = (data / maxValue) * 100;
 
-
     const dataContainerType = () => {
 
        const styleMap = {
@@ -30,8 +29,7 @@ export default function DataCard({data,location,time, dataType, fillingColor, un
 
         <View style = {styles.textDataContainer}>
             <Text style = { styles.headingText }>{location}</Text>
-            <Text style = { styles.headingText }>{time}
-            </Text>
+            <Text style = { styles.headingText }>{time}</Text>
         </View>
     </View>
   )
