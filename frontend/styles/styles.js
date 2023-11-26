@@ -153,11 +153,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonRowContainer: { 
-    width: '95%',
-    marginTop: 25,
-    marginBottom: 10,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '95%',
+    marginTop: 1,
+    marginBottom: 20,
   },
 });

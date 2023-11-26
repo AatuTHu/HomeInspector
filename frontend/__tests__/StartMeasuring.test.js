@@ -20,15 +20,15 @@ describe('StartMeasuring', () => {
         // Mocking the fetch function
         fetch.mockResponseOnce(JSON.stringify(), {
           status: 202,
-         });
+         })
       
-        const { getByText } = render(<StartMeasuring startURL='' setStatusText={mockFunction}/>);
+        const { getByText } = render(<StartMeasuring startURL='' setStatusText={mockFunction}/>)
       
-        const startButton = getByText('start');
-        fireEvent.press(startButton);
+        const startButton = getByText('start')
+        fireEvent.press(startButton)
       
         await waitFor(() => {
-          expect(getByText('On')).toBeDefined(); 
+          expect(getByText('On')).toBeDefined()
         });
       });
 
@@ -36,16 +36,16 @@ describe('StartMeasuring', () => {
         mockFunction = jest.fn()
         fetch.mockResponseOnce(JSON.stringify(), {
           status: 403,
-         });
+         })
     
         const { getByText } = render(<StartMeasuring startURL= '' setStatusText={mockFunction}/>)
     
-        const startButton = getByText('start');
+        const startButton = getByText('start')
     
-        fireEvent.press(startButton);
+        fireEvent.press(startButton)
     
         await waitFor(() => {
-          expect(getByText('Off')).toBeDefined(); 
+          expect(getByText('Off')).toBeDefined();
         });
     
       })

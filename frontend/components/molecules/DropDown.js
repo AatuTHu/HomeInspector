@@ -4,7 +4,7 @@ import { styles } from '../../styles/styles'
 import Buttons from '../atoms/Buttons'
 import InfoBox from '../atoms/InfoBox'
 
-export default function DropDown({setSelected,selected, location}) {
+export default function DropDown({setSelected,selected,options}) {
 
     const [hide, setHide] = useState(true)
 
@@ -19,23 +19,23 @@ export default function DropDown({setSelected,selected, location}) {
 
   return (<>
   <InfoBox text = "Sensor" textStyle = 'headingText' type = 'heading'/>
-  <Buttons text = 'Select Sensor..' onPress = { onPressDropDown }></Buttons>
+  <Buttons text = 'Select a Sensor..' onPress = { onPressDropDown }></Buttons>
     <View style = { styles.displayBox}>    
-      { hide ? (<>
-            <View>
-                <Text style = { styles.selectedText }>{selected}</Text>
-            </View>
-        </>) : (<>
-            <View style = {styles.dropDownBox}>
-                <TouchableOpacity style = {styles.dropDownText} onPress = { () => onSelect('humidity')}>
-                    <Text style = {styles.dropDownText}>Humidity sensor</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style = {styles.dropDownText} onPress = { () => onSelect('temperature')}>
-                    <Text style = {styles.dropDownText}>Temperature sensor</Text>
-                </TouchableOpacity>
-            </View>
-        </>)}
+    { hide ? (<>
+    <View>
+        <Text style = { styles.selectedText }>{selected}</Text>
+    </View>
+      </>) : (<>
+          <View style = {styles.dropDownBox}>
+              {options.map((options) => {
+                  return(<View key = {options.id}>
+                    <TouchableOpacity  style = {styles.dropDownText} onPress = { () => onSelect(options.value)}>
+                      <Text style = {styles.dropDownText}>{options.name}</Text>
+                    </TouchableOpacity>
+                  </View>)
+              })}
+          </View>
+      </>)}
     </View>
     
     </>)

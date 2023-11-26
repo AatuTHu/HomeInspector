@@ -2,7 +2,7 @@ import { Text, TouchableOpacity } from 'react-native'
 import { buttons } from '../../styles/buttonStyles'
 import React from 'react'
 
-export default function Buttons({text, type, onPress, testID}) {
+export default function Buttons({text, type, onPress}) {
     
     const getButtonStyle = () => { 
      
@@ -13,14 +13,15 @@ export default function Buttons({text, type, onPress, testID}) {
         nav: buttons.navButtons,
         update: buttons.updateButton,
         nav: buttons.navButtons,
-        refresh: buttons.refreshButton
+        refresh: buttons.refreshButton,
+        pin: buttons.pinButton
       };
     
       return styleMap[type] || buttons.defaultStyle;
     }
 
     return (
-      <TouchableOpacity style={getButtonStyle()} onPress={onPress} testID={testID}>
+      <TouchableOpacity style={getButtonStyle()} onPress={onPress}>
         <Text style={buttons.buttonText}>{text}</Text>
       </TouchableOpacity>
     )

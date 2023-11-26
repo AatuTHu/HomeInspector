@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView,View } from 'react-native';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { styles } from './styles/styles';
+import variables from './env'
 import HomeScreen from './components/cells/HomeScreen';
 import ControlScreen from './components/cells/ControlScreen'
-import NotesScreen from './components/cells/NotesScreen';
+import PinnedScreen from './components/cells/PinnedScreen';
 import MetricsScreen from './components/cells/MetricsScreen';
 import BottomBar from './components/atoms/BottomBar'
 import TopBar from './components/atoms/TopBar';
@@ -12,20 +13,43 @@ import TopBar from './components/atoms/TopBar';
 
 export default function App() {
 
-  const [screen, setScreen] = useState(1);
+  const { humidityURL, temperatureURL } = variables
+  const [temperature, setTemperature] = useState([])
+  const [humidity, setHumidity] = useState([])
+  const [screen, setScreen] = useState(1)
+
+  useEffect(() => {
+    async function fetchData () {
+        const result = await fetch(humidityURL).then((res)=>
+        res.json()
+      )
+      setHumidity(result)
+    }
+   fetchData()
+  }, [])
+
+  useEffect(() =>{
+    async function fetchData() {
+      const result = await fetch(temperatureURL).then((res)=>
+      res.json()
+    )
+      setTemperature(result)
+    }
+   fetchData()
+  }, [])
 
   const screens = () => {
     switch (screen) {
       case 1:
-        return <HomeScreen/>    
+        return <HomeScreen temperature={temperature} humidity={humidity}/>    
       case 2:
         return <ControlScreen setScreen={ setScreen }/>
       case 3:
-        return <NotesScreen/>
+        return <PinnedScreen/>
       case 4:
-        return <MetricsScreen setScreen={ setScreen }/>
+        return <MetricsScreen setScreen={ setScreen } temperature={temperature} humidity={humidity}/>
       default:
-      break;
+        return <HomeScreen temperature={temperature} humidity={humidity}/>
       }
   }
 

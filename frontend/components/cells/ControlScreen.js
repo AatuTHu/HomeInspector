@@ -10,21 +10,21 @@ import LightSwitch from "../molecules/LightSwitch"
 
 export default function ControlScreen({temperatureLocation,humidityLocation,setScreen}) {
 
-  const { humidityLocationURL,humidityStartURL,temperatureStartURL,temperatureLocationURL, lightURL} = variables
+  const { humidityLocationURL,humidityStartURL,temperatureStartURL,temperatureLocationURL} = variables
+
+  const options = [
+    {id : 1 ,name : "humidity", value : "humidity"},
+    {id : 2, name : "temperature", value : "temperature"}
+  ]
 
   let location
   let startURL
   let locationURL
 
-  const [statusText, setStatusText] = useState("")
   const [selected, setSelected] = useState("")
   
   const showAll = () => { 
     setScreen(4);
-  }
-
-  const deleteAll = () => {
-    
   }
 
   if(selected === 'temperature') {
@@ -38,19 +38,17 @@ export default function ControlScreen({temperatureLocation,humidityLocation,setS
   }
 
   return (
-    <>
     <ScrollView>
       <View style = { styles.controlContainer }>
-          <DropDown selected={selected} setSelected={setSelected} location = { location }/>
-        <SaveSensorLocation location={location} setStatusText = { setStatusText } statusText = {statusText} locationURL = { locationURL }/>
-      
-      <StartMeasuring setStatusText = { setStatusText } startURL={startURL}/>
-        <LightSwitch setStatusText = { setStatusText } lightURL={lightURL}/>
-    
+          <DropDown selected={selected} setSelected={setSelected} location = { location } options={options}/>
+          { selected ? (<>
+            <SaveSensorLocation location={location} locationURL = { locationURL }/>
+              <StartMeasuring startURL={startURL}/>
+          </>) : (<></>)}
+       
+          <LightSwitch/>
           <Buttons text = "See all the measurements" type = "update" onPress={ showAll }/>
-        <Buttons text = "Delete measurements" type = "delete" onPress={ deleteAll }/>
       </View>
     </ScrollView>
-  </>
   )
 }

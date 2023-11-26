@@ -97,8 +97,28 @@ exports[`SaveSensorLocation renders correctly 1`] = `
         }
       }
     >
-      save
+      Save
     </Text>
+  </View>,
+  <View
+    style={
+      {
+        "height": 100,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "darkgreen",
+          "fontSize": 20,
+          "justifyContent": "center",
+          "padding": 10,
+          "textAlign": "center",
+        }
+      }
+    />
   </View>,
 ]
 `;

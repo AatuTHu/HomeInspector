@@ -1,10 +1,9 @@
 import React from 'react'
-import { render, fireEvent, waitFor } from '@testing-library/react-native'
+import { render } from '@testing-library/react-native'
 import HomeScreen from '../components/cells/HomeScreen'
 
 describe('HomeScreen', () => {
-  
-  
+
   it('Renders InfoBox when no temperature or humidity is available', () => {
     
     const { getAllByText } = render(
@@ -16,41 +15,33 @@ describe('HomeScreen', () => {
 
   it('renders initial state correctly', () => {
 
-    const temperature = 20
-    const humidity= 50
-    const location= 'Living Room'
-    const time= '12:00'
+    const humidity = [{humidity: 23, id: 1, location: 'Kitchen'}]
+    const temperature = [{temperature: 25, id: 2, location: 'Living Room'}]
 
-    const { getAllByText } = render(
-      <HomeScreen temperature={temperature} humidity={humidity} location={location} time={time}/>
+    const { getAllByText } = render(  
+      <HomeScreen  humidity={humidity} temperature={temperature}/>
     );
   
-    expect(getAllByText('20 °C')).toBeTruthy()
-    expect(getAllByText('50 %')).toBeTruthy()
+    expect(getAllByText('25 °C')).toBeTruthy()
+    expect(getAllByText('23 %')).toBeTruthy()
     expect(getAllByText('Living Room')).toBeTruthy()
-    expect(getAllByText('12:00')).toBeTruthy()
+    expect(getAllByText('Kitchen')).toBeTruthy()
   });
 
   it('should Render one DataCard if either only temperature has been given', () => {
-    const temperature = 20
-    const location= 'Living Room'
-    const time= '12:00'
-    const { getByText } = render(<HomeScreen temperature={temperature} location={location} time={time}/>)
+    const temperature = [{temperature: 20, id: 1, location: 'Living Room'}]
+    const { getByText } = render(<HomeScreen temperature={temperature}/>)
 
     expect(getByText('20 °C')).toBeTruthy()
     expect(getByText('Living Room')).toBeTruthy()
-    expect(getByText('12:00')).toBeTruthy()
   })
 
   it('should Render one DataCard if either only humidity has been given', () => {
-    const humidity = 25
-    const location= 'Kitchen'
-    const time= '13:00'
-    const { getByText } = render(<HomeScreen humidity={humidity} location={location} time={time}/>)
+    const humidity = [{humidity: 23, id: 1, location: 'Kitchen'}]
+    const { getByText } = render(<HomeScreen humidity={humidity}/>)
 
-    expect(getByText('25 %')).toBeTruthy()
+    expect(getByText('23 %')).toBeTruthy()
     expect(getByText('Kitchen')).toBeTruthy()
-    expect(getByText('13:00')).toBeTruthy()
   }) 
 
 });

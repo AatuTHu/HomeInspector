@@ -4,7 +4,7 @@ import { styles } from '../../styles/styles'
 
 export default function DataCard({data,location,time, dataType, fillingColor, unit}) {
 
-    const maxValue = 55;
+    const maxValue = 40;
 
     const percentage = (data / maxValue) * 100;
 

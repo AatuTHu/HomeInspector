@@ -42,8 +42,16 @@ export const buttons = StyleSheet.create({
         padding: 10,
         borderRadius: 20,
         marginTop: 20,
-        width: '95%',
+        width: '35%',
         backgroundColor: 'red',
+        borderWidth: 1,
+    },
+    pinButton: {
+        padding: 10,
+        borderRadius: 20,
+        marginTop: 20,
+        width: '50%',
+        backgroundColor: 'yellow',
         borderWidth: 1,
     },
     buttonText: {

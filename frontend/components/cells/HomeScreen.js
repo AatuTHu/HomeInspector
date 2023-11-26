@@ -5,8 +5,7 @@ import DataCard from '../atoms/DataCard'
 import Buttons from '../atoms/Buttons'
 import InfoBox from '../atoms/InfoBox'
 
-export default function HomeScreen({temperature, humidity, location, time}) {
-
+export default function HomeScreen({temperature, humidity}) {
 
   const refreshData = () => {
  
@@ -22,32 +21,32 @@ export default function HomeScreen({temperature, humidity, location, time}) {
     )
   } else { 
     return (
-      <>
         <ScrollView>
           <View style = { styles.controlContainer }>
             {temperature !== undefined ? <>
-              <DataCard 
-            data = { temperature } 
-            location={location} 
-            time={time}
-            dataType = 'temperature' 
-            fillingColor= 'lightblue'
-            unit = '°C'/>
+            {temperature.map ( (temperature ) => { return (<View key = {temperature.id}>
+            <DataCard 
+              data = { temperature.temperature } 
+              location= {temperature.location} 
+              time= {''}
+              dataType = 'temperature' 
+              fillingColor= 'lightblue'
+              unit = '°C'/></View>)})}
             </> : <></>}
             
             {humidity !== undefined ? <>
+             {humidity.map ( (humidity) => { return (<View key = {humidity.id}>
             <DataCard 
-            data = { humidity } 
-            location={location} 
-            time={time}
-            dataType = 'humidity'
-            fillingColor = 'darkblue'
-            unit = '%'/>
-            </> : <></>}
+              data = { humidity.humidity } 
+              location={humidity.location} 
+              time={''}
+              dataType = 'humidity'
+              fillingColor = 'darkblue'
+              unit = '%'/></View>)})}
+             </> : <></>}
             
-          <Buttons type = 'update' onPress = { refreshData } text = 'refresh'/>
+          <Buttons type = 'update' onPress = { refreshData } text = 'Refresh'/>
           </View>
         </ScrollView>
-      </>
       )}
 }
