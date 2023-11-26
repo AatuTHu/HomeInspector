@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity } from 'react-native'
-import { buttons } from '../../../styles/buttonStyles'
+import { buttons } from '../../styles/buttonStyles'
 import React from 'react'
 
 export default function Buttons({text, type, onPress, testID}) {

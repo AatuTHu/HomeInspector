@@ -1,5 +1,5 @@
 import { View, TextInput } from 'react-native'
-import { styles } from '../../../styles/styles'
+import { styles } from '../../styles/styles'
 import React from 'react'
 
 export default function InputBox({placeholder, text, newText, onSubmitEditing}) {

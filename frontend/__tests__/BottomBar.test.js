@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import BottomBar from '../components/BottomBar';
+import BottomBar from '../components/atoms/BottomBar';
 
 describe('BottomBar', () => {
   it('renders correctly with custom props', () => {

@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import { styles } from '../../../styles/styles'
+import { styles } from '../../styles/styles'
 import React from 'react'
 
 export default function InfoBox({text, type, textStyle}) {

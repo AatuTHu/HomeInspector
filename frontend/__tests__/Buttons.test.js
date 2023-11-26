@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import Buttons from '../components/screens/atoms/Buttons';
+import Buttons from '../components/atoms/Buttons';
 
 describe('Buttons', () => {
 

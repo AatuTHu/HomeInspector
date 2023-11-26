@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { styles } from '../../../styles/styles'
+import { styles } from '../../styles/styles'
 
 export default function DataCard({data,location,time, dataType, fillingColor, unit}) {
 
@@ -17,8 +17,6 @@ export default function DataCard({data,location,time, dataType, fillingColor, un
 
        return styleMap[dataType]
     }
-
- 
 
   return (
     <View style = { styles.mediumInfoBox}>

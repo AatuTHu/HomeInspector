@@ -51,11 +51,9 @@ exports[`BottomBar renders correctly with custom props 1`] = `
       }
     }
   >
-    <View>
-      <Text>
-        Notes
-      </Text>
-    </View>
+    <Text>
+      Notes
+    </Text>
   </View>
   <View
     accessibilityState={
@@ -97,11 +95,9 @@ exports[`BottomBar renders correctly with custom props 1`] = `
       }
     }
   >
-    <View>
-      <Text>
-        Home
-      </Text>
-    </View>
+    <Text>
+      Home
+    </Text>
   </View>
   <View
     accessibilityState={
@@ -143,11 +139,9 @@ exports[`BottomBar renders correctly with custom props 1`] = `
       }
     }
   >
-    <View>
-      <Text>
-        Control
-      </Text>
-    </View>
+    <Text>
+      Control
+    </Text>
   </View>
 </View>
 `;

@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SaveSensorLocation renders correctly 1`] = `
+[
+  <View
+    style={
+      {
+        "borderRadius": 22,
+        "height": 50,
+        "justifyContent": "center",
+        "marginTop": 20,
+        "width": "95%",
+      }
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "fontSize": 20,
+            "fontWeight": "bold",
+          },
+        ]
+      }
+    >
+      Device location
+    </Text>
+  </View>,
+  <View
+    style={
+      {
+        "backgroundColor": "lightgrey",
+        "height": 50,
+        "justifyContent": "center",
+        "marginTop": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholder="where ..."
+      style={
+        {
+          "fontSize": 20,
+          "textAlign": "center",
+        }
+      }
+    />
+  </View>,
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "backgroundColor": "green",
+        "borderRadius": 20,
+        "borderWidth": 1,
+        "marginTop": 20,
+        "opacity": 1,
+        "padding": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "fontSize": 20,
+          "textAlign": "center",
+        }
+      }
+    >
+      save
+    </Text>
+  </View>,
+]
+`;

@@ -2,25 +2,24 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView,View } from 'react-native';
 import { useState } from 'react'
 import { styles } from './styles/styles';
-import HomeScreen from './components/screens/HomeScreen';
-import ControlScreen from './components/screens/ControlScreen'
-import BottomBar from './components/BottomBar'
-import NotesScreen from './components/screens/NotesScreen';
-import TopBar from './components/TopBar';
-import MetricsScreen from './components/screens/MetricsScreen';
+import HomeScreen from './components/cells/HomeScreen';
+import ControlScreen from './components/cells/ControlScreen'
+import NotesScreen from './components/cells/NotesScreen';
+import MetricsScreen from './components/cells/MetricsScreen';
+import BottomBar from './components/atoms/BottomBar'
+import TopBar from './components/atoms/TopBar';
 
 
 export default function App() {
 
   const [screen, setScreen] = useState(1);
-  const [ssid, setSsid] = useState("");
 
   const screens = () => {
     switch (screen) {
       case 1:
         return <HomeScreen/>    
       case 2:
-        return <ControlScreen ssid = { ssid } setScreen={ setScreen }/>
+        return <ControlScreen setScreen={ setScreen }/>
       case 3:
         return <NotesScreen/>
       case 4:

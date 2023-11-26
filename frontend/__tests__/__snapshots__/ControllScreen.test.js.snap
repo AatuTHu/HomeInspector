@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ControlScreen renders correctly with custom props 1`] = `
+exports[`ControlScreen renders correctly 1`] = `
 <RCTScrollView>
   <View>
     <View
@@ -32,32 +32,76 @@ exports[`ControlScreen renders correctly with custom props 1`] = `
             ]
           }
         >
-          Wi-Fi ssid
+          Sensor
         </Text>
       </View>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           {
-            "backgroundColor": "lightgrey",
-            "height": 50,
-            "justifyContent": "center",
-            "marginTop": 10,
-            "width": "95%",
+            "opacity": 1,
           }
         }
       >
         <Text
           style={
-            [
-              {
-                "fontSize": 20,
-                "textAlign": "center",
-              },
-            ]
+            {
+              "fontSize": 20,
+              "textAlign": "center",
+            }
           }
         >
-          WiFi
+          Select Sensor..
         </Text>
+      </View>
+      <View
+        style={
+          {
+            "flex": 1,
+            "flexDirection": "column",
+            "width": "100%",
+          }
+        }
+      >
+        <View>
+          <Text
+            style={
+              {
+                "color": "black",
+                "fontSize": 20,
+                "opacity": 0.5,
+                "padding": 10,
+                "textAlign": "center",
+              }
+            }
+          />
+        </View>
       </View>
       <View
         style={
@@ -104,9 +148,7 @@ exports[`ControlScreen renders correctly with custom props 1`] = `
               "textAlign": "center",
             }
           }
-        >
-          LivingRoom
-        </TextInput>
+        />
       </View>
       <View
         accessibilityState={
@@ -253,15 +295,15 @@ exports[`ControlScreen renders correctly with custom props 1`] = `
         >
           <Text
             style={
-              [
-                {
-                  "fontSize": 20,
-                  "textAlign": "center",
-                },
-              ]
+              {
+                "fontSize": 20,
+                "textAlign": "center",
+              }
             }
           >
-            0
+            <Text>
+              Off
+            </Text>
           </Text>
         </View>
       </View>

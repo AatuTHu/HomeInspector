@@ -7,7 +7,24 @@ const { firestore,
     deleteDoc,
     doc,
     addDoc,
-    getDocs } = require('../firebase')
+    getDocs,
+    serverTimestamp } = require('../firebase');
+
+
+
+
+
+var deviceLocation = ""
+var measuringMode = {}
+
+router.get('/location', (req, res) => {
+    console.log(deviceLocation)
+    res.json(deviceLocation)
+})
+
+router.get('/start', (req, res) => {
+    res.json(measuringMode)
+})
 
 
 
@@ -18,6 +35,7 @@ router.get('/', async(req, res) => { // SHOW EVERYTHING
         const messageObject = {
             humidity: doc.data().temperature,
             location: doc.data().location,
+            time: doc.data().time,
             id: doc.data().id,
         };
         temperature.push(messageObject);
@@ -25,14 +43,25 @@ router.get('/', async(req, res) => { // SHOW EVERYTHING
     res.send(temperature);
 });
 
-router.post('/', async(req, res) => {    // CREATE ARRAY OF temperature
+router.post('/location', (req, res) => {    // Receive location of the device.
+    if(process.env.API_KEY === req.body.apiKey) {
+        deviceLocation = req.body.location;
+        res.sendStatus(202)
+    } else {
+        res.sendStatus(403)
+    }
+})
+
+router.post('/', async(req, res) => {    // CREATE collection OF temperature, or add to collection
+    
    if(process.env.API_KEY === req.body.apiKey) {
 
-    if(req.body.temperature === undefined || req.body.location === undefined) return res.send('Invalid data')
+    if(req.body.temperature === undefined) return res.send('Invalid data')
 
     const docRef = await addDoc(collection(firestore, TEMPERATURE), {
         temperature: req.body.temperature,
-        location: req.body.location,
+        location: deviceLocation,
+        time: serverTimestamp(),
         id: uuidv4(),    
     }).then( () => {
         res.sendStatus(201);
@@ -42,6 +71,20 @@ router.post('/', async(req, res) => {    // CREATE ARRAY OF temperature
    } else {
         res.sendStatus(403);
    }
+})
+
+
+router.post('/start', (req, res) => {    // Receive 1 or 0 for 'turning' temperature sensor on..
+    if(process.env.API_KEY === req.body.apiKey) {
+
+        if(req.body.measuringMode === undefined || req.body.measuringMode >= 2 || req.body.measuringMode <= -1 || isNaN(req.body.measuringMode) || req.body.lightMode === "") {
+            return res.send('Invalid data')
+        }  
+            measuringMode = req.body.measuringMode;
+            res.sendStatus(202)
+       } else {
+        res.sendStatus(403)
+      }
 })
 
 router.delete('/', async(req, res) => { //Delete one from collection
