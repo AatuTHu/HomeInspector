@@ -13,9 +13,9 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {    // Receive location of the device.
     if(process.env.API_KEY === req.body.apiKey) {
         location = req.body.location;
-        res.sendStatus(200)
+        res.sendStatus(202)
        } else {
-        res.send("Access denied")
+        res.sendStatus(403)
        }
 })
 

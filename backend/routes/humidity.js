@@ -34,12 +34,12 @@ router.post('/', async(req, res) => {    // CREATE ARRAY OF HUMIDITIES
         location: req.body.location,
         humidity: req.body.humidity,
     }).then( () => {
-        res.sendStatus(200)
+        res.sendStatus(201)
     }).catch( (err) => {
         res.send(err.message)
     })
    } else {
-        res.send("Access denies")
+        res.sendStatus(403)
    }
 })
 
@@ -55,7 +55,7 @@ router.delete('/', async(req, res) => { //Delete one from collection
         }).catch ( err => res.send(err))
       
     } else {
-        res.send("Access denies")
+        res.sendStatus(403)
     }
 })
 

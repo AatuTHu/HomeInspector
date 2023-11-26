@@ -35,12 +35,12 @@ router.post('/', async(req, res) => {    // CREATE ARRAY OF temperature
         location: req.body.location,
         id: uuidv4(),    
     }).then( () => {
-        res.sendStatus(200);
+        res.sendStatus(201);
     }).catch((err) => {
         res.send(err.message)
     })
    } else {
-        res.send('Access denied')
+        res.sendStatus(403);
    }
 })
 
@@ -51,10 +51,10 @@ router.delete('/', async(req, res) => { //Delete one from collection
 
         const docRef = doc(firestore,TEMPERATURE, req.body.id)
        deleteDoc(docRef).then( () => {
-            res.sendStatus(200)
+            res.sendStatus(201)
         }).catch ( err => res.send(err))
     } else {
-        res.send('Access denied')
+        res.sendStatus(403)
     } 
 })
 

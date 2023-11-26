@@ -15,9 +15,9 @@ router.post('/', (req, res) => {    // Receive 1 or 0 for turning lights in or o
         }
         
         lightMode = req.body.lightMode;
-        res.sendStatus(200)
+        res.sendStatus(202)
        } else {
-        res.send("Access denied");
+        res.sendStatus(403)
       }
 })
 

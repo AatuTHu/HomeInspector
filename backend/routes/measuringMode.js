@@ -15,9 +15,9 @@ router.post('/', (req, res) => {    // Receive 1 or 0 for turning DHT22 on or of
             return res.send('Invalid data')
         }  
             measuringMode = req.body.measuringMode;
-            res.sendStatus(200)
+            res.sendStatus(202)
        } else {
-        res.send("Access denied");
+        res.sendStatus(403)
       }
 })
 
