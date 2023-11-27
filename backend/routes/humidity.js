@@ -76,8 +76,6 @@ router.post('/start', (req, res) => {   // Tell esp32 to start measuring or stop
         }
         measuringMode = req.body.measuringMode
         res.sendStatus(200)
-        // Send GET request to ESP32
-        request.end();
        } else {
         res.sendStatus(403)
       }
