@@ -1,7 +1,10 @@
 /backend/node_modules
+/ESP32CODE/CREDENTIALS.h
 /backend/.env
 /documents
-/arduinoCodes/ESP32CODE/CREDENTIALS.h
 /frontend/env.js
 /frontend/.vs/slnx.sqlite
 /frontend/coverage
+ESP32CODE/CREDENTIALS.h
+*.h
+ESP32CODE/CREDENTIALS.h
