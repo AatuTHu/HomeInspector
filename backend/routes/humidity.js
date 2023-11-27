@@ -9,7 +9,6 @@ const { firestore,
     addDoc,
     getDocs, 
     serverTimestamp} = require('../firebase')
-const http = require('http')
 
 
 
@@ -25,6 +24,7 @@ router.get('/start', (req, res) => {
 })
   
 router.get('/', async(req, res) => { // SHOW EVERYTHING
+    console.log('getsomme')
     const querySnapshot = await getDocs(collection(firestore, HUMIDITY));
     const humidity = [];
         querySnapshot.forEach((doc) => {
@@ -74,32 +74,8 @@ router.post('/start', (req, res) => {   // Tell esp32 to start measuring or stop
         if(req.body.measuringMode === undefined || req.body.measuringMode >= 2 || req.body.measuringMode <= -1 || isNaN(req.body.measuringMode) || req.body.lightMode === "") {
             return res.send('Invalid data')
         }
-  
-        const options = {
-          hostname: process.env.esp32IP,
-          port: process.env.esp32Port,
-          path: `/startHumidity`,
-          method: 'GET',
-        };
-      
-        const request = http.request(options, (response) => {
-          let data = '';
-      
-          response.on('data', (chunk) => {
-            data += chunk;
-          });
-      
-          response.on('end', () => {
-            console.log('Response from ESP32:', data);
-            res.status(200).send(data);
-          });
-        });
-      
-        request.on('error', (e) => {
-          console.error(`Problem with request: ${e.message}`);
-          res.status(500).send('Internal Server Error');
-        });
-      
+        measuringMode = req.body.measuringMode
+        res.sendStatus(200)
         // Send GET request to ESP32
         request.end();
        } else {

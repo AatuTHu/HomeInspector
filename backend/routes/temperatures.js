@@ -9,7 +9,6 @@ const { firestore,
     addDoc,
     getDocs,
     serverTimestamp } = require('../firebase')
-const http = require('http');
 
 
 var deviceLocation = ""
@@ -78,33 +77,8 @@ router.post('/start', (req, res) => {    // Tell esp32 to start measuring or sto
         if(req.body.measuringMode === undefined || req.body.measuringMode >= 2 || req.body.measuringMode <= -1 || isNaN(req.body.measuringMode) || req.body.lightMode === "") {
             return res.send('Invalid data')
         }  
-        const options = {
-            hostname: process.env.esp32IP,
-            port: process.env.esp32Port,
-            path: `/startTemperature`,
-            method: 'GET',
-          };
-        
-          const request = http.request(options, (response) => {
-            let data = '';
-        
-            response.on('data', (chunk) => {
-              data += chunk;
-            });
-        
-            response.on('end', () => {
-              console.log('Response from ESP32:', data);
-              res.status(200).send(data);
-            });
-          });
-        
-          request.on('error', (e) => {
-            console.error(`Problem with request: ${e.message}`);
-            res.status(500).send('Internal Server Error');
-          });
-        
-          // Send GET request to ESP32
-          request.end();
+        measuringMode = req.body.measuringMode
+        res.sendStatus(200)
        } else {
         res.sendStatus(403)
       }
