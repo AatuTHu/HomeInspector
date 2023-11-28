@@ -3,8 +3,9 @@
 /backend/.env
 /documents
 /frontend/env.js
-/frontend/.vs/slnx.sqlite
+/frontend/.vs
 /frontend/coverage
 ESP32CODE/CREDENTIALS.h
 *.h
-ESP32CODE/CREDENTIALS.h
+
+

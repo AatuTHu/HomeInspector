@@ -1,5 +1,5 @@
 const { initializeApp } = require("firebase/app");
-const { getFirestore, collection, onSnapshot, query, doc, getDocs,addDoc,orderBy,deleteDoc,serverTimestamp } = require("firebase/firestore");
+const { getFirestore, collection, onSnapshot, query, doc, getDocs,addDoc,orderBy,deleteDoc,updateDoc,where } = require("firebase/firestore");
 
 const firebaseConfig = {
   apiKey: process.env.apiKey,
@@ -16,14 +16,16 @@ const firestore = getFirestore();
 const HUMIDITY = "humidity"
 const TEMPERATURE = "temperature"
 
+
 module.exports = {
   firestore,
   HUMIDITY,
   TEMPERATURE,
   collection,
-  serverTimestamp,
   addDoc,
   deleteDoc,
+  where,
+  updateDoc,
   orderBy,
   onSnapshot,
   query,

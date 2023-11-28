@@ -24,7 +24,7 @@ app.use('/lightMode',lightMode)
 
 
 app.get('/', function (req, res) {
-  res.send('Hello world')
+  res.send('Howd you find this')
 })
 
 app.listen(port, () => {
