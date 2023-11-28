@@ -43,7 +43,7 @@ export default function ControlScreen({setScreen,setTempStarted,tempStarted,setC
           </>) : (<></>)}
        
           <LightSwitch lights = {lights} setLights = {setLights}/>
-          <Buttons text = "See all the measurements" type = "update" onPress={ showAll }/>
+          <Buttons textStyle="white" text = "See all the measurements" type = "update" onPress={ showAll }/>
       </View>
     </ScrollView>
   )

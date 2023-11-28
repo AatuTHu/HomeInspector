@@ -33,7 +33,7 @@ export default function StartMeasuring({selected,setTempStarted,tempStarted,setH
 
   return (
     <View style = { styles.buttonRowContainer }>
-     <Buttons text = "start" type = "start" onPress={ startMeasuring }/>
+     <Buttons text = "start" textStyle="white" type = "start" onPress={ startMeasuring }/>
         <View style = { styles.statusBox }>
           <Text style = { styles.subHeadingText }>{ rememberStarted ? (<Text style = {{"color" : "green"}}>On</Text>) : (<Text>Off</Text>)}</Text>
         </View>

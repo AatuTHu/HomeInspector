@@ -93,7 +93,7 @@ export default function App() {
       <View style={styles.navBar}>
         <BottomBar setScreen = { setScreen }/>
       </View>
-      <StatusBar style="auto" />
+      <StatusBar style="auto"/>
     </SafeAreaView>
   );
 }

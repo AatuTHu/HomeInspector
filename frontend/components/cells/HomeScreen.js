@@ -1,5 +1,5 @@
 import React from 'react'
-import { View,ScrollView  } from 'react-native'
+import { View,ScrollView } from 'react-native'
 import { styles } from '../../styles/styles'
 import DataCard from '../atoms/DataCard'
 import Buttons from '../atoms/Buttons'
@@ -16,6 +16,7 @@ export default function HomeScreen({latestTemperature, latestHumidity}) {
       <>
         <View style = { styles.controlContainer }>
           <InfoBox text = "No measurements found" type = "small" textStyle='subHeadingText'/>
+          <Buttons type = 'update' textStyle="white" onPress = { refreshData } text = 'Refresh'/>
         </View>
       </>
     )
@@ -23,14 +24,16 @@ export default function HomeScreen({latestTemperature, latestHumidity}) {
     return (
         <ScrollView>
           <View style = { styles.controlContainer }>
+          <InfoBox text = "Latest Measurements" type = "heading" textStyle='subHeadingText'/>
             {latestTemperature !== undefined ? <>
             <DataCard 
               data = {latestTemperature.temperature} 
               location= {latestTemperature.location} 
               time={latestTemperature.time}
               date={latestTemperature.date}
+              title = "Temperature"
               dataType = 'temperature' 
-              fillingColor= 'lightblue'
+              fillingColor= '#880D1E'
               unit = '°C'/>
             </> : <></>}
             
@@ -40,12 +43,13 @@ export default function HomeScreen({latestTemperature, latestHumidity}) {
               location={latestHumidity.location} 
               time={latestHumidity.time}
               date={latestHumidity.date}
+              title = "Humidity"
               dataType = 'humidity'
-              fillingColor = 'darkblue'
+              fillingColor = '#D1495B'
               unit = '%'/>
              </> : <></>}
             
-          <Buttons type = 'update' onPress = { refreshData } text = 'Refresh'/>
+          <Buttons type = 'update' textStyle="white" onPress = { refreshData } text = 'Refresh'/>
           </View>
         </ScrollView>
       )}

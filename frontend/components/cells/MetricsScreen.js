@@ -1,9 +1,8 @@
-import { useState} from 'react'
-import DataCard from '../atoms/DataCard'
 import variables from '../../env'
 import { View, ScrollView, TouchableOpacity,Text } from 'react-native'
+import MetricsCard from '../molecules/MetricsCard'
 import { styles } from '../../styles/styles'
-import { buttons } from '../../styles/buttonStyles'
+
 
 
 export default function MetricsScreen({temperature, humidity, setTemperature, setHumidity}) {
@@ -30,7 +29,6 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
   }
 
   const onPinPress = async(id, type) => {
-    console.log(temperature[0])
     let pinned = true;
     let url = type === 'humidity' ? humidityURL : temperatureURL
 
@@ -49,54 +47,15 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
       let objectToBeUpdated = tempArray.findIndex(p => p.id === id);   
       tempArray[objectToBeUpdated].pinned = true;
       type === 'humidity' ? setHumidity(tempArray) : setTemperature(tempArray)
-
-      console.log(temperature[0])
     }
 
   }
 
   return (
   <ScrollView>
-    {temperature !== undefined ? <>
-      { temperature.map ( (temp) => { return (
-      <View key = {temp.id} style = { styles.controlContainer}>
-       <DataCard 
-        data = { temp.temperature } 
-        location= {temp.location} 
-        time= {temp.time}
-        date= {temp.date}
-        dataType = 'temperature' 
-        fillingColor= 'lightblue'
-        unit = '°C'/>
-
-      <View style= {styles.buttonRowContainer}>
-       { temp.pinned === true ? (<></>) : (<><TouchableOpacity style = {buttons.pinButton} onPress = { () => onPinPress(temp.id, "temperature")}>
-        <Text style = {buttons.buttonText}>Pin reading</Text>
-      </TouchableOpacity></>)}
-        <TouchableOpacity style = {buttons.deleteButton} onPress = { () => onDeletePress(temp.id, "temperature")}><Text style = {buttons.buttonText}>Delete</Text></TouchableOpacity>
-      </View>
-      
-      </View>)})}
-      </> : <></>}
-            
-    {humidity !== undefined ? <>
-      { humidity.map ( (hum) => { return (
-      <View key = {hum.id} style = { styles.controlContainer}>
-        <DataCard 
-          data = { hum.humidity } 
-          location={hum.location} 
-          time={hum.time}
-          date={hum.date}
-          dataType = 'humidity'
-          fillingColor = 'darkblue'
-          unit = '%'/>
-          
-      <View style= {styles.buttonRowContainer}>
-      { hum.pinned === true ? (<></>) : (<><TouchableOpacity style = {buttons.pinButton} onPress = { () => onPinPress(hum.id, "humidity")}><Text style = {buttons.buttonText}>Pin reading</Text></TouchableOpacity></>)}
-        <TouchableOpacity style = {buttons.deleteButton} onPress = { () => onDeletePress(hum.id, "humidity")}><Text style = {buttons.buttonText}>Delete</Text></TouchableOpacity>
-      </View>
-          </View>)})}
-      </> : <></>}
+    <View style = {styles.displayBox}>
+      <MetricsCard temperature={temperature} humidity={humidity} onPinPress={onPinPress} onDeletePress={onDeletePress}/> 
+    </View>
   </ScrollView>
   )
 }

@@ -19,7 +19,7 @@ export default function DropDown({setSelected,selected,options}) {
 
   return (<>
   <InfoBox text = "Sensor" textStyle = 'headingText' type = 'heading'/>
-  <Buttons text = 'Select a Sensor..' onPress = { onPressDropDown }></Buttons>
+  <Buttons text = 'Select a Sensor..' textStyle = 'black' onPress = { onPressDropDown }></Buttons>
     <View style = { styles.displayBox}>    
     { hide ? (<>
     <View>
@@ -29,8 +29,8 @@ export default function DropDown({setSelected,selected,options}) {
           <View style = {styles.dropDownBox}>
               {options.map((options) => {
                   return(<View key = {options.id}>
-                    <TouchableOpacity  style = {styles.dropDownText} onPress = { () => onSelect(options.value)}>
-                      <Text style = {styles.dropDownText}>{options.name}</Text>
+                    <TouchableOpacity  style = {styles.dropDownTextContainer} onPress = { () => onSelect(options.value)}>
+                      <Text style = {styles.subHeadingText}>{options.name}</Text>
                     </TouchableOpacity>
                   </View>)
               })}

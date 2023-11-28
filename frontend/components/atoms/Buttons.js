@@ -2,7 +2,7 @@ import { Text, TouchableOpacity } from 'react-native'
 import { buttons } from '../../styles/buttonStyles'
 import React from 'react'
 
-export default function Buttons({text, type, onPress}) {
+export default function Buttons({text,textStyle, type, onPress}) {
     
     const getButtonStyle = () => { 
      
@@ -12,7 +12,6 @@ export default function Buttons({text, type, onPress}) {
         delete: buttons.deleteButton,
         nav: buttons.navButtons,
         update: buttons.updateButton,
-        nav: buttons.navButtons,
         refresh: buttons.refreshButton,
         pin: buttons.pinButton
       };
@@ -20,9 +19,18 @@ export default function Buttons({text, type, onPress}) {
       return styleMap[type] || buttons.defaultStyle;
     }
 
+    const getTextStyle = () => {
+      const textMap = {
+        white : buttons.whiteButtonText,
+        black : buttons.blackButtonText
+      }
+
+      return textMap[textStyle]
+    }
+
     return (
       <TouchableOpacity style={getButtonStyle()} onPress={onPress}>
-        <Text style={buttons.buttonText}>{text}</Text>
+        <Text style={getTextStyle()}>{text}</Text>
       </TouchableOpacity>
     )
   
