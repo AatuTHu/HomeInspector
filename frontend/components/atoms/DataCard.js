@@ -2,9 +2,9 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { styles } from '../../styles/styles'
 
-export default function DataCard({data,location,time, dataType, fillingColor, unit}) {
+export default function DataCard({data,location,time, dataType, fillingColor,date, unit}) {
 
-    const maxValue = 40;
+    const maxValue = 60;
 
     const percentage = (data / maxValue) * 100;
 
@@ -26,8 +26,8 @@ export default function DataCard({data,location,time, dataType, fillingColor, un
         </View>
 
         <View style = {styles.textDataContainer}>
-            <Text style = { styles.headingText }>{location}</Text>
-            <Text style = { styles.headingText }>{time}</Text>
+            <Text style = { styles.subHeadingText }>{location} {date}</Text>
+            <Text style = { styles.subHeadingText }>{time}</Text>
         </View>
     </View>
   )

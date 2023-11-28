@@ -15,15 +15,26 @@ export default function App() {
 
   const { humidityURL, temperatureURL } = variables
   const [temperature, setTemperature] = useState([])
+  const [latestTemperature, setLatestTemperature] = useState([])
+  const [latestHumidity, setLatestHumidity] = useState([])
   const [humidity, setHumidity] = useState([])
   const [screen, setScreen] = useState(1)
+  const [tempStarted, setTempStarted] = useState(false)
+  const [humStarted, setHumStarted] = useState(false)
+  const [lights, setLights] = useState(false)
+  const [currentTempLoc, setCurrentTempLoc] = useState('')
+  const [currentHumLoc, setCurrentHumLoc] = useState('')
 
   useEffect(() => {
     async function fetchData () {
         const result = await fetch(humidityURL).then((res)=>
         res.json()
-      )
+      ).catch((error) => { 
+        console.error(error.message); 
+      });
       setHumidity(result)
+      let latestObject = result[result.length-1]
+      setLatestHumidity(latestObject)
     }
    fetchData()
   }, [])
@@ -32,24 +43,41 @@ export default function App() {
     async function fetchData() {
       const result = await fetch(temperatureURL).then((res)=>
       res.json()
-    )
-      setTemperature(result)
+    ).catch((error) => { 
+      console.error(error.message); 
+    });
+    
+     setTemperature(result)
+     let latestObject = result[result.length-1]
+     setLatestTemperature(latestObject)
     }
    fetchData()
   }, [])
 
+  
+
   const screens = () => {
     switch (screen) {
       case 1:
-        return <HomeScreen temperature={temperature} humidity={humidity}/>    
+        return <HomeScreen latestTemperature = {latestTemperature} latestHumidity={latestHumidity}/>    
       case 2:
-        return <ControlScreen setScreen={ setScreen }/>
+        return (<ControlScreen 
+        setScreen={ setScreen } 
+        setTempStarted = { setTempStarted } 
+        tempStarted = { tempStarted }
+        setHumStarted = { setHumStarted } 
+        humStarted = { humStarted } 
+        setCurrentHumLoc = {setCurrentHumLoc}
+        setCurrentTempLoc = {setCurrentTempLoc}
+        currentHumLoc = {currentHumLoc}
+        currentTempLoc = {currentTempLoc}
+        setLights = {setLights}
+        lights = {lights}
+        />)
       case 3:
         return <PinnedScreen/>
       case 4:
-        return <MetricsScreen setScreen={ setScreen } temperature={temperature} humidity={humidity}/>
-      default:
-        return <HomeScreen temperature={temperature} humidity={humidity}/>
+        return <MetricsScreen setScreen={ setScreen } setTemperature = {setTemperature} setHumidity={setHumidity} temperature={temperature} humidity={humidity}/>
       }
   }
 

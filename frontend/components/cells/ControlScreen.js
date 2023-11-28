@@ -1,6 +1,6 @@
 import { View, Text, ScrollView} from "react-native"
 import { styles } from "../../styles/styles"
-import  variables  from "../../env"
+import  localVariables  from "../../env"
 import { useState } from "react"
 import Buttons from "../atoms/Buttons"
 import SaveSensorLocation from "../molecules/SaveSensorLocation"
@@ -8,18 +8,12 @@ import DropDown  from "../molecules/DropDown"
 import StartMeasuring from "../molecules/StartMeasuring"
 import LightSwitch from "../molecules/LightSwitch"
 
-export default function ControlScreen({temperatureLocation,humidityLocation,setScreen}) {
-
-  const { humidityLocationURL,humidityStartURL,temperatureStartURL,temperatureLocationURL} = variables
+export default function ControlScreen({setScreen,setTempStarted,tempStarted,setCurrentHumLoc,setCurrentTempLoc,currentHumLoc,currentTempLoc,setHumStarted,humStarted,setLights, lights}) {
 
   const options = [
     {id : 1 ,name : "humidity", value : "humidity"},
     {id : 2, name : "temperature", value : "temperature"}
   ]
-
-  let location
-  let startURL
-  let locationURL
 
   const [selected, setSelected] = useState("")
   
@@ -27,26 +21,28 @@ export default function ControlScreen({temperatureLocation,humidityLocation,setS
     setScreen(4);
   }
 
-  if(selected === 'temperature') {
-    location = temperatureLocation
-    startURL = temperatureStartURL
-    locationURL = temperatureLocationURL 
-  } else if (selected === 'humidity') {
-    location = humidityLocation
-    startURL = humidityStartURL
-    locationURL = humidityLocationURL
-  }
-
   return (
     <ScrollView>
       <View style = { styles.controlContainer }>
-          <DropDown selected={selected} setSelected={setSelected} location = { location } options={options}/>
+          <DropDown selected={selected} setSelected={setSelected} options={options}/>
           { selected ? (<>
-            <SaveSensorLocation location={location} locationURL = { locationURL }/>
-              <StartMeasuring startURL={startURL}/>
+            <SaveSensorLocation 
+              selected = {selected} 
+              setCurrentHumLoc = {setCurrentHumLoc} 
+              setCurrentTempLoc = {setCurrentTempLoc} 
+              currentHumLoc = {currentHumLoc} 
+              currentTempLoc = {currentTempLoc}
+            />
+            <StartMeasuring 
+              selected = {selected} 
+              setTempStarted = { setTempStarted } 
+              tempStarted = {tempStarted} 
+              setHumStarted = { setHumStarted } 
+              humStarted = {humStarted}
+            />
           </>) : (<></>)}
        
-          <LightSwitch/>
+          <LightSwitch lights = {lights} setLights = {setLights}/>
           <Buttons text = "See all the measurements" type = "update" onPress={ showAll }/>
       </View>
     </ScrollView>

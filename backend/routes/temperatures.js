@@ -33,7 +33,7 @@ router.get('/', async(req, res) => { // SHOW EVERYTHING
             location: doc.data().location,
             time: doc.data().time,
             date: doc.data().date,
-            pinned: doc.data().pinned
+            pinned: Boolean(doc.data().pinned)
         };
         temperature.push(messageObject);
     });
@@ -109,24 +109,21 @@ router.put('/', async(req, res) => {
         const docRef = doc(firestore,TEMPERATURE,req.body.id)
         await updateDoc(docRef, {
             pinned: req.body.pinned
-        }).then ( () => {
-            res.sendStatus(200)
         })
+        res.sendStatus(200)
     } else {
-			res.sendStatus(403)
+		res.sendStatus(403)
 	} 
 })
 
 router.delete('/', async(req, res) => { //Delete one from collection
     if(process.env.API_KEY === req.body.apiKey) {
-
     if(req.body.id === undefined || req.body.id === "") return res.send('Invalid data')
     const docRef = doc(firestore,TEMPERATURE,req.body.id)
-      await deleteDoc(docRef).then( () => {
-            res.sendStatus(200)
-        }).catch ( err => res.send(err))
+      await deleteDoc(docRef).catch ( err => res.send(err)) 
+      res.sendStatus(200)
     } else {
-        res.sendStatus(403)
+     res.sendStatus(403)
     } 
 })
 

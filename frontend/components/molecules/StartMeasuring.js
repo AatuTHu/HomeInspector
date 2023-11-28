@@ -2,33 +2,40 @@ import { View, Text } from 'react-native'
 import { styles } from "../../styles/styles"
 import { useState } from 'react'
 import Buttons from '../atoms/Buttons'
-import variables from '../../env'
+import localVariables from '../../env'
 
-export default function StartMeasuring({startURL}) {
+export default function StartMeasuring({selected,setTempStarted,tempStarted,setHumStarted,humStarted,}) {
 
-  const { apiKey } = variables
-  const [start, setStart] = useState(false)
+  const { apiKey, temperatureStartURL, humidityStartURL } = localVariables
+  const [ started, setStarted ] = useState(false);
 
   const startMeasuring = async() => {
     
-      let mode = start? 1 : 0
-  
-      const response = await fetch(startURL, {
+      let mode = started ? 0 : 1
+      let url = selected === 'humidity' ? humidityStartURL : temperatureStartURL
+
+
+      const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `apiKey=${apiKey}&measuringMode=${mode}`,
-      })
+      }).catch((error) => { 
+        console.error(error.message); 
+      }); 
   
-      if(response.status === 202) {
-        setStart(!start)
-      }
+      if(response.status === 200) {
+        setStarted(!started)
+        selected === 'humidity' ? setHumStarted(!humStarted) : setTempStarted(!tempStarted)
+      } 
     }
+
+    let rememberStarted = selected === 'humidity' ? humStarted : tempStarted
 
   return (
     <View style = { styles.buttonRowContainer }>
      <Buttons text = "start" type = "start" onPress={ startMeasuring }/>
         <View style = { styles.statusBox }>
-          <Text style = { styles.subHeadingText }>{start ? (<Text style = {{"color" : "green"}}>On</Text>) : (<Text>Off</Text>)}</Text>
+          <Text style = { styles.subHeadingText }>{ rememberStarted ? (<Text style = {{"color" : "green"}}>On</Text>) : (<Text>Off</Text>)}</Text>
         </View>
     </View>
   )

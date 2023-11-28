@@ -2,35 +2,27 @@ import { View, Text } from 'react-native'
 import { styles } from "../../styles/styles"
 import { useState } from 'react'
 import Buttons from '../atoms/Buttons'
-import variables from '../../env'
+import localVariables from '../../env'
 
-export default function LightSwitch() {
+export default function LightSwitch({lights, setLights}) {
 
-  const { apiKey,lightURL } = variables
-  const [lights, setLights] = useState(false)
+  const { apiKey,lightURL } = localVariables
 
     const lightSwitch = async() => {
-        console.log(lightURL)
-        console.log(lights)
-        
-        let mode = lights ?  1 : 0
-        console.log(mode)
-        const response = await fetch('http://127.0.0.1:3001/lightMode', {
+
+        let mode = lights ?  0 : 1
+        const response = await fetch(lightURL, {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: `apiKey=${apiKey}&lightMode=${mode}`,
-        }).then((res) => {
-          res.json()
-        }
-        ).catch(err => {
-          console.log(response)
-        })
-        
-        console.log(response.status)
-        if(response.status === 202) {
+        }).catch((error) => { 
+          console.error(error.message); 
+        }); 
+
+        if(response.status === 200) {
           setLights(!lights)
         } else {
-          console.log(response)
+          
         }
       }
 

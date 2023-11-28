@@ -6,29 +6,37 @@ import Buttons from '../atoms/Buttons'
 import { View, Text } from 'react-native'
 import { styles } from "../../styles/styles"
 
-export default function saveSensorLocation({ location, locationURL}) {
+export default function saveSensorLocation({selected, setCurrentHumLoc, setCurrentTempLoc, currentHumLoc, currentTempLoc}) {
 
-    const { apiKey } = variables
+    const { apiKey, temperatureLocationURL, humidityLocationURL } = variables
     const [newLocation, setNewLocation] = useState('');
-    const [ statusText, setStatusText ] = useState('');
+    const [statusText, setStatusText] = useState('');
 
     const saveLocation = async() => {
-        const response = await fetch(locationURL, {
+
+       const url = selected === "humidity" ? humidityLocationURL : temperatureLocationURL 
+
+        const response = await fetch(url, {
            method: "POST",
            headers: { "Content-Type": "application/x-www-form-urlencoded" },
            body: `apiKey=${apiKey}&location=${newLocation}`,
-         })
+         }).catch((error) => { 
+          console.error(error.message); 
+        }); 
          
          if(response.status === 202) {
            setStatusText("Location saved")
+           selected === "humidity" ? setCurrentHumLoc(newLocation) : setCurrentTempLoc(newLocation)
          } else if (response.status === 403) {
            setStatusText("There was an error, Try again later")
          }
        }
 
+    let rememberLocation = selected === "humidity" ? currentHumLoc : currentTempLoc
+
   return (<>
     <InfoBox text = "Device location" textStyle = 'headingText' type = 'heading'/>  
-        <InputBox placeholder= "where ..." text = { location } newText = { setNewLocation } onSubmitEditing={ saveLocation }/>
+        <InputBox placeholder= "where ..." text = {rememberLocation} newText = { setNewLocation } onSubmitEditing={ saveLocation }/>
     <Buttons text = "Save" type = "save" onPress={ saveLocation } />
     <View style = { styles.block}>
         <Text style = { styles.statusText }>{statusText}</Text>

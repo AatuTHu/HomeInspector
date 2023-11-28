@@ -31,8 +31,8 @@ router.get('/', async(req, res) => { // SHOW EVERYTHING
                 humidity: doc.data().humidity,
                 location: doc.data().location,
                 time: doc.data().time,
-                data: doc.data().data,
-                pinned: doc.data().pinned,
+                date: doc.data().date,
+                pinned: Boolean(doc.data().pinned),
             };
             humidity.push(messageObject);
         });
@@ -50,13 +50,10 @@ router.post('/location', (req, res) => {    // Receive location of the device.
 
 router.post('/', async(req, res) => {    // CREATE collection OF HUMIDITIES or add to the collection
    if(process.env.API_KEY === req.body.apiKey) {
-
-    if(req.body.humidity === undefined) return res.send('Invalid data')
-    
+    if(req.body.humidity === undefined) return res.send('Invalid data') 
     let currentTime = new Date();
     let date = currentTime.getDate() + '.' + (currentTime.getMonth()+1)
     let time = currentTime.getHours() + ':' + currentTime.getMinutes()
-
     await addDoc(collection(firestore, HUMIDITY), {
         humidity: req.body.humidity,
         location: deviceLocation,
@@ -107,9 +104,8 @@ router.put('/', async(req, res) => {
         const docRef = doc(firestore,HUMIDITY,req.body.id)
         await updateDoc(docRef, {
             pinned: req.body.pinned
-        }).then ( () => {
-            res.sendStatus(200)
         }).catch (error => console.log(error))
+        res.sendStatus(200)
     } else {
         res.sendStatus(403)
     } 
@@ -120,9 +116,9 @@ router.delete('/', async(req, res) => { //Delete one from collection
     if(process.env.API_KEY === req.body.apiKey) {
         if(req.body.id === undefined || req.body.id === "") return res.send('Invalid data')
         const docRef = doc(firestore,HUMIDITY,req.body.id) 
-        await deleteDoc(docRef).then( () => {
-            res.sendStatus(200)
-        }).catch ( err => res.send(err))  
+        await deleteDoc(docRef).catch ( err => res.send(err))  
+
+        res.sendStatus(200)
     } else {
         res.sendStatus(403)
     }

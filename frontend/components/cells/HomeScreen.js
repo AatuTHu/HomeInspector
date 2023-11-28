@@ -5,13 +5,13 @@ import DataCard from '../atoms/DataCard'
 import Buttons from '../atoms/Buttons'
 import InfoBox from '../atoms/InfoBox'
 
-export default function HomeScreen({temperature, humidity}) {
+export default function HomeScreen({latestTemperature, latestHumidity}) {
 
   const refreshData = () => {
  
   }
 
-  if(temperature === undefined && humidity === undefined) {
+  if(latestTemperature === undefined && latestHumidity === undefined) {
       return(
       <>
         <View style = { styles.controlContainer }>
@@ -23,26 +23,26 @@ export default function HomeScreen({temperature, humidity}) {
     return (
         <ScrollView>
           <View style = { styles.controlContainer }>
-            {temperature !== undefined ? <>
-            {temperature.map ( (temperature ) => { return (<View key = {temperature.id}>
+            {latestTemperature !== undefined ? <>
             <DataCard 
-              data = { temperature.temperature } 
-              location= {temperature.location} 
-              time= {''}
+              data = {latestTemperature.temperature} 
+              location= {latestTemperature.location} 
+              time={latestTemperature.time}
+              date={latestTemperature.date}
               dataType = 'temperature' 
               fillingColor= 'lightblue'
-              unit = '°C'/></View>)})}
+              unit = '°C'/>
             </> : <></>}
             
-            {humidity !== undefined ? <>
-             {humidity.map ( (humidity) => { return (<View key = {humidity.id}>
+            {latestHumidity ? <>           
             <DataCard 
-              data = { humidity.humidity } 
-              location={humidity.location} 
-              time={''}
+              data = {latestHumidity.humidity} 
+              location={latestHumidity.location} 
+              time={latestHumidity.time}
+              date={latestHumidity.date}
               dataType = 'humidity'
               fillingColor = 'darkblue'
-              unit = '%'/></View>)})}
+              unit = '%'/>
              </> : <></>}
             
           <Buttons type = 'update' onPress = { refreshData } text = 'Refresh'/>
