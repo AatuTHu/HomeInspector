@@ -1,6 +1,5 @@
 import { View, Text } from 'react-native'
 import { styles } from "../../styles/styles"
-import { useState } from 'react'
 import Buttons from '../atoms/Buttons'
 import localVariables from '../../env'
 
@@ -21,8 +20,8 @@ export default function LightSwitch({lights, setLights}) {
 
         if(response.status === 200) {
           setLights(!lights)
-        } else {
-          
+        } else if (response.status = 403) {
+          setLights(false)
         }
       }
 

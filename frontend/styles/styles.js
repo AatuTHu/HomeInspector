@@ -80,7 +80,7 @@ dataContainer:{
   justifyContent: 'flex-end',
   marginHorizontal: 5,
   borderRadius: 60,
-  borderWidth:2
+  borderWidth:2.5
 },
 textDataContainer:{
   height: 250,
@@ -108,6 +108,19 @@ metricInfoBox: {
   marginTop: 20,
   borderWidth: 1,
 },
+pinnedInfoBox: {
+  display: 'flex',
+  flexDirection: 'row', 
+  alignSelf: 'center',
+  width: '95%',
+  height: 300,
+  borderRadius: 10, 
+  backgroundColor: '#E8F1F2',
+  marginTop: 25,
+  marginBottom:20,
+  borderWidth: 1,
+  overflow: 'hidden',
+},
 statusBox: {
   backgroundColor: '#D9E5D6',
   justifyContent: 'center',
@@ -115,7 +128,9 @@ statusBox: {
   borderRadius: 22,
 },
 mercury: {
-  backgroundColor: 'darkred',
+  width: 600,
+  borderTopWidth: 2,
+  borderStyle: 'dotted',
 }, 
 headingText: {
   fontSize: 20,
@@ -141,6 +156,10 @@ statusText: {
 },
 metricText: {
   fontSize: 15,
+  textAlign: 'center',
+},
+pinnedText: {
+  fontSize: 22,
   textAlign: 'center',
 },
 metricTextTitle: {
@@ -172,4 +191,16 @@ buttonColumnContainer: {
   width: '30%',
   justifyContent: 'space-evenly',
 },
+pinTextContainer: {
+  display: 'flex',
+  width: '75%',
+  justifyContent: 'space-evenly',
+},
+pinnedButtonBox: {
+  width: '25%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent:'space-between',
+  backgroundColor: '#B4CDCF',
+}
 });

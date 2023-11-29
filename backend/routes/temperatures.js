@@ -33,7 +33,7 @@ router.get('/', async(req, res) => { // SHOW EVERYTHING
             location: doc.data().location,
             time: doc.data().time,
             date: doc.data().date,
-            pinned: Boolean(doc.data().pinned)
+            pinned: doc.data().pinned
         };
         temperature.push(messageObject);
     });

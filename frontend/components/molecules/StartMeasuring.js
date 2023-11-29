@@ -8,12 +8,12 @@ export default function StartMeasuring({selected,setTempStarted,tempStarted,setH
 
   const { apiKey, temperatureStartURL, humidityStartURL } = localVariables
   const [ started, setStarted ] = useState(false);
+  let rememberStarted = false
 
   const startMeasuring = async() => {
     
       let mode = started ? 0 : 1
       let url = selected === 'humidity' ? humidityStartURL : temperatureStartURL
-
 
       const response = await fetch(url, {
         method: "POST",
@@ -26,14 +26,15 @@ export default function StartMeasuring({selected,setTempStarted,tempStarted,setH
       if(response.status === 200) {
         setStarted(!started)
         selected === 'humidity' ? setHumStarted(!humStarted) : setTempStarted(!tempStarted)
+        rememberStarted = selected === 'humidity' ? humStarted : tempStarted
       } 
     }
 
-    let rememberStarted = selected === 'humidity' ? humStarted : tempStarted
+    
 
   return (
     <View style = { styles.buttonRowContainer }>
-     <Buttons text = "start" textStyle="white" type = "start" onPress={ startMeasuring }/>
+     <Buttons text = "Start" textStyle="white" type = "start" onPress={ startMeasuring }/>
         <View style = { styles.statusBox }>
           <Text style = { styles.subHeadingText }>{ rememberStarted ? (<Text style = {{"color" : "green"}}>On</Text>) : (<Text>Off</Text>)}</Text>
         </View>

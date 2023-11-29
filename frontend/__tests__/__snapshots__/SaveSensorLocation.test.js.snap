@@ -29,7 +29,7 @@ exports[`SaveSensorLocation renders correctly 1`] = `
   <View
     style={
       {
-        "backgroundColor": "lightgrey",
+        "backgroundColor": "#E8F1F2",
         "height": 50,
         "justifyContent": "center",
         "marginTop": 10,
@@ -43,7 +43,7 @@ exports[`SaveSensorLocation renders correctly 1`] = `
       placeholder="where ..."
       style={
         {
-          "fontSize": 20,
+          "fontSize": 22,
           "textAlign": "center",
         }
       }
@@ -79,7 +79,7 @@ exports[`SaveSensorLocation renders correctly 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       {
-        "backgroundColor": "green",
+        "backgroundColor": "#00A352",
         "borderRadius": 20,
         "borderWidth": 1,
         "marginTop": 20,
@@ -92,7 +92,8 @@ exports[`SaveSensorLocation renders correctly 1`] = `
     <Text
       style={
         {
-          "fontSize": 20,
+          "color": "white",
+          "fontSize": 22,
           "textAlign": "center",
         }
       }

@@ -7,7 +7,7 @@ export default function BottomBar({setScreen}) {
     <View style = {styles.navContainer}>
       <TouchableOpacity style = { buttons.navButtons } onPress={ () => setScreen(3) } >
         <Text>
-          Notes
+          Pinned
         </Text>
       </TouchableOpacity>
       

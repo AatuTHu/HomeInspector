@@ -14,52 +14,70 @@ import TopBar from './components/atoms/TopBar';
 export default function App() {
 
   const { humidityURL, temperatureURL } = variables
+
+  const [screen, setScreen] = useState(1)
+  const [lights, setLights] = useState(false)
+
   const [temperature, setTemperature] = useState([])
   const [latestTemperature, setLatestTemperature] = useState([])
-  const [latestHumidity, setLatestHumidity] = useState([])
-  const [humidity, setHumidity] = useState([])
-  const [screen, setScreen] = useState(1)
   const [tempStarted, setTempStarted] = useState(false)
-  const [humStarted, setHumStarted] = useState(false)
-  const [lights, setLights] = useState(false)
   const [currentTempLoc, setCurrentTempLoc] = useState('')
+
+  const [humidity, setHumidity] = useState([])
+  const [latestHumidity, setLatestHumidity] = useState([])
+  const [humStarted, setHumStarted] = useState(false)
   const [currentHumLoc, setCurrentHumLoc] = useState('')
 
-  useEffect(() => {
-    async function fetchData () {
-        const result = await fetch(humidityURL).then((res)=>
+
+  const fetchHumidityData = async() => {
+    const result = await fetch(humidityURL).then((res)=>
         res.json()
       ).catch((error) => { 
         console.error(error.message); 
       });
-      setHumidity(result)
-      let latestObject = result[result.length-1]
-      setLatestHumidity(latestObject)
+
+      if(result.length > 0) {
+        setHumidity(result)
+        let latestObject = result[result.length-1]
+        setLatestHumidity(latestObject)
+      }  
+  }
+
+  const fetchTemperatureData = async() => {
+    const result = await fetch(temperatureURL).then((res)=>
+      res.json()
+    ).catch((error) => { 
+      console.error(error.message); 
+    });
+     setTemperature(result)
+     let latestObject = result[result.length-1]
+     setLatestTemperature(latestObject)
+  }
+
+  useEffect(() => {
+    async function fetchData () {
+        await fetchHumidityData()
     }
    fetchData()
   }, [])
 
   useEffect(() =>{
     async function fetchData() {
-      const result = await fetch(temperatureURL).then((res)=>
-      res.json()
-    ).catch((error) => { 
-      console.error(error.message); 
-    });
-    
-     setTemperature(result)
-     let latestObject = result[result.length-1]
-     setLatestTemperature(latestObject)
+      await fetchTemperatureData()
     }
    fetchData()
   }, [])
 
+  const refreshData = async() => {
+    fetchHumidityData()
+    fetchTemperatureData()
+  }
   
 
   const screens = () => {
     switch (screen) {
       case 1:
-        return <HomeScreen latestTemperature = {latestTemperature} latestHumidity={latestHumidity}/>    
+        return <HomeScreen latestTemperature = {latestTemperature} latestHumidity={latestHumidity} refreshData = {refreshData}/>    
       case 2:
         return (<ControlScreen 
         setScreen={ setScreen } 
@@ -75,7 +93,7 @@ export default function App() {
         lights = {lights}
         />)
       case 3:
-        return <PinnedScreen/>
+        return <PinnedScreen temperature = {temperature} humidity = {humidity} setTemperature={setTemperature} setHumidity={setHumidity}/>
       case 4:
         return <MetricsScreen setScreen={ setScreen } setTemperature = {setTemperature} setHumidity={setHumidity} temperature={temperature} humidity={humidity}/>
       }

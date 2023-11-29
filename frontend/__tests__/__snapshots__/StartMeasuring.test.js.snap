@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StartMeasuring renders correctly with custom props 1`] = `
+exports[`StartMeasuring renders correctly 1`] = `
 <View
   style={
     {
@@ -43,7 +43,7 @@ exports[`StartMeasuring renders correctly with custom props 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       {
-        "backgroundColor": "lightgrey",
+        "backgroundColor": "#03254E",
         "borderRadius": 20,
         "borderWidth": 1,
         "opacity": 1,
@@ -55,18 +55,19 @@ exports[`StartMeasuring renders correctly with custom props 1`] = `
     <Text
       style={
         {
-          "fontSize": 20,
+          "color": "white",
+          "fontSize": 22,
           "textAlign": "center",
         }
       }
     >
-      start
+      Start
     </Text>
   </View>
   <View
     style={
       {
-        "backgroundColor": "lightgrey",
+        "backgroundColor": "#D9E5D6",
         "borderRadius": 22,
         "justifyContent": "center",
         "width": "30%",
@@ -76,7 +77,7 @@ exports[`StartMeasuring renders correctly with custom props 1`] = `
     <Text
       style={
         {
-          "fontSize": 20,
+          "fontSize": 22,
           "textAlign": "center",
         }
       }

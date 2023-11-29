@@ -15,33 +15,34 @@ describe('HomeScreen', () => {
 
   it('renders initial state correctly', () => {
 
-    const humidity = [{humidity: 23, id: 1, location: 'Kitchen'}]
-    const temperature = [{temperature: 25, id: 2, location: 'Living Room'}]
+    const humidity = {humidity: 23, id: 1, location: 'Kitchen', time: "12:00",date:"11.12"}
+    const temperature = {temperature: 25, id: 2, location: 'Living Room', time: "13:00",date:"09.12"}
 
     const { getAllByText } = render(  
-      <HomeScreen  humidity={humidity} temperature={temperature}/>
+      <HomeScreen  latestHumidity={humidity} latestTemperature={temperature}/>
     );
-  
     expect(getAllByText('25 °C')).toBeTruthy()
     expect(getAllByText('23 %')).toBeTruthy()
     expect(getAllByText('Living Room')).toBeTruthy()
     expect(getAllByText('Kitchen')).toBeTruthy()
   });
 
-  it('should Render one DataCard if either only temperature has been given', () => {
-    const temperature = [{temperature: 20, id: 1, location: 'Living Room'}]
-    const { getByText } = render(<HomeScreen temperature={temperature}/>)
+  it('should Render one DataCard if only temperature has been given', () => {
+    const temperature = {temperature: 25, id: 1, location: 'Living Room', time: "12:00",date:"11.12"}
+    const { getByText } = render(<HomeScreen latestTemperature={temperature}/>)
 
-    expect(getByText('20 °C')).toBeTruthy()
+    expect(getByText('25 °C')).toBeTruthy()
     expect(getByText('Living Room')).toBeTruthy()
+    expect(getByText('11.12 - 12:00')).toBeTruthy()
   })
 
-  it('should Render one DataCard if either only humidity has been given', () => {
-    const humidity = [{humidity: 23, id: 1, location: 'Kitchen'}]
-    const { getByText } = render(<HomeScreen humidity={humidity}/>)
+  it('should Render one DataCard if only humidity has been given', () => {
+    const humidity = {humidity: 23, id: 1, location: 'Kitchen', time: "12:00",date:"11.12"}
+    const { getByText } = render(<HomeScreen latestHumidity={humidity}/>)
 
     expect(getByText('23 %')).toBeTruthy()
     expect(getByText('Kitchen')).toBeTruthy()
+    expect(getByText('11.12 - 12:00')).toBeTruthy()
   }) 
 
 });

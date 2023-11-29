@@ -14,7 +14,7 @@ describe('BottomBar', () => {
 
     const { getByText } = render(<BottomBar setScreen = {mockFunction}/>);
   
-    const screen1 = getByText('Notes');
+    const screen1 = getByText('Pinned');
     const screen2 = getByText('Home');
     const screen3 = getByText('Control');
 

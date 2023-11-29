@@ -1,53 +1,40 @@
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import { enableFetchMocks } from 'jest-fetch-mock'
 import StartMeasuring from '../components/molecules/StartMeasuring';
 
-enableFetchMocks();
+global.fetch = jest.fn(() =>
+Promise.resolve({
+  status: 200,
+  json: () => Promise.resolve({}),
+})
+);
 
 describe('StartMeasuring', () => {
 
-    afterEach(() => {
-        jest.clearAllMocks();
-      })
-    
-    it('renders correctly with custom props', () => {
-        const screen = render(<StartMeasuring/>);
-        expect(screen).toMatchSnapshot();
-    });
+afterEach(() => {
+    jest.clearAllMocks();
+  })
 
-    it('tells server to start measurement and updates statusText', async () => {
-        mockFunction = jest.fn()
-        // Mocking the fetch function
-        fetch.mockResponseOnce(JSON.stringify(), {
-          status: 202,
-         })
-      
-        const { getByText } = render(<StartMeasuring startURL='' setStatusText={mockFunction}/>)
-      
-        const startButton = getByText('start')
-        fireEvent.press(startButton)
-      
-        await waitFor(() => {
-          expect(getByText('On')).toBeDefined()
-        });
-      });
+it('renders correctly', () => {
+    const screen = render(<StartMeasuring/>);
+    expect(screen).toMatchSnapshot();
+});
 
-      it('shows error if start post request fails', async () => {
-        mockFunction = jest.fn()
-        fetch.mockResponseOnce(JSON.stringify(), {
-          status: 403,
-         })
-    
-        const { getByText } = render(<StartMeasuring startURL= '' setStatusText={mockFunction}/>)
-    
-        const startButton = getByText('start')
-    
-        fireEvent.press(startButton)
-    
-        await waitFor(() => {
-          expect(getByText('Off')).toBeDefined();
-        });
-    
-      })
+it('should start measuring temperature when response status is 200', async () => {
+
+  const setTempStarted = jest.fn()
+  const { getByText } = render(<StartMeasuring selected="temperature" setTempStarted={setTempStarted} tempStarted={false}/>);
+  const startButton = getByText('Start');
+  fireEvent.press(startButton);
+  await waitFor(() => expect(setTempStarted).toHaveBeenCalledWith(true));
+});
+
+it('should start measuring humidity when response status is 200', async () => {
+
+  const setHumStarted = jest.fn();
+  const { getByText } = render(<StartMeasuring selected="humidity" setHumStarted={setHumStarted} humStarted={false} />);
+  const startButton = getByText('Start');
+  fireEvent.press(startButton);
+  await waitFor(() => expect(setHumStarted).toHaveBeenCalledWith(true));
+})
     
 })

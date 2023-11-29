@@ -41,6 +41,21 @@ export const buttons = StyleSheet.create({
         backgroundColor: '#FF6542',
         borderWidth: 1,
     },
+    unPinButton: {
+        padding: 8,
+        borderTopRightRadius: 9,
+        backgroundColor: '#FF6542',
+        borderBottomWidth: 1,
+        borderLeftWidth:1 ,
+        
+    },
+    pinSaveButton: {
+        padding: 8,
+        borderBottomRightRadius: 9,
+        backgroundColor: '#00A352',
+        borderTopWidth: 1,
+        borderLeftWidth:1 ,
+    },
     pinButton: {
         padding: 8,
         borderRadius: 20,

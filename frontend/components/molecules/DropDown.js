@@ -19,7 +19,7 @@ export default function DropDown({setSelected,selected,options}) {
 
   return (<>
   <InfoBox text = "Sensor" textStyle = 'headingText' type = 'heading'/>
-  <Buttons text = 'Select a Sensor..' textStyle = 'black' onPress = { onPressDropDown }></Buttons>
+  <Buttons text = 'Select a sensor..' textStyle = 'black' onPress = { onPressDropDown }></Buttons>
     <View style = { styles.displayBox}>    
     { hide ? (<>
     <View>

@@ -72,17 +72,19 @@ exports[`ControlScreen renders correctly 1`] = `
         <Text
           style={
             {
-              "fontSize": 20,
+              "color": "#001021",
+              "fontSize": 22,
               "textAlign": "center",
             }
           }
         >
-          Select a Sensor..
+          Select a sensor..
         </Text>
       </View>
       <View
         style={
           {
+            "backgroundColor": "#FFFF",
             "flex": 1,
             "flexDirection": "column",
             "width": "100%",
@@ -145,7 +147,7 @@ exports[`ControlScreen renders correctly 1`] = `
           onStartShouldSetResponder={[Function]}
           style={
             {
-              "backgroundColor": "lightgrey",
+              "backgroundColor": "#03254E",
               "borderRadius": 20,
               "borderWidth": 1,
               "opacity": 1,
@@ -157,7 +159,8 @@ exports[`ControlScreen renders correctly 1`] = `
           <Text
             style={
               {
-                "fontSize": 20,
+                "color": "white",
+                "fontSize": 22,
                 "textAlign": "center",
               }
             }
@@ -168,7 +171,7 @@ exports[`ControlScreen renders correctly 1`] = `
         <View
           style={
             {
-              "backgroundColor": "lightgrey",
+              "backgroundColor": "#D9E5D6",
               "borderRadius": 22,
               "justifyContent": "center",
               "width": "30%",
@@ -178,7 +181,7 @@ exports[`ControlScreen renders correctly 1`] = `
           <Text
             style={
               {
-                "fontSize": 20,
+                "fontSize": 22,
                 "textAlign": "center",
               }
             }
@@ -219,9 +222,11 @@ exports[`ControlScreen renders correctly 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           {
-            "backgroundColor": "lightblue",
+            "backgroundColor": "#03254E",
             "borderRadius": 20,
             "borderWidth": 1,
+            "color": "white",
+            "marginBottom": 10,
             "marginTop": 20,
             "opacity": 1,
             "padding": 10,
@@ -232,7 +237,8 @@ exports[`ControlScreen renders correctly 1`] = `
         <Text
           style={
             {
-              "fontSize": 20,
+              "color": "white",
+              "fontSize": 22,
               "textAlign": "center",
             }
           }

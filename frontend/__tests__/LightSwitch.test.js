@@ -1,57 +1,54 @@
-import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import { enableFetchMocks } from 'jest-fetch-mock'
-import LightSwitch from "../components/molecules/LightSwitch";
+import LightSwitch from '../components/molecules/LightSwitch';
 
-enableFetchMocks();
+// Mock the fetch function globally
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    status: 200,
+    json: () => Promise.resolve({}),
+  })
+);
 
-describe('lightSwitch', () => {
+describe('LightSwitch', () => {
+afterEach(() => {
+  jest.clearAllMocks();
+});
 
-    afterEach(() => {
-        jest.clearAllMocks();
-      })
-    
-    it('renders correctly', () => {
-        const screen = render(<LightSwitch/>);
-        expect(screen).toMatchSnapshot();
-    });
+it('should render correctly', () => {
+  const { getByText } = render(<LightSwitch lights={false} setLights={jest.fn()} />);
+  expect(getByText('Off')).toBeTruthy();
+});
 
-    it('tells server to turn on the lights and updates statusText', async () => {
-    
-    mockFunction = jest.fn()
-    // Mocking the fetch function
-        fetch.mockResponseOnce(JSON.stringify(), {
-        status: 202,
-        });
-    
-    const { getByText } = render(<LightSwitch lightURL='' setStatusText={mockFunction}/>);
-    
-    const lightSwitchButton = getByText('lights');
-    fireEvent.press(lightSwitchButton);
-    
-    await waitFor(() => {
-        expect(getByText('On')).toBeDefined(); 
-    });
-    });
+it('should turn lights ON and button is pressed', async () => {
 
-    
-    it('shows error if lightSwitch post request fails', async () => {
-    mockFunction = jest.fn()
-    fetch.mockResponseOnce(JSON.stringify(), {
-        status: 403,
-        });
+  global.fetch = jest.fn(() =>
+      Promise.resolve({
+        status: 200,
+        json: () => Promise.resolve({}),
+  }));
 
-    const { getByText } = render(<LightSwitch lightURL='' setStatusText={mockFunction}/>)
-
-    const lightSwitchButton = getByText('lights');
-
-    fireEvent.press(lightSwitchButton);
-
-    await waitFor(() => {
-        expect(getByText('Off')).toBeDefined(); 
-    });
-
-    })
+  setLights = jest.fn()
+  const { getByText } = render(<LightSwitch lights={true} setLights={setLights} />);
+  fireEvent.press(getByText('lights'));
+  await waitFor(() => 
+    expect(getByText('On')).toBeTruthy(),
+  )}
+)
 
 
+it('should turn lights OFF and button is pressed', async () => {
+  global.fetch = jest.fn(() =>
+      Promise.resolve({
+        status: 304,
+        json: () => Promise.resolve({}),
+  }));
+
+  setLights = jest.fn()
+  const { getByText } = render(<LightSwitch lights={false} setLights={setLights} />);
+  fireEvent.press(getByText('lights'));
+  await waitFor(() => 
+    expect(getByText('Off')).toBeTruthy()
+  )
 })
+
+});

@@ -1,6 +1,7 @@
 import variables from '../../env'
-import { View, ScrollView, TouchableOpacity,Text } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import MetricsCard from '../molecules/MetricsCard'
+import InfoBox from '../atoms/InfoBox'
 import { styles } from '../../styles/styles'
 
 
@@ -31,12 +32,12 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
   const onPinPress = async(id, type) => {
     let pinned = true;
     let url = type === 'humidity' ? humidityURL : temperatureURL
-
+    let data = { apiKey, id, pinned }
 
     const response = await fetch(url, {
       method: "PUT",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `apiKey=${apiKey}&id=${id}&pinned=${pinned}`,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     }).catch((error) => { 
       console.error(error.message); 
     }); 
@@ -54,7 +55,39 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
   return (
   <ScrollView>
     <View style = {styles.displayBox}>
-      <MetricsCard temperature={temperature} humidity={humidity} onPinPress={onPinPress} onDeletePress={onDeletePress}/> 
+      {temperature !== undefined ? <>
+        <InfoBox text = "Temperatures" textStyle="subHeadingText" type = 'heading'/>
+        {temperature.map( (temp) => {return <View key = {temp.id}>
+        <MetricsCard 
+        data={temp.temperature}
+        location={temp.location}
+        time={temp.time}
+        date={temp.date}
+        unit="°C"
+        title="temperature"
+        pinned={temp.pinned}
+        id={temp.id}
+        onPinPress={onPinPress} 
+        onDeletePress={onDeletePress}/> 
+        </View>})}</>
+     : <></>}
+
+      {humidity !== undefined ? <>
+        <InfoBox text = "Humidity" textStyle="subHeadingText" type = 'heading'/>
+        {humidity.map( (hum) => {return <View key = {hum.id}>
+        <MetricsCard 
+        data={hum.humidity}
+        location={hum.location}
+        time={hum.time}
+        date={hum.date}
+        unit="%"
+        title="humidity"
+        pinned={hum.pinned}
+        id={hum.id}
+        onPinPress={onPinPress} 
+        onDeletePress={onDeletePress}/> 
+        </View>})}</>
+     : <></>} 
     </View>
   </ScrollView>
   )
