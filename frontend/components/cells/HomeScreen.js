@@ -7,6 +7,7 @@ import InfoBox from '../atoms/InfoBox'
 
 export default function HomeScreen({latestTemperature, latestHumidity, refreshData}) {
 
+
 if(latestTemperature.length === 0 && latestHumidity.length === 0) {
 return(
     <View style = { styles.controlContainer }>

@@ -16,6 +16,24 @@ controlContainer: {
   justifyContent: 'center',
   alignItems: 'center',
 },
+buttonRowContainer: { 
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  width: '95%',
+  marginTop: 1,
+  marginBottom: 20,
+},
+buttonColumnContainer: {
+  display: 'flex',
+  width: '30%',
+  justifyContent: 'space-evenly',
+},
+pinTextContainer: {
+  display: 'flex',
+  width: '75%',
+  justifyContent: 'space-evenly',
+},
 controlRowContainer: {
   display: 'flex',
   flexDirection: 'row',
@@ -27,17 +45,39 @@ controlRowContainer: {
   marginTop: 15,
   marginBottom:15,
 },
+dropDownTextContainer: {  
+  padding: 10,
+  fontStyle: 'italic',
+  backgroundColor: '#fff',
+  borderRadius: 15,
+  margin: 15
+},
+dataContainer:{
+  height: 250,
+  width: '30%',
+  overflow: 'hidden',
+  backgroundColor: '#ffff',
+  justifyContent: 'flex-end',
+  marginHorizontal: 5,
+  borderRadius: 60,
+  borderWidth:2.5
+},
+textDataContainer:{
+  height: 250,
+  width: '50%',
+  justifyContent: 'space-evenly',
+},
+navContainer: {
+  display: 'flex',
+  flexDirection: 'row',
+  width: '99%',
+  justifyContent:'space-around',
+},
 topBar:{
   height: '7%',
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: "#3C6E71",
-},
-displayBox: {
-  flex: 1,
-  flexDirection: 'column',
-  width: '100%',
-  backgroundColor: '#FFFF',
 },
 navBar: {
   height: '10%',
@@ -45,11 +85,11 @@ navBar: {
   justifyContent: 'center',
   backgroundColor: "#dbd7d7",
 },
-navContainer: {
-  display: 'flex',
-  flexDirection: 'row',
-  width: '99%',
-  justifyContent:'space-around',
+displayBox: {
+  flex: 1,
+  flexDirection: 'column',
+  width: '100%',
+  backgroundColor: '#FFFF',
 },
 dropDownBox: {
   width: '95%',
@@ -71,21 +111,6 @@ smallInfoBox: {
   backgroundColor: '#E8F1F2',
   justifyContent: 'center',
   marginTop: 10,
-},
-dataContainer:{
-  height: 250,
-  width: '30%',
-  overflow: 'hidden',
-  backgroundColor: '#ffff',
-  justifyContent: 'flex-end',
-  marginHorizontal: 5,
-  borderRadius: 60,
-  borderWidth:2.5
-},
-textDataContainer:{
-  height: 250,
-  width: '50%',
-  justifyContent: 'space-evenly',
 },
 mediumInfoBox: {
   display: 'flex',
@@ -127,21 +152,16 @@ statusBox: {
   width: '30%',
   borderRadius: 22,
 },
-mercury: {
-  width: 600,
-  borderTopWidth: 2,
-  borderStyle: 'dotted',
-}, 
+pinnedButtonBox: {
+  width: '25%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent:'space-between',
+  backgroundColor: '#B4CDCF',
+},
 headingText: {
   fontSize: 20,
   fontWeight: 'bold',
-},
-dropDownTextContainer: {  
-  padding: 10,
-  fontStyle: 'italic',
-  backgroundColor: '#fff',
-  borderRadius: 15,
-  margin: 15
 },
 subHeadingText: {
   fontSize: 22,
@@ -178,29 +198,9 @@ block : {
   height: 100,
   justifyContent: 'center',
 },
-buttonRowContainer: { 
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  width: '95%',
-  marginTop: 1,
-  marginBottom: 20,
-},
-buttonColumnContainer: {
-  display: 'flex',
-  width: '30%',
-  justifyContent: 'space-evenly',
-},
-pinTextContainer: {
-  display: 'flex',
-  width: '75%',
-  justifyContent: 'space-evenly',
-},
-pinnedButtonBox: {
-  width: '25%',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent:'space-between',
-  backgroundColor: '#B4CDCF',
-}
+mercury: {
+  width: 600,
+  borderTopWidth: 2,
+  borderStyle: 'dotted',
+}, 
 });

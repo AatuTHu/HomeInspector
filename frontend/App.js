@@ -33,25 +33,28 @@ export default function App() {
     const result = await fetch(humidityURL).then((res)=>
         res.json()
       ).catch((error) => { 
-        console.error(error.message); 
+        console.log(error.message); 
       });
 
-      if(result.length > 0) {
+      if(result !== undefined) {
         setHumidity(result)
         let latestObject = result[result.length-1]
         setLatestHumidity(latestObject)
-      }  
+      }
   }
 
   const fetchTemperatureData = async() => {
     const result = await fetch(temperatureURL).then((res)=>
       res.json()
     ).catch((error) => { 
-      console.error(error.message); 
+      console.log(error.message); 
     });
-     setTemperature(result)
-     let latestObject = result[result.length-1]
-     setLatestTemperature(latestObject)
+
+    if(result !== undefined) {
+      setTemperature(result)
+      let latestObject = result[result.length-1]
+      setLatestTemperature(latestObject)
+    }
   }
 
   useEffect(() => {

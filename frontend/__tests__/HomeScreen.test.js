@@ -7,7 +7,7 @@ describe('HomeScreen', () => {
   it('Renders InfoBox when no temperature or humidity is available', () => {
     
     const { getAllByText } = render(
-      <HomeScreen/>
+      <HomeScreen latestHumidity={""} latestTemperature={""}/>
     );
 
     expect(getAllByText('No measurements found')).toBeTruthy()
@@ -29,7 +29,7 @@ describe('HomeScreen', () => {
 
   it('should Render one DataCard if only temperature has been given', () => {
     const temperature = {temperature: 25, id: 1, location: 'Living Room', time: "12:00",date:"11.12"}
-    const { getByText } = render(<HomeScreen latestTemperature={temperature}/>)
+    const { getByText } = render(<HomeScreen latestTemperature={temperature} latestHumidity={""}/>)
 
     expect(getByText('25 °C')).toBeTruthy()
     expect(getByText('Living Room')).toBeTruthy()
@@ -38,7 +38,7 @@ describe('HomeScreen', () => {
 
   it('should Render one DataCard if only humidity has been given', () => {
     const humidity = {humidity: 23, id: 1, location: 'Kitchen', time: "12:00",date:"11.12"}
-    const { getByText } = render(<HomeScreen latestHumidity={humidity}/>)
+    const { getByText } = render(<HomeScreen latestHumidity={humidity} latestTemperature={""}/>)
 
     expect(getByText('23 %')).toBeTruthy()
     expect(getByText('Kitchen')).toBeTruthy()
