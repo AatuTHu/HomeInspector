@@ -40,7 +40,7 @@ exports[`SaveSensorLocation renders correctly 1`] = `
     <TextInput
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
-      placeholder="where ..."
+      placeholder="update location"
       style={
         {
           "fontSize": 22,

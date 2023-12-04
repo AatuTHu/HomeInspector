@@ -32,6 +32,7 @@ router.get('/', async(req, res) => { // SHOW EVERYTHING
                 location: doc.data().location,
                 time: doc.data().time,
                 date: doc.data().date,
+                note: doc.data().note,
                 pinned: doc.data().pinned,
             };
             humidity.push(messageObject);
@@ -78,6 +79,7 @@ router.post('/start', (req, res) => {   // Tell esp32 to start measuring or stop
         }
         var url
         measuringMode = Number(req.body.measuringMode)
+        console.log("humidity start " + measuringMode)
         if(measuringMode === 1) {
           url = process.env.esp32URLhumON
         } else if (measuringMode === 0) {
@@ -98,12 +100,25 @@ router.post('/start', (req, res) => {   // Tell esp32 to start measuring or stop
       }
 })
 
-router.put('/', async(req, res) => {
+router.put('/pinned', async(req, res) => {
     if(process.env.API_KEY === req.body.apiKey) {
         if(req.body.id === undefined || req.body.id === "") return res.send('Invalid data')
         const docRef = doc(firestore,HUMIDITY,req.body.id)
         await updateDoc(docRef, {
             pinned: req.body.pinned
+        }).catch (error => console.log(error))
+        res.sendStatus(200)
+    } else {
+        res.sendStatus(403)
+    } 
+})
+
+router.put('/note', async(req, res) => {
+    if(process.env.API_KEY === req.body.apiKey) {
+        if(req.body.id === undefined || req.body.id === "") return res.send('Invalid data')
+        const docRef = doc(firestore,HUMIDITY,req.body.id)
+        await updateDoc(docRef, {
+            note: req.body.note
         }).catch (error => console.log(error))
         res.sendStatus(200)
     } else {

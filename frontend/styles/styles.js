@@ -50,7 +50,7 @@ dropDownTextContainer: {
   fontStyle: 'italic',
   backgroundColor: '#fff',
   borderRadius: 15,
-  margin: 15
+  margin: 15,
 },
 dataContainer:{
   height: 250,
@@ -95,7 +95,7 @@ dropDownBox: {
   width: '95%',
   alignSelf: 'center',
   backgroundColor: "#EEF0F2",
-  margin: 10,
+  margin: 20,
   borderRadius: 15,
 },
 headingBox:{

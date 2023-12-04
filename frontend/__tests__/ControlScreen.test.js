@@ -68,7 +68,7 @@ describe('ControlScreen', () => {
 
       fireEvent.press(humiditySensor)
 
-      expect(getByPlaceholderText('where ...')).toBeTruthy()
+      expect(getByPlaceholderText('update location')).toBeTruthy()
       expect(getByText('Save')).toBeTruthy()
       expect(getByText('Start')).toBeTruthy()
     })

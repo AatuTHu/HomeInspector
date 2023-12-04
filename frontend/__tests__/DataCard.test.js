@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react-native';
-import DataCard from '../components/atoms/DataCard';
+import DataCard from '../components/molecules/DataCard';
 
 describe('DataCard', () => {
 

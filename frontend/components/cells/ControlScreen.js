@@ -1,6 +1,5 @@
 import { View, Text, ScrollView} from "react-native"
 import { styles } from "../../styles/styles"
-import  localVariables  from "../../env"
 import { useState } from "react"
 import Buttons from "../atoms/Buttons"
 import SaveSensorLocation from "../molecules/SaveSensorLocation"
@@ -16,6 +15,7 @@ export default function ControlScreen({setScreen,setTempStarted,tempStarted,setC
   ]
 
   const [selected, setSelected] = useState("")
+  const [hide, setHide] = useState(true)
   
   const showAll = () => { 
     setScreen(4);
@@ -24,8 +24,8 @@ export default function ControlScreen({setScreen,setTempStarted,tempStarted,setC
   return (
     <ScrollView>
       <View style = { styles.controlContainer }>
-          <DropDown selected={selected} setSelected={setSelected} options={options}/>
-          { selected ? (<>
+          <DropDown selected={selected} setSelected={setSelected} options={options} hide={hide} setHide={setHide}/>
+          { selected !== "" ? (<>
             <SaveSensorLocation 
               selected = {selected} 
               setCurrentHumLoc = {setCurrentHumLoc} 

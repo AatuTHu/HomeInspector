@@ -1,7 +1,7 @@
 import React from 'react'
 import { View,ScrollView } from 'react-native'
 import { styles } from '../../styles/styles'
-import DataCard from '../atoms/DataCard'
+import DataCard from '../molecules/DataCard'
 import Buttons from '../atoms/Buttons'
 import InfoBox from '../atoms/InfoBox'
 
@@ -28,8 +28,7 @@ return (
           title = "Temperature"
           dataType = 'temperature' 
           fillingColor= '#880D1E'
-          unit = '°C'
-          cardType='big'/>
+          unit = '°C'/>
         </> : <></>}
         
         {latestHumidity.length !== 0  ? <>           
@@ -41,8 +40,7 @@ return (
           title = "Humidity"
           dataType = 'humidity'
           fillingColor = '#82DDF0'
-          unit = '%'
-          cardType='big'/>
+          unit = '%'/>
           </> : <></>}
         
       <Buttons type = 'update' textStyle="white" onPress = { refreshData } text = 'Refresh'/>

@@ -8,7 +8,7 @@ import { styles } from '../../styles/styles'
 
 export default function MetricsScreen({temperature, humidity, setTemperature, setHumidity}) {
 
-  const { humidityURL, temperatureURL, apiKey} = variables
+  const { humidityURL,humidityPinnedURL,temperaturePinnedURL, temperatureURL, apiKey} = variables
 
   const onDeletePress = async(id, type) => {
    let url = type === 'humidity' ? humidityURL : temperatureURL
@@ -17,7 +17,7 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `apiKey=${apiKey}&id=${id}`,
     }).catch((error) => { 
-      console.error(error.message); 
+      console.log(error.message); 
     });
 
     if(response.status === 200) {
@@ -31,7 +31,7 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
 
   const onPinPress = async(id, type) => {
     let pinned = true;
-    let url = type === 'humidity' ? humidityURL : temperatureURL
+    let url = type === 'humidity' ? humidityPinnedURL : temperaturePinnedURL
     let data = { apiKey, id, pinned }
 
     const response = await fetch(url, {
@@ -39,7 +39,7 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     }).catch((error) => { 
-      console.error(error.message); 
+      console.log(error.message); 
     }); 
 
     if(response.status === 200) {

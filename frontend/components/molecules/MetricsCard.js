@@ -1,23 +1,18 @@
 import { View, TouchableOpacity,Text } from 'react-native'
 import { styles } from '../../styles/styles'
 import { buttons } from '../../styles/buttonStyles'
-import DataCard from '../atoms/DataCard'
+import DataCard from './DataCard'
 
 export default function MetricsCard({data,location,time,title,date,unit,pinned,onDeletePress,onPinPress,id}) {
   return (
    <>
     <View style = { styles.controlRowContainer}>
-      <DataCard
-        data={data}
-        location={location}
-        time={time}
-        date={date}
-        unit={unit}
-        title={title}
-        pinned={pinned}
-        id={id}
-        cardType='small'
-      />
+      <View style = { styles.metricInfoBox}>
+          <Text style = { styles.metricTextTitle }>{title}</Text>
+          <Text style = { styles.metricText }>{date} - {time}</Text>
+          <Text style = { styles.metricText }>{data} {unit}</Text>
+          <Text style = { styles.metricText }>{location}</Text>  
+      </View>
 
       <View style= {styles.buttonColumnContainer}>
        { pinned === true ? (<></>) : (<>

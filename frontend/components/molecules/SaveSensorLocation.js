@@ -36,7 +36,7 @@ export default function saveSensorLocation({selected, setCurrentHumLoc, setCurre
 
   return (<>
     <InfoBox text = "Device location" textStyle = 'headingText' type = 'heading'/>  
-        <InputBox placeholder= "where ..." text = {rememberLocation} newText = { setNewLocation } onSubmitEditing={ saveLocation }/>
+        <InputBox placeholder= "update location" text = {rememberLocation} newText = { setNewLocation } onSubmitEditing={ saveLocation }/>
     <Buttons text = "Save" textStyle="white" type = "save" onPress={ saveLocation } />
     <View style = { styles.block}>
         <Text style = { styles.statusText }>{statusText}</Text>

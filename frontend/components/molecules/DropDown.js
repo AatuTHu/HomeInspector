@@ -4,11 +4,12 @@ import { styles } from '../../styles/styles'
 import Buttons from '../atoms/Buttons'
 import InfoBox from '../atoms/InfoBox'
 
-export default function DropDown({setSelected,selected,options}) {
+export default function DropDown({setSelected,selected,options,hide, setHide}) {
 
-    const [hide, setHide] = useState(true)
+    
 
     const onPressDropDown = () => {
+        setSelected("")
         setHide(!hide)
     }
 

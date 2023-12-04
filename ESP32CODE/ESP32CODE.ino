@@ -47,7 +47,6 @@ if (httpResponseCode > 0) {
  Serial.println(httpResponseCode);
 }
  http.end();
- Serial.println("Going in to waiting");
 }
 
 

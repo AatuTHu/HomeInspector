@@ -39,8 +39,11 @@ export default function App() {
       if(result !== undefined) {
         setHumidity(result)
         let latestObject = result[result.length-1]
-        setLatestHumidity(latestObject)
-      }
+        
+        if( latestObject !== undefined ) {
+          setLatestHumidity(latestObject)
+        }     
+      } 
   }
 
   const fetchTemperatureData = async() => {
@@ -53,7 +56,10 @@ export default function App() {
     if(result !== undefined) {
       setTemperature(result)
       let latestObject = result[result.length-1]
-      setLatestTemperature(latestObject)
+
+      if(latestObject !== undefined) {
+        setLatestTemperature(latestObject)
+      }   
     }
   }
 
