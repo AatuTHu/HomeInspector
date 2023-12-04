@@ -1,15 +1,21 @@
 #include <WiFi.h>
 #include <DHT.h>
 #include <HTTPClient.h>
-#include "CREDENTIALS.h"
 #include <ESPAsyncWebServer.h>
+#include <SPI.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_PCD8544.h>
 
+#include "CREDENTIALS.h"
 #define ledPin 5
 #define DHTPIN 0
 #define DHTTYPE DHT22
 DHT dht(DHTPIN,DHTTYPE);
 
 AsyncWebServer server(80);
+
+Adafruit_PCD8544 display = Adafruit_PCD8544(23, 22, 17, 19, 18);
+int contrastValue = 200; // Default Contrast Value
 
 //Variables
 float hum;  //Stores humidity value
@@ -66,11 +72,25 @@ Serial.println(WiFi.localIP());
 server.on("/ledON", HTTP_GET, [](AsyncWebServerRequest *request){
  enableLights = 1;
 request->send(200, "text/plain", "LED is ON");
+
+display.clearDisplay();
+display.setTextColor(BLACK, WHITE);
+display.setTextSize(1);
+display.setCursor(0, 0);
+display.println("LED is ON");
+display.display();
 });
 
 server.on("/ledOFF", HTTP_GET, [](AsyncWebServerRequest *request){
  enableLights = 0;
 request->send(200, "text/plain", "LED is OFF");
+
+display.clearDisplay();
+display.setTextColor(BLACK, WHITE);
+display.setTextSize(1);
+display.setCursor(0, 0);
+display.println("LED is OFF");
+display.display();
 });
 
 server.on("/tempON", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -93,21 +113,36 @@ server.on("/humOFF", HTTP_GET, [](AsyncWebServerRequest *request){
 request->send(200, "text/plain", "Humidity is OFF");
 });
 
-
 server.begin();
 dht.begin();
+display.begin();
+
+display.setContrast(contrastValue);
+display.clearDisplay();
+display.display();
+delay(1000);
+
+
+display.setTextColor(BLACK, WHITE);
+display.setCursor(0,0);
+display.setTextSize(0.5);
+display.println("HOMEINSPECTOR ONLINE");
+display.display();
 }
 
 void loop() {
  unsigned long currentMillis = millis();
 
+
+
 if(currentMillis - previousMillis > interval) {
+
 if(enableMeasurementsTemperature == 1) { // user can enable measurements from phone.
- temp= dht.readTemperature();
- Serial.println("Temperature");
- Serial.print(temp);
- Serial.println(" Celsius");
- makeHttpPOSTRequestToServer(temperatureURL, temperature, temp); 
+temp= dht.readTemperature();
+Serial.println("Temperature");
+Serial.print(temp);
+Serial.println(" Celsius");
+makeHttpPOSTRequestToServer(temperatureURL, temperature, temp);
 }
 
 if(enableMeasurementsHumidity == 1) { // user can enable measurements from phone.
@@ -120,8 +155,66 @@ if(enableMeasurementsHumidity == 1) { // user can enable measurements from phone
  previousMillis = currentMillis;
 }
 
+if(enableMeasurementsHumidity == 1 && enableMeasurementsTemperature == 1) {
+
+display.clearDisplay();
+display.setTextColor(BLACK, WHITE);
+display.setTextSize(1);
+display.setCursor(0,1);
+
+display.println("Temperature");
+display.print(temp);
+display.println(" Celsius");
+display.println("");
+
+display.println("Humidity");
+display.print(hum);
+display.println(" %");
+
+if(enableLights == 1) {
+  display.println("LED is ON");
+}
+
+display.display();
+
+} else if (enableMeasurementsHumidity == 1 ) {
+
+display.clearDisplay();
+display.setTextColor(BLACK, WHITE);
+display.setTextSize(1);
+display.setCursor(0, 1);
+display.println("Humidity");
+display.print(hum);
+display.println(" %");
+display.println("");
+
+if(enableLights == 1) {
+  display.println("LED is ON");
+}
+
+display.display();
+
+} else if(enableMeasurementsTemperature == 1) {
+
+display.clearDisplay();
+display.setTextColor(BLACK, WHITE);
+display.setTextSize(1);
+display.setCursor(1,1);
+display.println("Temperature");
+display.print(temp);
+display.println(" Celsius");
+display.println("");
+
+if(enableLights == 1) {
+  display.println("LED is ON");
+}
+
+display.display(); 
+}
+
 if(enableLights == 1) {
  digitalWrite(ledPin, HIGH);
+
 } else if (enableLights == 0) {
  digitalWrite(ledPin, LOW);
 }}
