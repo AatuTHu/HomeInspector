@@ -32,6 +32,7 @@ const char* lightMode = "lightMode";
 const char* tempUnit = "celsius";
 const char* humUnit = "%";
 
+int serverState = 1;
 int tempButtonState = LOW;
 int lastTempButtonState = LOW;
 int humButtonState = LOW;
@@ -118,16 +119,19 @@ void sendReadingToServer(const char* URL,const char* KEY, float VALUE) {
   Serial.println(httpResponseCode);
   String response = http.getString();
   Serial.println(response);
+  serverState = 1;
   } else {
   Serial.print("Error on HTTP request. HTTP Response code: ");
   Serial.println(httpResponseCode);
   enableMeasurementsTemperature = 0;
-  enableMeasurementsHumidity = 0; 
+  enableMeasurementsHumidity = 0;
+  serverState = 0;
+  httpERROR();
   }
   http.end();
 }
 
-void sendStartValueToServer(const char* URL, const char* KEY, int VALUE) {
+int sendStartValueToServer(const char* URL, const char* KEY, int VALUE) {
    HTTPClient http;
   // Specify the server endpoint and request method
   http.begin(URL);
@@ -142,13 +146,19 @@ void sendStartValueToServer(const char* URL, const char* KEY, int VALUE) {
   Serial.println(httpResponseCode);
   String response = http.getString();
   Serial.println(response);
+  serverState = 1;
   } else {
   Serial.print("Error on HTTP request. HTTP Response code: ");
   Serial.println(httpResponseCode);
   enableMeasurementsTemperature = 0;
-  enableMeasurementsHumidity = 0; 
+  enableMeasurementsHumidity = 0;
+  serverState = 0;
+  httpERROR();
   }
+
   http.end();
+
+  return httpResponseCode;
 }
 
 
@@ -168,19 +178,17 @@ void bothMeasurementsON() {
   display.setTextColor(BLACK, WHITE);
   display.setTextSize(1);
   display.setCursor(0,1);
-
   display.println("Temperature");
   display.print(temp);
   display.println(" Celsius");
   display.println("");
-
   display.println("Humidity");
   display.print(hum);
   display.println(" %");
   if(enableLights == 1) {
-  display.println("LED IS ON");
+  display.println("Led is on");
   } else {
-  display.println("LED IS OFF");
+  display.println("Led is off");
   }
   display.display();
 }
@@ -195,9 +203,9 @@ void onlyOneMeasurementON(const char* KEY, float VALUE, const char* UNIT) {
   display.print(" ");
   display.println(UNIT);
   if(enableLights == 1) {
-  display.println("LED IS ON");
+  display.println("Led is on");
   } else {
-  display.println("LED IS OFF");
+  display.println("Led is off");
   }
   display.display();
 }
@@ -207,16 +215,26 @@ void noMeasurementsON() {
   display.setTextColor(BLACK, WHITE);
   display.setTextSize(1);
   display.setCursor(1,1);
-  display.println("Temperature");
-  display.println("and");
-  display.println("humidity");
-  display.println("are off");
+  display.println("Temperature: ");
+  display.println("off");
+  display.println("humidity: ");
+  display.println("off");
   display.println("");
   if(enableLights == 1) {
-  display.println("LED IS ON");
+  display.println("Led is on");
   } else {
-  display.println("LED IS OFF");
+  display.println("Led is off");
   }
+  display.display();
+}
+
+void httpERROR() {
+  display.clearDisplay();
+  display.setTextColor(BLACK, WHITE);
+  display.setTextSize(1);
+  display.setCursor(1,1);
+  display.println("SERVICE");
+  display.println("UNAVAILABLE");
   display.display();
 }
 
@@ -236,9 +254,11 @@ void loop() {
   if ((millis() - lastDebounceTime) > debounceDelay) {
    if (ledReading != buttonLedState) {
       buttonLedState = ledReading;
-      if (buttonLedState == HIGH) {
-        enableLights = 1 - enableLights;
-        sendStartValueToServer(lightURL, lightMode, enableLights);
+      if (buttonLedState == HIGH) {    
+        int response = sendStartValueToServer(lightURL, lightMode, enableLights);
+        if(response > 0) {
+          enableLights = 1 - enableLights;
+        }
       }
     }
   }
@@ -253,9 +273,11 @@ void loop() {
   if ((millis() - lastDebounceTime) > debounceDelay) {
     if (tempReading != tempButtonState) {
       tempButtonState = tempReading;
-      if (tempButtonState == HIGH) {
-        enableMeasurementsTemperature = 1 - enableMeasurementsTemperature;
-        sendStartValueToServer(temperatureStartURL, measuringMode, enableMeasurementsTemperature);
+      if (tempButtonState == HIGH) {       
+        int response = sendStartValueToServer(temperatureStartURL, measuringMode, enableMeasurementsTemperature);
+        if(response > 0) {
+          enableMeasurementsTemperature = 1 - enableMeasurementsTemperature;
+        }
       }
     }
   }
@@ -270,9 +292,11 @@ void loop() {
   if ((millis() - lastDebounceTime) > debounceDelay) {
     if (humReading != humButtonState) {
       humButtonState = humReading;
-      if (humButtonState == HIGH) {
-        enableMeasurementsHumidity = 1 - enableMeasurementsHumidity;
-        sendStartValueToServer(humidityStartURL, measuringMode, enableMeasurementsHumidity);
+      if (humButtonState == HIGH) {       
+        int response = sendStartValueToServer(humidityStartURL, measuringMode, enableMeasurementsHumidity);
+         if(response > 0) {
+          enableMeasurementsHumidity = 1 - enableMeasurementsHumidity;
+        }
       }
     }
   }
@@ -280,7 +304,6 @@ void loop() {
   lastHumButtonState = humReading;
 
   //READING POSTS
-
   if(currentMillis - previousMillis > interval) {
     if(enableMeasurementsTemperature == 1) { // user can enable measurements from phone.
     temp = dht.readTemperature();
@@ -293,13 +316,14 @@ void loop() {
     previousMillis = currentMillis;
   }
 
-  if(enableMeasurementsHumidity == 1 && enableMeasurementsTemperature == 1) {
+
+   if(enableMeasurementsHumidity == 1 && enableMeasurementsTemperature == 1) {
     bothMeasurementsON();
-  } else if (enableMeasurementsHumidity == 1 ) {
+  } else if (enableMeasurementsHumidity == 1 && serverState == 1) {
     onlyOneMeasurementON(humidity, hum, humUnit);
-  } else if(enableMeasurementsTemperature == 1) {
+  } else if(enableMeasurementsTemperature == 1 && serverState == 1) {
     onlyOneMeasurementON(temperature, temp, tempUnit);
-  } else if(enableMeasurementsTemperature == 0 && enableMeasurementsHumidity == 0) {
+  } else if(enableMeasurementsTemperature == 0 && enableMeasurementsHumidity == 0 && serverState == 1) {
     noMeasurementsON();
   }
 

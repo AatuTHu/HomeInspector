@@ -2,21 +2,41 @@
  
 ## Esp32-Express-Firebase-ReactNative
 
-This is a project where I use ESP32-WROOM-32D board to read data from DHT22 humidity/temperature sensor. This data is then sent to my REST API which I have made with express web application framework. 
-The API uses firebases firestore to store the data. Then a mobile phone application that is made with React-Native fetches this data and shows it in a readable way on the app. 
+There are four blocks to this project;
+
+- ESP32 (ESP32CODE)
+- Server (backend)
+- Mobile app (frontend)
+- Firebase firestore
+
+### ESP32: 
+I have connected to it 3 components that are nokia5110-screen to display set of predefined info screens that depend on the states of a led and DHT22 sensor
+for example, "Temperature data and that a led is on". Or that "Temperature off, humidity off and led is on". There are also three buttons connected to the board so that I can switch the light/temperature/humidity on manually.
+
+### Server:
+This is what controls everything. It is a node.js express server that receives data from the ESP32 or from mobile app. for example if ESP32 sends a temperature reading to server, the server will then save it to firebase. Or if I turn off the lights from the mobile app, the server will receive a state and tell ESP32 to turn off the lights.
+
+### Mobile app:
+This is the main interface, where all the readings are displayed. It has homeScreen for the latest reading of temperature and humidity. A control Screen where I can turn on the lights/humidity/temperature. Or set a location for the device (although DHT22 has both sensor in it, I can set different locations for both humidity and temperature). There is also MetricsScreen where I can see all the past readings and delete the readings I don't like or pin readings I like. And the final screen is the pinnedScreen where the pinned readings are displayed. There I can add a note for the reading or just unpin the reading.
+
+### Firebase firestore:
+This is a noSQL database where I save the temperature and humidity readings. 
+
+
 The project is still in production.
 
 ## Here are some pictures
 
-### HomeScreen
-![homeScreen](./pictures/HomeScreen.png)
+| **HomeScreen** | **MetricsScreen** |
+|------------|---------------|
+| ![HomeScreen](./pictures/HomeScreen.png) | ![MetricsScreen](./pictures/AllTheMeasurementsScreen.png) |
 
-### MetricsScreen
-![allMeasurements](./pictures/AllTheMeasurementsScreen.png)
+| **ControlScreen** | **PinnedScreen** |
+|---------------|--------------|
+| ![ControlScreen](./pictures/ControlSensorSelected.png) | ![PinnedScreen](./pictures/PinnedScreen.png) |
 
-### ControlScreen
-![control](./pictures//ControlSensorSelected.png)
 
-### PinnedScreen
-![pinnedScreen](./pictures/PinnedScreen.png)
+**Board**
+![realCircuit](./pictures/realCircuit.jpg)
 
+more pictures at the picture folder
