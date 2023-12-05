@@ -23,6 +23,8 @@ float temp; //Stores temperature value
 const char* temperature = "temperature";
 const char* humidity = "humidity";
 const char* start = "start";
+const char* tempUnit = "celsius";
+const char* humUnit = "%";
 
 int enableMeasurementsTemperature = 0;
 int enableMeasurementsHumidity = 0; 
@@ -62,7 +64,6 @@ pinMode(ledPin, OUTPUT);
 
 WiFi.begin(ssid, password);
 while (WiFi.status() != WL_CONNECTED) {
-delay(1000);
 Serial.print("..");
 }
 Serial.println("Connected to WiFi");
@@ -120,8 +121,6 @@ display.begin();
 display.setContrast(contrastValue);
 display.clearDisplay();
 display.display();
-delay(1000);
-
 
 display.setTextColor(BLACK, WHITE);
 display.setCursor(0,0);
@@ -130,10 +129,60 @@ display.println("HOMEINSPECTOR ONLINE");
 display.display();
 }
 
+void bothMeasurementsON() {
+  
+display.clearDisplay();
+display.setTextColor(BLACK, WHITE);
+display.setTextSize(1);
+display.setCursor(0,1);
+
+display.println("Temperature");
+display.print(temp);
+display.println(" Celsius");
+display.println("");
+
+display.println("Humidity");
+display.print(hum);
+display.println(" %");
+if(enableLights == 1) {
+  display.println("LED is ON");
+}
+display.display();
+}
+
+void onlyOneMeasurementON(const char* KEY, float VALUE, const char* UNIT) {
+display.clearDisplay();
+display.setTextColor(BLACK, WHITE);
+display.setTextSize(1);
+display.setCursor(0, 1);
+display.println(KEY);
+display.print(VALUE);
+display.print(" ");
+display.println(UNIT);
+if(enableLights == 1) {
+  display.println("LED is ON");
+}
+display.display();
+}
+
+void noMeasurementsON() {
+display.clearDisplay();
+display.setTextColor(BLACK, WHITE);
+display.setTextSize(1);
+display.setCursor(1,1);
+display.println("Temperature");
+display.println("and");
+display.println("humidity");
+display.println("are off");
+display.println("");
+if(enableLights == 1) {
+  display.println("LED is ON");
+}
+display.display();
+}
+
 void loop() {
  unsigned long currentMillis = millis();
-
-
 
 if(currentMillis - previousMillis > interval) {
 
@@ -156,65 +205,17 @@ if(enableMeasurementsHumidity == 1) { // user can enable measurements from phone
 }
 
 if(enableMeasurementsHumidity == 1 && enableMeasurementsTemperature == 1) {
-
-display.clearDisplay();
-display.setTextColor(BLACK, WHITE);
-display.setTextSize(1);
-display.setCursor(0,1);
-
-display.println("Temperature");
-display.print(temp);
-display.println(" Celsius");
-display.println("");
-
-display.println("Humidity");
-display.print(hum);
-display.println(" %");
-
-if(enableLights == 1) {
-  display.println("LED is ON");
-}
-
-display.display();
-
+bothMeasurementsON();
 } else if (enableMeasurementsHumidity == 1 ) {
-
-display.clearDisplay();
-display.setTextColor(BLACK, WHITE);
-display.setTextSize(1);
-display.setCursor(0, 1);
-display.println("Humidity");
-display.print(hum);
-display.println(" %");
-display.println("");
-
-if(enableLights == 1) {
-  display.println("LED is ON");
-}
-
-display.display();
-
+onlyOneMeasurementON(humidity, hum, humUnit);
 } else if(enableMeasurementsTemperature == 1) {
-
-display.clearDisplay();
-display.setTextColor(BLACK, WHITE);
-display.setTextSize(1);
-display.setCursor(1,1);
-display.println("Temperature");
-display.print(temp);
-display.println(" Celsius");
-display.println("");
-
-if(enableLights == 1) {
-  display.println("LED is ON");
-}
-
-display.display(); 
+onlyOneMeasurementON(temperature, temp, tempUnit);
+} else if(enableMeasurementsTemperature == 0 && enableMeasurementsHumidity == 0) {
+noMeasurementsON();
 }
 
 if(enableLights == 1) {
- digitalWrite(ledPin, HIGH);
-
+digitalWrite(ledPin, HIGH);
 } else if (enableLights == 0) {
- digitalWrite(ledPin, LOW);
+digitalWrite(ledPin, LOW);
 }}

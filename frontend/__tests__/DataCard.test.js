@@ -18,7 +18,6 @@ describe('DataCard', () => {
             date= {date}
             title={title}
             unit={unit}
-            cardType="big"
         />)
 
         expect(getByText(data + " "+unit)).toBeTruthy()

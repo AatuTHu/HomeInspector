@@ -4,8 +4,6 @@ import MetricsCard from '../molecules/MetricsCard'
 import InfoBox from '../atoms/InfoBox'
 import { styles } from '../../styles/styles'
 
-
-
 export default function MetricsScreen({temperature, humidity, setTemperature, setHumidity}) {
 
   const { humidityURL,humidityPinnedURL,temperaturePinnedURL, temperatureURL, apiKey} = variables
@@ -51,11 +49,17 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
     }
 
   }
+  
+if( temperature.length === 0 && humidity.length === 0) {
+  return (<View style = {styles.displayBox}>
+    <InfoBox text = "No metric data found" type = "heading" textStyle="subHeadingText"/>
+  </View>)
+} else {
 
   return (
   <ScrollView>
     <View style = {styles.displayBox}>
-      {temperature !== undefined ? <>
+      {temperature.length !== 0 ? <>
         <InfoBox text = "Temperatures" textStyle="subHeadingText" type = 'heading'/>
         {temperature.map( (temp) => {return <View key = {temp.id}>
         <MetricsCard 
@@ -72,7 +76,7 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
         </View>})}</>
      : <></>}
 
-      {humidity !== undefined ? <>
+      {humidity.length !== 0 ? <>
         <InfoBox text = "Humidity" textStyle="subHeadingText" type = 'heading'/>
         {humidity.map( (hum) => {return <View key = {hum.id}>
         <MetricsCard 
@@ -91,4 +95,5 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
     </View>
   </ScrollView>
   )
+}
 }

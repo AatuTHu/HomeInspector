@@ -15,7 +15,6 @@ export default function ControlScreen({setScreen,setTempStarted,tempStarted,setC
   ]
 
   const [selected, setSelected] = useState("")
-  const [hide, setHide] = useState(true)
   
   const showAll = () => { 
     setScreen(4);
@@ -24,7 +23,7 @@ export default function ControlScreen({setScreen,setTempStarted,tempStarted,setC
   return (
     <ScrollView>
       <View style = { styles.controlContainer }>
-          <DropDown selected={selected} setSelected={setSelected} options={options} hide={hide} setHide={setHide}/>
+          <DropDown selected={selected} setSelected={setSelected} options={options}/>
           { selected !== "" ? (<>
             <SaveSensorLocation 
               selected = {selected} 

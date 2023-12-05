@@ -27,8 +27,18 @@ export default function saveSensorLocation({selected, setCurrentHumLoc, setCurre
          if(response.status === 202) {
            setStatusText("Location saved")
            selected === "humidity" ? setCurrentHumLoc(newLocation) : setCurrentTempLoc(newLocation)
+           const timeout = setTimeout(() => {
+            setStatusText("");
+          }, 3000);
+   
+          return () => clearTimeout(timeout);
          } else if (response.status === 403) {
            setStatusText("There was an error, Try again later")
+           const timeout = setTimeout(() => {
+            setStatusText("");
+          }, 3000);
+   
+          return () => clearTimeout(timeout);
          }
        }
 

@@ -14,7 +14,7 @@ describe('DropDown', () => {
             {id : 1 ,name : "humidity", value : "humidity"},
             {id : 2, name : "temperature", value : "temperature"}]
 
-        const { getByText } = render(<DropDown options={options}/>)
+        const { getByText } = render(<DropDown options={options} setSelected={jest.fn()}/>)
         const selectButton = getByText('Select a sensor..')
 
         fireEvent.press(selectButton)

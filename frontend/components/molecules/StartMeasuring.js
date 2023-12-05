@@ -10,21 +10,23 @@ export default function StartMeasuring({selected,setTempStarted,tempStarted,setH
   const [ started, setStarted ] = useState(false);
 
   useEffect(() => {
-    async function fetchIsStarted () {
-      let url = selected === 'humidity' ? humidityStartURL : temperatureStartURL
-
-      const response = await fetch(url).then((res)=>
-       res.json()
-     ).catch((error) => { 
-       console.log(error.message); 
-     })
-
-     if(response !== undefined) {
-        setStarted(response)
-     }
+    async function fetchIsStarted() {
+      let url = selected === 'humidity' ? humidityStartURL : temperatureStartURL;
+  
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (response.ok) {
+          setStarted(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
     }
-   fetchIsStarted()
-  }, [])
+  
+    fetchIsStarted();
+  }, [selected]);
+  
 
   const startMeasuring = async() => {
     

@@ -8,6 +8,7 @@ import InfoBox from '../atoms/InfoBox'
 export default function PinnedScreen({temperature, setTemperature, humidity, setHumidity}) {
 
   const { humidityPinnedURL, temperaturePinnedURL,humidityNoteURL,temperatureNoteURL, apiKey} = variables
+  
  
   const onPinPress = async(id, type) => {
     let pinned = false;
@@ -43,6 +44,8 @@ export default function PinnedScreen({temperature, setTemperature, humidity, set
     }).catch((error) => { 
       console.log(error.message); 
     })
+
+    return response.status
   }
 
   

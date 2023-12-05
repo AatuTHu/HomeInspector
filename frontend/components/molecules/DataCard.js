@@ -2,12 +2,10 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { styles } from '../../styles/styles'
 
-export default function DataCard({data,location,time,title,fillingColor,date,unit,cardType}) {
+export default function DataCard({data,location,time,title,fillingColor,date,unit}) {
 
     const maxValue = 70;
-
     const percentage = (data / maxValue) * 100;
-
 
 return (
   <View style = { styles.mediumInfoBox}>

@@ -16,7 +16,7 @@ export default function Buttons({text,textStyle, type, onPress}) {
         pin: buttons.pinButton
       };
     
-      return styleMap[type] || buttons.defaultStyle;
+      return styleMap[type]
     }
 
     const getTextStyle = () => {

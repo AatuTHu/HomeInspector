@@ -4,11 +4,28 @@ import { styles } from '../../styles/styles'
 import { buttons } from '../../styles/buttonStyles'
 import InputBox from '../atoms/InputBox'
 
-export default function PinnedCard({data,location,time,title,date,unit,onPinPress,id,note, onAddNote}) {
+export default function PinnedCard({data,location,time,title,date,unit,onPinPress,id,note,onAddNote}) {
 
   const [newNote, setNewNote] = useState("")
+  const [statusText, setStatusText] = useState("")
 
+  const onSumbitNote = async() => {
+    const status = await onAddNote(id, title, newNote)
 
+    if(status === 200) {
+      setStatusText("note added");
+      const timeout = setTimeout(() => {
+      setStatusText("");
+    }, 3000);
+   return () => clearTimeout(timeout);
+    } else {
+      setStatusText("something went wrong");
+      const timeout = setTimeout(() => {
+      setStatusText("");
+      }, 3000);
+      return () => clearTimeout(timeout);
+    }
+  }
 return (
   <>
       <View style = { styles.pinnedInfoBox}>
@@ -17,8 +34,10 @@ return (
           <Text style = { styles.metricTextTitle }>{title}</Text>
           <Text style = { styles.pinnedText }>{date} | {time} | {data} {unit}</Text>
           <Text style = { styles.pinnedText }>{location}</Text>
-          <Text style = { styles.pinnedText }>{note}</Text>
+          <Text style = { styles.pinnedText }>Note: {note}</Text>
           <InputBox placeholder= "add a note.." multiline = { true } newText = { setNewNote }/>
+
+          <Text style = { styles.pinnedText }>{statusText}</Text>
       </View>
 
         <View style = {styles.pinnedButtonBox}>
@@ -26,7 +45,7 @@ return (
           <Text style = {buttons.blackButtonText}>unpin</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style = {buttons.pinSaveButton} onPress = { () => onAddNote(id, title, newNote)}>
+        <TouchableOpacity style = {buttons.pinSaveButton} onPress = { () => onSumbitNote()}>
           <Text style = {buttons.blackButtonText}>add</Text>
         </TouchableOpacity>
         </View>        

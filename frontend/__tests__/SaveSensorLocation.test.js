@@ -13,8 +13,6 @@ it('renders correctly', () => {
   expect(screen).toMatchSnapshot();
 });
 
-  
-
 it('should set statusText to "Location saved" when response status is 202', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({

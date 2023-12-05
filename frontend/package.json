@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --coverage"
+    "test": "jest --coverage --detectOpenHandles"
   },
   "jest": {
     "preset": "jest-expo",
