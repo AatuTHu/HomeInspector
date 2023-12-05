@@ -6,10 +6,13 @@ const { firestore,
     deleteDoc,
     doc,
     addDoc,
+    limit,
     updateDoc,
-    where,
+    orderBy,
+    query,
     getDocs} = require('../firebase')
-const http = require('http');
+const http = require('http')
+
 var deviceLocation = ""
 var measuringMode = 0
 
@@ -24,7 +27,7 @@ router.get('/start', (req, res) => {
 
 
 router.get('/', async(req, res) => { // SHOW EVERYTHING
-    const querySnapshot = await getDocs(collection(firestore, TEMPERATURE));
+    const querySnapshot = await getDocs(query(collection(firestore, TEMPERATURE),orderBy('date', 'desc'), orderBy('time', 'desc')));
     const temperature = [];
     querySnapshot.forEach((doc) => {
         const messageObject = {
@@ -60,6 +63,17 @@ router.post('/', async(req, res) => {    // CREATE collection OF temperature, or
     let date = currentTime.getDate() + '.' + (currentTime.getMonth()+1)
     let time = currentTime.getHours() + ':' + currentTime.getMinutes()
 
+    if(deviceLocation == "") {
+        const querySnapshot = await getDocs(
+            query(collection(firestore, TEMPERATURE), orderBy('date', 'desc'), orderBy('time', 'desc'), limit(1))
+          )
+          if(!querySnapshot.empty) {
+             deviceLocation = querySnapshot.docs[0].data().location
+          } else {
+            deviceLocation = "No defined location"
+          }
+    }
+
     const docRef = await addDoc(collection(firestore, TEMPERATURE), {
         temperature: req.body.temperature,
         location: deviceLocation,
@@ -85,7 +99,6 @@ router.post('/start', (req, res) => {    // Tell esp32 to start measuring or sto
         }  
         var url
         measuringMode = Number(req.body.measuringMode)
-        console.log("temperature start " + measuringMode)
         if(measuringMode === 1) {
           url = process.env.esp32URLtempON
         } else if (measuringMode === 0) {

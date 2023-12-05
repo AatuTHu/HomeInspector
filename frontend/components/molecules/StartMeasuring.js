@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Buttons from '../atoms/Buttons'
 import localVariables from '../../env'
 
-export default function StartMeasuring({selected,setTempStarted,tempStarted,setHumStarted,humStarted}) {
+export default function StartMeasuring({selected}) {
 
   const { apiKey, temperatureStartURL, humidityStartURL } = localVariables
   const [ started, setStarted ] = useState(false);
@@ -43,7 +43,6 @@ export default function StartMeasuring({selected,setTempStarted,tempStarted,setH
   
       if(response.status === 200) {
         setStarted(!started)
-        selected === 'humidity' ? setHumStarted(!humStarted) : setTempStarted(!tempStarted)
       } 
     }
 

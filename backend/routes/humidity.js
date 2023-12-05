@@ -6,9 +6,12 @@ const { firestore,
     deleteDoc,
     doc,
     addDoc,
+    orderBy,
     updateDoc,
+    limit,
+    query,
     getDocs} = require('../firebase')
-const http = require('http');
+const http = require('http')
 
 
 var deviceLocation = ""
@@ -23,7 +26,7 @@ router.get('/start', (req, res) => {
 })
   
 router.get('/', async(req, res) => { // SHOW EVERYTHING
-    const querySnapshot = await getDocs(collection(firestore, HUMIDITY));
+    const querySnapshot = await getDocs(query(collection(firestore, HUMIDITY),orderBy('date', 'desc'),orderBy('time', 'desc')));
     const humidity = [];
         querySnapshot.forEach((doc) => {
             const messageObject = {
@@ -55,6 +58,19 @@ router.post('/', async(req, res) => {    // CREATE collection OF HUMIDITIES or a
     let currentTime = new Date();
     let date = currentTime.getDate() + '.' + (currentTime.getMonth()+1)
     let time = currentTime.getHours() + ':' + currentTime.getMinutes()
+
+    if(deviceLocation == "") {
+        const querySnapshot = await getDocs(
+            query(collection(firestore, HUMIDITY), orderBy('date', 'desc'), orderBy('time', 'desc'), limit(1))
+          )
+          if(!querySnapshot.empty) {
+             deviceLocation = querySnapshot.docs[0].data().location
+          } else {
+            deviceLocation = "No defined location"
+          }
+    }
+    
+
     await addDoc(collection(firestore, HUMIDITY), {
         humidity: req.body.humidity,
         location: deviceLocation,
@@ -79,7 +95,6 @@ router.post('/start', (req, res) => {   // Tell esp32 to start measuring or stop
         }
         var url
         measuringMode = Number(req.body.measuringMode)
-        console.log("humidity start " + measuringMode)
         if(measuringMode === 1) {
           url = process.env.esp32URLhumON
         } else if (measuringMode === 0) {

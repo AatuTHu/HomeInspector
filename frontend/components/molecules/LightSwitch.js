@@ -1,14 +1,31 @@
 import { View, Text } from 'react-native'
+import { useEffect, useState } from 'react'
 import { styles } from "../../styles/styles"
 import Buttons from '../atoms/Buttons'
 import localVariables from '../../env'
 
-export default function LightSwitch({lights, setLights}) {
+export default function LightSwitch() {
 
   const { apiKey,lightURL } = localVariables
+  const [lights, setLights] = useState(false)
+
+  useEffect(() => {
+    async function fetchIsStarted() {
+      try {
+        const response = await fetch(lightURL);
+        const data = await response.json();
+        if (response.ok) {
+          setLights(data);
+        }
+      } catch (error) {
+        
+      }
+    }
+  
+    fetchIsStarted();
+  }, []);
 
     const lightSwitch = async() => {
-
         let mode = lights ?  0 : 1
         const response = await fetch(lightURL, {
           method: "POST",

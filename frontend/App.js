@@ -16,16 +16,12 @@ export default function App() {
   const { humidityURL, temperatureURL } = variables
 
   const [screen, setScreen] = useState(1)
-  const [lights, setLights] = useState(false)
-
+  
   const [temperature, setTemperature] = useState([])
-  const [latestTemperature, setLatestTemperature] = useState([])
-  const [tempStarted, setTempStarted] = useState(false)
+  const [latestTemperature, setLatestTemperature] = useState([]) 
   const [currentTempLoc, setCurrentTempLoc] = useState('')
-
   const [humidity, setHumidity] = useState([])
   const [latestHumidity, setLatestHumidity] = useState([])
-  const [humStarted, setHumStarted] = useState(false)
   const [currentHumLoc, setCurrentHumLoc] = useState('')
 
 
@@ -38,7 +34,7 @@ export default function App() {
 
       if(result !== undefined) {
         setHumidity(result)
-        let latestObject = result[result.length-1]
+        let latestObject = result[0]
         
         if( latestObject !== undefined ) {
           setLatestHumidity(latestObject)
@@ -55,7 +51,7 @@ export default function App() {
 
     if(result !== undefined) {
       setTemperature(result)
-      let latestObject = result[result.length-1]
+      let latestObject = result[0]
 
       if(latestObject !== undefined) {
         setLatestTemperature(latestObject)
@@ -90,16 +86,10 @@ export default function App() {
       case 2:
         return (<ControlScreen 
         setScreen={ setScreen } 
-        setTempStarted = { setTempStarted } 
-        tempStarted = { tempStarted }
-        setHumStarted = { setHumStarted } 
-        humStarted = { humStarted } 
         setCurrentHumLoc = {setCurrentHumLoc}
         setCurrentTempLoc = {setCurrentTempLoc}
         currentHumLoc = {currentHumLoc}
         currentTempLoc = {currentTempLoc}
-        setLights = {setLights}
-        lights = {lights}
         />)
       case 3:
         return <PinnedScreen temperature = {temperature} humidity = {humidity} setTemperature={setTemperature} setHumidity={setHumidity}/>

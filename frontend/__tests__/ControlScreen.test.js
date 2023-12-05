@@ -27,7 +27,7 @@ describe('ControlScreen', () => {
           json: () => Promise.resolve({}),
     }));
       setLights = jest.fn()
-      const { getByText } = render(<ControlScreen lights={true} setLights={setLights} />);
+      const { getByText } = render(<ControlScreen/>);
       fireEvent.press(getByText('lights'));
       await waitFor(() => 
         expect(getByText('On')).toBeTruthy(),
@@ -41,7 +41,7 @@ describe('ControlScreen', () => {
       json: () => Promise.resolve({}),
     }));
     setLights = jest.fn()
-    const { getByText } = render(<ControlScreen lights={false} setLights={setLights} />);
+    const { getByText } = render(<ControlScreen/>);
     fireEvent.press(getByText('lights'));
     await waitFor(() => 
       expect(getByText('Off')).toBeTruthy(),
@@ -116,8 +116,7 @@ describe('ControlScreen', () => {
       json: () => Promise.resolve({}),
     }));
     
-    const setHumStarted = jest.fn()
-    const { getByText } = render(<ControlScreen setHumStarted={setHumStarted} humStarted={false}/>);
+    const { getByText } = render(<ControlScreen/>);
     const selectButton = getByText('Select a sensor..')
      fireEvent.press(selectButton)
     const humiditySensor = getByText('humidity')
@@ -125,7 +124,7 @@ describe('ControlScreen', () => {
     const startButton = getByText('Start');
      fireEvent.press(startButton)
 
-     await waitFor(() => expect(setHumStarted).toHaveBeenCalledWith(true));
+     await waitFor(() => expect(getByText("On")).toBeTruthy());
   })
 
 });

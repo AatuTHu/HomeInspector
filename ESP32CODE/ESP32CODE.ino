@@ -27,7 +27,8 @@ int contrastValue = 150;
 
 const char* temperature = "temperature";
 const char* humidity = "humidity";
-const char* start = "start";
+const char* measuringMode = "measuringMode";
+const char* lightMode = "lightMode";
 const char* tempUnit = "celsius";
 const char* humUnit = "%";
 
@@ -102,7 +103,7 @@ void setup() {
   display.display();
 }
 
-void makeHttpPOSTRequestToServer(const char* URL,const char* KEY, float VALUE) {
+void sendReadingToServer(const char* URL,const char* KEY, float VALUE) {
   HTTPClient http;
   // Specify the server endpoint and request method
   http.begin(URL);
@@ -120,9 +121,37 @@ void makeHttpPOSTRequestToServer(const char* URL,const char* KEY, float VALUE) {
   } else {
   Serial.print("Error on HTTP request. HTTP Response code: ");
   Serial.println(httpResponseCode);
+  enableMeasurementsTemperature = 0;
+  enableMeasurementsHumidity = 0; 
   }
   http.end();
 }
+
+void sendStartValueToServer(const char* URL, const char* KEY, int VALUE) {
+   HTTPClient http;
+  // Specify the server endpoint and request method
+  http.begin(URL);
+  http.addHeader("Content-Type", "application/json");
+  // Your JSON payload
+  String jsonPayload = "{\""+ String(KEY) +"\":" + String(VALUE) + ", \"apiKey\":\"" + String(apiKey) + "\"}";
+  // Send the POST request
+  int httpResponseCode = http.POST(jsonPayload);
+
+  if (httpResponseCode > 0) {
+  Serial.print("HTTP Response code: ");
+  Serial.println(httpResponseCode);
+  String response = http.getString();
+  Serial.println(response);
+  } else {
+  Serial.print("Error on HTTP request. HTTP Response code: ");
+  Serial.println(httpResponseCode);
+  enableMeasurementsTemperature = 0;
+  enableMeasurementsHumidity = 0; 
+  }
+  http.end();
+}
+
+
 
 void startScreen() {
   display.clearDisplay();
@@ -204,12 +233,12 @@ void loop() {
   if (ledReading != lastButtonLedState) {
     lastDebounceTime = millis();
   }
-
   if ((millis() - lastDebounceTime) > debounceDelay) {
    if (ledReading != buttonLedState) {
       buttonLedState = ledReading;
       if (buttonLedState == HIGH) {
         enableLights = 1 - enableLights;
+        sendStartValueToServer(lightURL, lightMode, enableLights);
       }
     }
   }
@@ -217,7 +246,6 @@ void loop() {
   lastButtonLedState = ledReading;
 
   //TEMPERATURE BUTTON
-
   if (tempReading != lastTempButtonState) {
     lastDebounceTime = millis();
   }
@@ -227,6 +255,7 @@ void loop() {
       tempButtonState = tempReading;
       if (tempButtonState == HIGH) {
         enableMeasurementsTemperature = 1 - enableMeasurementsTemperature;
+        sendStartValueToServer(temperatureStartURL, measuringMode, enableMeasurementsTemperature);
       }
     }
   }
@@ -234,7 +263,6 @@ void loop() {
   lastTempButtonState = tempReading;
 
   //HUMIDITY BUTTON
-
   if (humReading != lastHumButtonState) {
     lastDebounceTime = millis();
   }
@@ -244,6 +272,7 @@ void loop() {
       humButtonState = humReading;
       if (humButtonState == HIGH) {
         enableMeasurementsHumidity = 1 - enableMeasurementsHumidity;
+        sendStartValueToServer(humidityStartURL, measuringMode, enableMeasurementsHumidity);
       }
     }
   }
@@ -255,11 +284,11 @@ void loop() {
   if(currentMillis - previousMillis > interval) {
     if(enableMeasurementsTemperature == 1) { // user can enable measurements from phone.
     temp = dht.readTemperature();
-    makeHttpPOSTRequestToServer(temperatureURL, temperature, temp);
+    sendReadingToServer(temperatureURL, temperature, temp);
     }
     if(enableMeasurementsHumidity == 1) { // user can enable measurements from phone.
     hum = dht.readHumidity();
-    makeHttpPOSTRequestToServer(humidityURL, humidity, hum);
+    sendReadingToServer(humidityURL, humidity, hum);
     }
     previousMillis = currentMillis;
   }

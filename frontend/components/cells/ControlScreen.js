@@ -7,7 +7,7 @@ import DropDown  from "../molecules/DropDown"
 import StartMeasuring from "../molecules/StartMeasuring"
 import LightSwitch from "../molecules/LightSwitch"
 
-export default function ControlScreen({setScreen,setTempStarted,tempStarted,setCurrentHumLoc,setCurrentTempLoc,currentHumLoc,currentTempLoc,setHumStarted,humStarted,setLights, lights}) {
+export default function ControlScreen({setScreen,setCurrentHumLoc,setCurrentTempLoc,currentHumLoc,currentTempLoc}) {
 
   const options = [
     {id : 1 ,name : "humidity", value : "humidity"},
@@ -34,14 +34,10 @@ export default function ControlScreen({setScreen,setTempStarted,tempStarted,setC
             />
             <StartMeasuring 
               selected = {selected} 
-              setTempStarted = { setTempStarted } 
-              tempStarted = {tempStarted} 
-              setHumStarted = { setHumStarted } 
-              humStarted = {humStarted}
             />
           </>) : (<></>)}
        
-          <LightSwitch lights = {lights} setLights = {setLights}/>
+          <LightSwitch/>
           <Buttons textStyle="white" text = "See all the measurements" type = "update" onPress={ showAll }/>
       </View>
     </ScrollView>

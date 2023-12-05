@@ -1,5 +1,5 @@
 const { initializeApp } = require("firebase/app");
-const { getFirestore, collection, onSnapshot, query, doc, getDocs,addDoc,orderBy,deleteDoc,updateDoc,where } = require("firebase/firestore");
+const { getFirestore, collection, onSnapshot, query, doc, getDocs,addDoc,orderBy,deleteDoc,limit,updateDoc,where } = require("firebase/firestore");
 
 const firebaseConfig = {
   apiKey: process.env.apiKey,
@@ -25,6 +25,7 @@ module.exports = {
   addDoc,
   deleteDoc,
   where,
+  limit,
   updateDoc,
   orderBy,
   onSnapshot,

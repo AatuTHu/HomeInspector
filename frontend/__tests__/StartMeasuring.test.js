@@ -22,27 +22,26 @@ it('renders correctly', () => {
 it('should start measuring temperature when response status is 200', async () => {
   const setTempStarted = jest.fn();
   const { getByText } = render(
-    <StartMeasuring selected="temperature" setTempStarted={setTempStarted} tempStarted={false} />
+    <StartMeasuring selected="temperature"/>
   );
 
 
   await act(async () => {
     const startButton = getByText('Start');
     fireEvent.press(startButton);
-    await waitFor(() => expect(setTempStarted).toHaveBeenCalledWith(true));
+    await waitFor(() => expect(getByText("On")).toBeTruthy());
   })
 })
 
 
 it('should start measuring humidity when response status is 200', async () => {
 
-  const setHumStarted = jest.fn();
-  const { getByText } = render(<StartMeasuring selected="humidity" setHumStarted={setHumStarted} humStarted={false} />);
+  const { getByText } = render(<StartMeasuring selected="humidity"/>);
   
   await act(async() => {
     const startButton = getByText('Start');
     fireEvent.press(startButton);
-    await waitFor(() => expect(setHumStarted).toHaveBeenCalledWith(true));
+    await waitFor(() => expect(getByText("On")).toBeTruthy());
   }) 
 })
     
