@@ -36,7 +36,7 @@ The project is still in production.
 | ![ControlScreen](./pictures/ControlSensorSelected.png) | ![PinnedScreen](./pictures/PinnedScreen.png) |
 
 
-**Board**
+## Board
 ![realCircuit](./pictures/realCircuit.jpg)
 
 more pictures at the picture folder
