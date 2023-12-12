@@ -5,10 +5,11 @@ import InputBox from '../atoms/InputBox'
 import Buttons from '../atoms/Buttons'
 import { View, Text } from 'react-native'
 import { styles } from "../../styles/styles"
+import Icon from "react-native-vector-icons/AntDesign"
 
 export default function saveSensorLocation({selected, setCurrentHumLoc, setCurrentTempLoc, currentHumLoc, currentTempLoc}) {
 
-    const { apiKey, temperatureLocationURL, humidityLocationURL } = variables
+    const {apiKey, temperatureLocationURL, humidityLocationURL} = variables
     const [newLocation, setNewLocation] = useState('');
     const [statusText, setStatusText] = useState('');
 
@@ -21,7 +22,7 @@ export default function saveSensorLocation({selected, setCurrentHumLoc, setCurre
            headers: { "Content-Type": "application/x-www-form-urlencoded" },
            body: `apiKey=${apiKey}&location=${newLocation}`,
          }).catch((error) => { 
-          console.error(error.message); 
+          console.log(error.message); 
         }); 
          
          if(response.status === 202) {
@@ -47,7 +48,7 @@ export default function saveSensorLocation({selected, setCurrentHumLoc, setCurre
   return (<>
     <InfoBox text = "Device location" textStyle = 'headingText' type = 'heading'/>  
         <InputBox placeholder= "update location" text = {rememberLocation} newText = { setNewLocation } onSubmitEditing={ saveLocation }/>
-    <Buttons text = "Save" textStyle="white" type = "save" onPress={ saveLocation } />
+    <Buttons text = {<Icon name='save' size={35} color={'white'}/>} textStyle="white" type = "save" onPress={ saveLocation } />
     <View style = { styles.block}>
         <Text style = { styles.statusText }>{statusText}</Text>
     </View>

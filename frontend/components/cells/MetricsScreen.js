@@ -1,15 +1,15 @@
-import variables from '../../env'
-import { View, ScrollView } from 'react-native'
-import MetricsCard from '../molecules/MetricsCard'
-import InfoBox from '../atoms/InfoBox'
-import { styles } from '../../styles/styles'
+import variables from "../../env"
+import { View, ScrollView } from "react-native"
+import MetricsCard from "../molecules/MetricsCard"
+import InfoBox from "../atoms/InfoBox"
+import { styles } from "../../styles/styles"
 
 export default function MetricsScreen({temperature, humidity, setTemperature, setHumidity}) {
 
   const { humidityURL,humidityPinnedURL,temperaturePinnedURL, temperatureURL, apiKey} = variables
 
   const onDeletePress = async(id, type) => {
-   let url = type === 'humidity' ? humidityURL : temperatureURL
+   let url = type === "humidity" ? humidityURL : temperatureURL
     const response = await fetch(url, {
       method: "DELETE",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -20,16 +20,16 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
 
     if(response.status === 200) {
       let tempArray
-      type === 'humidity' ?  tempArray = [...humidity] : tempArray = [...temperature]    
+      type === "humidity" ?  tempArray = [...humidity] : tempArray = [...temperature]    
       let objectToBeDeleted = tempArray.findIndex(p => p.id === id);   
       tempArray.splice(objectToBeDeleted, 1)
-      type === 'humidity' ? setHumidity(tempArray) : setTemperature(tempArray)
+      type === "humidity" ? setHumidity(tempArray) : setTemperature(tempArray)
     }
   }
 
   const onPinPress = async(id, type) => {
     let pinned = true;
-    let url = type === 'humidity' ? humidityPinnedURL : temperaturePinnedURL
+    let url = type === "humidity" ? humidityPinnedURL : temperaturePinnedURL
     let data = { apiKey, id, pinned }
 
     const response = await fetch(url, {
@@ -41,11 +41,11 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
     }); 
 
     if(response.status === 200) {
-      type === 'humidity' ?  tempArray = [...humidity] : tempArray = [...temperature]    
+      type === "humidity" ?  tempArray = [...humidity] : tempArray = [...temperature]    
       let tempArray
       let objectToBeUpdated = tempArray.findIndex(p => p.id === id);   
       tempArray[objectToBeUpdated].pinned = true;
-      type === 'humidity' ? setHumidity(tempArray) : setTemperature(tempArray)
+      type === "humidity" ? setHumidity(tempArray) : setTemperature(tempArray)
     }
 
   }
@@ -60,7 +60,7 @@ if( temperature.length === 0 && humidity.length === 0) {
   <ScrollView>
     <View style = {styles.displayBox}>
       {temperature.length !== 0 ? <>
-        <InfoBox text = "Temperatures" textStyle="subHeadingText" type = 'heading'/>
+        <InfoBox text = "Temperatures" textStyle="subHeadingText" type = "heading"/>
         {temperature.map( (temp) => {return <View key = {temp.id}>
         <MetricsCard 
         data={temp.temperature}
@@ -77,7 +77,7 @@ if( temperature.length === 0 && humidity.length === 0) {
      : <></>}
 
       {humidity.length !== 0 ? <>
-        <InfoBox text = "Humidity" textStyle="subHeadingText" type = 'heading'/>
+        <InfoBox text = "Humidity" textStyle="subHeadingText" type = "heading"/>
         {humidity.map( (hum) => {return <View key = {hum.id}>
         <MetricsCard 
         data={hum.humidity}

@@ -74,8 +74,8 @@ export default function App() {
   }, [])
 
   const refreshData = async() => {
-    fetchHumidityData()
-    fetchTemperatureData()
+   await fetchHumidityData()
+   await fetchTemperatureData()
   }
   
 

@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react'
 import { styles } from "../../styles/styles"
 import Buttons from '../atoms/Buttons'
 import localVariables from '../../env'
+import Icon from 'react-native-vector-icons/Entypo'
 
 export default function LightSwitch() {
 
-  const { apiKey,lightURL } = localVariables
+  const {apiKey,lightURL} = localVariables
   const [lights, setLights] = useState(false)
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export default function LightSwitch() {
           setLights(data);
         }
       } catch (error) {
-        
+        console.log(error)
       }
     }
   
@@ -44,7 +45,7 @@ export default function LightSwitch() {
 
   return (
     <View style = { styles.buttonRowContainer }>
-        <Buttons text = "lights" textStyle="white" type = "start" onPress={ lightSwitch }/>
+        <Buttons text = {<Icon name='light-bulb' size = {30}/>} textStyle="white" type = "start" onPress={ lightSwitch }/>
       <View style = { styles.statusBox }>
           <Text style = { styles.subHeadingText }>{lights ? (<Text style = {{"color" : "#A30015"}}>On</Text>) : (<Text>Off</Text>)}</Text>
       </View>

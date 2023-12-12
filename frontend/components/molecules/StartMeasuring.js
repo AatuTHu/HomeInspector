@@ -3,6 +3,7 @@ import { styles } from "../../styles/styles"
 import { useState, useEffect } from 'react'
 import Buttons from '../atoms/Buttons'
 import localVariables from '../../env'
+import Icon from 'react-native-vector-icons/Feather'
 
 export default function StartMeasuring({selected}) {
 
@@ -38,7 +39,7 @@ export default function StartMeasuring({selected}) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `apiKey=${apiKey}&measuringMode=${mode}`,
       }).catch((error) => { 
-        console.error(error.message); 
+        console.log(error.message); 
       }); 
   
       if(response.status === 200) {
@@ -48,7 +49,7 @@ export default function StartMeasuring({selected}) {
 
   return (
     <View style = { styles.buttonRowContainer }>
-     <Buttons text = "Start" textStyle="white" type = "start" onPress={ startMeasuring }/>
+     <Buttons text = {<Icon name='play' size={30}/>} textStyle="white" type = "start" onPress={ startMeasuring }/>
         <View style = { styles.statusBox }>
           <Text style = { styles.subHeadingText }>{ started ? (<Text style = {{"color" : "green"}}>On</Text>) : (<Text>Off</Text>)}</Text>
         </View>

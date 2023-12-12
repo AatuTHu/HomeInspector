@@ -12,7 +12,7 @@ export const buttons = StyleSheet.create({
         backgroundColor: '#03254E',
     },
     startButton: {
-        padding: 5,
+        padding: 10,
         borderRadius: 20,
         borderWidth: 1,
         width: '50%',

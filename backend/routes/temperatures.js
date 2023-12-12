@@ -24,8 +24,6 @@ router.get('/start', (req, res) => {
     res.json(measuringMode)
 })
 
-
-
 router.get('/', async(req, res) => { // SHOW EVERYTHING
     const querySnapshot = await getDocs(query(collection(firestore, TEMPERATURE),orderBy('date', 'desc'), orderBy('time', 'desc')));
     const temperature = [];

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { firestore,
+const {firestore,
     HUMIDITY,
     collection,
     deleteDoc,
@@ -69,7 +69,6 @@ router.post('/', async(req, res) => {    // CREATE collection OF HUMIDITIES or a
             deviceLocation = "No defined location"
           }
     }
-    
 
     await addDoc(collection(firestore, HUMIDITY), {
         humidity: req.body.humidity,
@@ -140,7 +139,6 @@ router.put('/note', async(req, res) => {
         res.sendStatus(403)
     } 
 })
-
 
 router.delete('/', async(req, res) => { //Delete one from collection
     if(process.env.API_KEY === req.body.apiKey) {

@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { styles } from '../../styles/styles'
 import { buttons } from '../../styles/buttonStyles'
 import InputBox from '../atoms/InputBox'
+import Icon1 from 'react-native-vector-icons/Ionicons'
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export default function PinnedCard({data,location,time,title,date,unit,onPinPress,id,note,onAddNote}) {
 
@@ -26,6 +28,7 @@ export default function PinnedCard({data,location,time,title,date,unit,onPinPres
       return () => clearTimeout(timeout);
     }
   }
+  
 return (
   <>
       <View style = { styles.pinnedInfoBox}>
@@ -42,11 +45,11 @@ return (
 
         <View style = {styles.pinnedButtonBox}>
         <TouchableOpacity style = {buttons.unPinButton} onPress = { () => onPinPress(id, title)}>
-          <Text style = {buttons.blackButtonText}>unpin</Text>
+          <Text style = {buttons.blackButtonText}><Icon2 name='pin-off-outline' size={30}/></Text>
         </TouchableOpacity>
 
         <TouchableOpacity style = {buttons.pinSaveButton} onPress = { () => onSumbitNote()}>
-          <Text style = {buttons.blackButtonText}>add</Text>
+          <Text style = {buttons.blackButtonText}><Icon1 name="add" size={30}/></Text>
         </TouchableOpacity>
         </View>        
       </View>

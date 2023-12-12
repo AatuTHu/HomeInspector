@@ -1,9 +1,9 @@
-import variables from '../../env'
-import { useState, useEffect } from 'react'
-import { styles } from '../../styles/styles'
-import { View, ScrollView,Text } from 'react-native'
-import PinnedCard from '../molecules/PinnedCard'
-import InfoBox from '../atoms/InfoBox'
+import variables from "../../env"
+import { useState, useEffect } from "react"
+import { styles } from "../../styles/styles"
+import { View, ScrollView,Text } from "react-native"
+import PinnedCard from "../molecules/PinnedCard"
+import InfoBox from "../atoms/InfoBox"
 
 export default function PinnedScreen({temperature, setTemperature, humidity, setHumidity}) {
 
@@ -12,7 +12,7 @@ export default function PinnedScreen({temperature, setTemperature, humidity, set
  
   const onPinPress = async(id, type) => {
     let pinned = false;
-    let url = type === 'humidity' ? humidityPinnedURL : temperaturePinnedURL
+    let url = type === "humidity" ? humidityPinnedURL : temperaturePinnedURL
     let data = { apiKey, id, pinned }
 
     const response = await fetch(url, {
@@ -24,17 +24,17 @@ export default function PinnedScreen({temperature, setTemperature, humidity, set
     }); 
 
     if(response.status === 200) {
-      type === 'humidity' ?  tempArray = [...humidity] : tempArray = [...temperature]    
+      type === "humidity" ?  tempArray = [...humidity] : tempArray = [...temperature]    
       let tempArray
       let objectToBeUpdated = tempArray.findIndex(p => p.id === id);   
       tempArray[objectToBeUpdated].pinned = false;
-      type === 'humidity' ? setHumidity(tempArray) : setTemperature(tempArray)
+      type === "humidity" ? setHumidity(tempArray) : setTemperature(tempArray)
     }
 
   }
 
   const onAddNote = async(id, type, note) => {
-    let url = type === 'humidity' ? humidityNoteURL : temperatureNoteURL
+    let url = type === "humidity" ? humidityNoteURL : temperatureNoteURL
     let data = { apiKey, id, note}
 
     const response = await fetch(url, {
