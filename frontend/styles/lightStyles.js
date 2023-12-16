@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import  Constants  from 'expo-constants';
 
-export const styles = StyleSheet.create({
+export const lightStyles = StyleSheet.create({
 title: {
   fontSize: 25,
   fontStyle: 'italic',
@@ -15,6 +15,7 @@ container: {
 controlContainer: {
   justifyContent: 'center',
   alignItems: 'center',
+  
 },
 buttonRowContainer: { 
   display: 'flex',
@@ -33,6 +34,7 @@ pinTextContainer: {
   display: 'flex',
   width: '75%',
   justifyContent: 'space-evenly',
+  elevation: 4,
 },
 controlRowContainer: {
   display: 'flex',
@@ -51,6 +53,7 @@ dropDownTextContainer: {
   backgroundColor: '#fff',
   borderRadius: 15,
   margin: 15,
+  elevation: 4,
 },
 dataContainer:{
   height: 250,
@@ -60,12 +63,15 @@ dataContainer:{
   justifyContent: 'flex-end',
   marginHorizontal: 5,
   borderRadius: 60,
-  borderWidth:2.5
+  borderWidth:2.5,
+  elevation: 4,
+  
 },
 textDataContainer:{
   height: 250,
   width: '50%',
   justifyContent: 'space-evenly',
+ 
 },
 navContainer: {
   display: 'flex',
@@ -84,12 +90,14 @@ navBar: {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: "#dbd7d7",
+  
 },
 displayBox: {
   flex: 1,
   flexDirection: 'column',
   width: '100%',
   backgroundColor: '#FFFF',
+
 },
 dropDownBox: {
   width: '95%',
@@ -97,6 +105,7 @@ dropDownBox: {
   backgroundColor: "#EEF0F2",
   margin: 20,
   borderRadius: 15,
+  elevation: 4,
 },
 headingBox:{
   width: '95%',
@@ -108,7 +117,6 @@ headingBox:{
 smallInfoBox: {
   width: '95%',
   height: 50,
-  backgroundColor: '#E8F1F2',
   justifyContent: 'center',
   marginTop: 10,
 },
@@ -122,6 +130,7 @@ mediumInfoBox: {
   justifyContent: 'space-around',
   alignItems: 'center',
   marginTop: 20,
+  elevation: 4,
 },
 metricInfoBox: {
   display: 'flex',
@@ -132,6 +141,7 @@ metricInfoBox: {
   backgroundColor: '#E8F1F2',
   marginTop: 20,
   borderWidth: 1,
+  elevation: 4,
 },
 pinnedInfoBox: {
   display: 'flex',
@@ -145,12 +155,14 @@ pinnedInfoBox: {
   marginBottom:20,
   borderWidth: 1,
   overflow: 'hidden',
+  elevation: 4,
 },
 statusBox: {
   backgroundColor: '#D9E5D6',
   justifyContent: 'center',
   width: '30%',
   borderRadius: 22,
+  elevation: 4,
 },
 pinnedButtonBox: {
   width: '25%',
@@ -158,6 +170,7 @@ pinnedButtonBox: {
   flexDirection: 'column',
   justifyContent:'space-between',
   backgroundColor: '#B4CDCF',
+  elevation: 4,
 },
 headingText: {
   fontSize: 20,
@@ -195,12 +208,11 @@ selectedText: {
   opacity: 0.5
 },
 block : {
-  height: 100,
+  height: 50,
   justifyContent: 'center',
 },
 mercury: {
   width: 600,
   borderTopWidth: 2,
-  borderStyle: 'dotted',
 }, 
 });

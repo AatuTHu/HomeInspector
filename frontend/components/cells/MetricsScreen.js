@@ -2,9 +2,10 @@ import variables from "../../env"
 import { View, ScrollView } from "react-native"
 import MetricsCard from "../molecules/MetricsCard"
 import InfoBox from "../atoms/InfoBox"
-import { styles } from "../../styles/styles"
+import { lightStyles } from "../../styles/lightStyles"
+import { darkStyles } from "../../styles/darkStyles"
 
-export default function MetricsScreen({temperature, humidity, setTemperature, setHumidity}) {
+export default function MetricsScreen({temperature, humidity, setTemperature, setHumidity, isDarkTheme}) {
 
   const { humidityURL,humidityPinnedURL,temperaturePinnedURL, temperatureURL, apiKey} = variables
 
@@ -51,16 +52,16 @@ export default function MetricsScreen({temperature, humidity, setTemperature, se
   }
   
 if( temperature.length === 0 && humidity.length === 0) {
-  return (<View style = {styles.displayBox}>
-    <InfoBox text = "No metric data found" type = "heading" textStyle="subHeadingText"/>
+  return (<View style = { isDarkTheme ? darkStyles.displayBox : lightStyles.displayBox}>
+    <InfoBox text = "No metric data found" type = "heading" textStyle="subHeadingText" isDarkTheme={isDarkTheme}/>
   </View>)
 } else {
 
   return (
   <ScrollView>
-    <View style = {styles.displayBox}>
+    <View style = { isDarkTheme ? darkStyles.displayBox : lightStyles.displayBox}>
       {temperature.length !== 0 ? <>
-        <InfoBox text = "Temperatures" textStyle="subHeadingText" type = "heading"/>
+        <InfoBox text = "Temperatures" textStyle="subHeadingText" type = "heading" isDarkTheme={isDarkTheme}/>
         {temperature.map( (temp) => {return <View key = {temp.id}>
         <MetricsCard 
         data={temp.temperature}
@@ -72,7 +73,8 @@ if( temperature.length === 0 && humidity.length === 0) {
         pinned={temp.pinned}
         id={temp.id}
         onPinPress={onPinPress} 
-        onDeletePress={onDeletePress}/> 
+        onDeletePress={onDeletePress}
+        isDarkTheme = {isDarkTheme}/> 
         </View>})}</>
      : <></>}
 
@@ -89,7 +91,8 @@ if( temperature.length === 0 && humidity.length === 0) {
         pinned={hum.pinned}
         id={hum.id}
         onPinPress={onPinPress} 
-        onDeletePress={onDeletePress}/> 
+        onDeletePress={onDeletePress}
+        isDarkTheme = {isDarkTheme}/>
         </View>})}</>
      : <></>} 
     </View>

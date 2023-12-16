@@ -27,13 +27,14 @@ The project is still in production.
 
 ## Here are some pictures
 
+
 | **HomeScreen** | **MetricsScreen** |
 |------------|---------------|
 | ![HomeScreen](./pictures/HomeScreen.png) | ![MetricsScreen](./pictures/AllTheMeasurementsScreen.png) |
 
-| **ControlScreen** | **PinnedScreen** |
+| **DarkControlScreen** | **DarkPinnedScreen** |
 |---------------|--------------|
-| ![ControlScreen](./pictures/ControlSensorSelected.png) | ![PinnedScreen](./pictures/PinnedScreen.png) |
+| ![darkControl](./pictures/darkControl.png) | ![darkPin](./pictures/darkPin.png) |
 
 
 ## Board

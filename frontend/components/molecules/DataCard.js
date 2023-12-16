@@ -1,23 +1,24 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { styles } from '../../styles/styles'
+import { lightStyles } from '../../styles/lightStyles'
+import { darkStyles } from '../../styles/darkStyles';
 
-export default function DataCard({data,location,time,title,fillingColor,date,unit}) {
+export default function DataCard({data,location,time,title,fillingColor,date,unit,isDarkTheme}) {
 
     const maxValue = 70;
     const percentage = (data / maxValue) * 100;
 
 return (
-  <View style = { styles.mediumInfoBox}>
-      <View style = {styles.dataContainer}>
-          <Text style = { styles.subHeadingText }>{data} {unit}</Text>
-          <View style = {[styles.mercury, { height: `${percentage}%`, backgroundColor: `${fillingColor}`}]}/>
+  <View style = { isDarkTheme ? darkStyles.mediumInfoBox : lightStyles.mediumInfoBox}>
+      <View style = { isDarkTheme ? darkStyles.dataContainer : lightStyles.dataContainer}>
+          <Text style = { isDarkTheme? darkStyles.subHeadingText : lightStyles.subHeadingText }>{data} {unit}</Text>
+          <View style = {[lightStyles.mercury, { height: `${percentage}%`, backgroundColor: `${fillingColor}`}]}/>
       </View>
 
-      <View style = {styles.textDataContainer}>
-        <Text style = {styles.subHeadingText}>{title}</Text>
-        <Text style = { styles.subHeadingText }>{date} - {time}</Text>
-        <Text style = { styles.subHeadingText }>{location}</Text>  
+      <View style = {lightStyles.textDataContainer}>
+        <Text style = { isDarkTheme ? darkStyles.subHeadingText : lightStyles.subHeadingText}>{title}</Text>
+        <Text style = { isDarkTheme ? darkStyles.subHeadingText : lightStyles.subHeadingText }>{date} - {time}</Text>
+        <Text style = { isDarkTheme ? darkStyles.subHeadingText : lightStyles.subHeadingText }>{location}</Text>  
       </View>
   </View>
 )

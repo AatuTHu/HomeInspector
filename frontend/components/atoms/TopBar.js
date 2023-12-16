@@ -1,10 +1,11 @@
 import { Text, View } from 'react-native';
-import { styles } from '../../styles/styles'
+import { lightStyles } from '../../styles/lightStyles'
+import { darkStyles } from '../../styles/darkStyles';
 
-export default function TopBar() {
+export default function TopBar({}) {
   return (
     <View>
-        <Text style = {styles.title}>HomeInspector</Text>
+        <Text style = {lightStyles.title}>HomeInspector</Text>
     </View>
   )
 }

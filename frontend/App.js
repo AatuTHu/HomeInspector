@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView,View } from 'react-native';
 import { useState, useEffect } from 'react'
-import { styles } from './styles/styles';
+import { lightStyles } from './styles/lightStyles';
+import { darkStyles } from './styles/darkStyles';
 import variables from './env'
 import HomeScreen from './components/cells/HomeScreen';
 import ControlScreen from './components/cells/ControlScreen'
@@ -16,6 +17,7 @@ export default function App() {
   const { humidityURL, temperatureURL } = variables
 
   const [screen, setScreen] = useState(1)
+  const [isDarkTheme, setIsDarkTheme] = useState(true)
   
   const [temperature, setTemperature] = useState([])
   const [latestTemperature, setLatestTemperature] = useState([]) 
@@ -82,7 +84,7 @@ export default function App() {
   const screens = () => {
     switch (screen) {
       case 1:
-        return <HomeScreen latestTemperature = {latestTemperature} latestHumidity={latestHumidity} refreshData = {refreshData}/>    
+        return <HomeScreen latestTemperature = {latestTemperature} latestHumidity={latestHumidity} refreshData = {refreshData} isDarkTheme={isDarkTheme}/>    
       case 2:
         return (<ControlScreen 
         setScreen={ setScreen } 
@@ -90,27 +92,29 @@ export default function App() {
         setCurrentTempLoc = {setCurrentTempLoc}
         currentHumLoc = {currentHumLoc}
         currentTempLoc = {currentTempLoc}
+        setIsDarkTheme = {setIsDarkTheme}
+        isDarkTheme={isDarkTheme}
         />)
       case 3:
-        return <PinnedScreen temperature = {temperature} humidity = {humidity} setTemperature={setTemperature} setHumidity={setHumidity}/>
+        return <PinnedScreen temperature = {temperature} humidity = {humidity} setTemperature={setTemperature} setHumidity={setHumidity} isDarkTheme={isDarkTheme}/>
       case 4:
-        return <MetricsScreen setScreen={ setScreen } setTemperature = {setTemperature} setHumidity={setHumidity} temperature={temperature} humidity={humidity}/>
+        return <MetricsScreen setScreen={ setScreen } setTemperature = {setTemperature} setHumidity={setHumidity} temperature={temperature} humidity={humidity} isDarkTheme={isDarkTheme}/>
       }
   }
 
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style = {styles.topBar}>
+    <SafeAreaView style={lightStyles.container}>
+      <View style = { isDarkTheme ? darkStyles.topBar : lightStyles.topBar}>
         <TopBar/>
       </View>
-        <View style = {styles.displayBox}>
+        <View style = { isDarkTheme ? darkStyles.displayBox : lightStyles.displayBox}>
           {screens()}
         </View> 
-      <View style={styles.navBar}>
-        <BottomBar setScreen = { setScreen }/>
+      <View style={ isDarkTheme? darkStyles.navBar : lightStyles.navBar}>
+        <BottomBar setScreen = { setScreen } isDarkTheme={isDarkTheme}/>
       </View>
-      <StatusBar style="auto"/>
+      <StatusBar style="auto" backgroundColor={isDarkTheme ? "#183D3D" : "white"}/>
     </SafeAreaView>
   );
 }

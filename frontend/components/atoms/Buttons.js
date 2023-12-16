@@ -11,7 +11,7 @@ export default function Buttons({text,textStyle, type, onPress}) {
         save: buttons.saveButton,
         delete: buttons.deleteButton,
         nav: buttons.navButtons,
-        update: buttons.updateButton,
+        metrics: buttons.metricsButton,
         refresh: buttons.refreshButton,
         pin: buttons.pinButton
       };

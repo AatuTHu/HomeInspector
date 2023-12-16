@@ -1,11 +1,12 @@
 import { View, Text } from 'react-native'
-import { styles } from "../../styles/styles"
+import { lightStyles } from "../../styles/lightStyles"
 import { useState, useEffect } from 'react'
 import Buttons from '../atoms/Buttons'
 import localVariables from '../../env'
 import Icon from 'react-native-vector-icons/Feather'
+import { darkStyles } from '../../styles/darkStyles'
 
-export default function StartMeasuring({selected}) {
+export default function StartMeasuring({selected, isDarkTheme}) {
 
   const { apiKey, temperatureStartURL, humidityStartURL } = localVariables
   const [ started, setStarted ] = useState(false);
@@ -48,10 +49,10 @@ export default function StartMeasuring({selected}) {
     }
 
   return (
-    <View style = { styles.buttonRowContainer }>
+    <View style = { lightStyles.buttonRowContainer }>
      <Buttons text = {<Icon name='play' size={30}/>} textStyle="white" type = "start" onPress={ startMeasuring }/>
-        <View style = { styles.statusBox }>
-          <Text style = { styles.subHeadingText }>{ started ? (<Text style = {{"color" : "green"}}>On</Text>) : (<Text>Off</Text>)}</Text>
+        <View style = { isDarkTheme ? darkStyles.statusBox : lightStyles.statusBox }>
+          <Text style = { isDarkTheme ? darkStyles.subHeadingText : lightStyles.subHeadingText }>{ started ? (<Text style = {{"color" : "green"}}>On</Text>) : (<Text>Off</Text>)}</Text>
         </View>
     </View>
   )

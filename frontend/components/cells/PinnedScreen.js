@@ -1,11 +1,11 @@
 import variables from "../../env"
-import { useState, useEffect } from "react"
-import { styles } from "../../styles/styles"
-import { View, ScrollView,Text } from "react-native"
+import { lightStyles } from "../../styles/lightStyles"
+import { View, ScrollView } from "react-native"
 import PinnedCard from "../molecules/PinnedCard"
 import InfoBox from "../atoms/InfoBox"
+import { darkStyles } from "../../styles/darkStyles"
 
-export default function PinnedScreen({temperature, setTemperature, humidity, setHumidity}) {
+export default function PinnedScreen({temperature, setTemperature, humidity, setHumidity, isDarkTheme}) {
 
   const { humidityPinnedURL, temperaturePinnedURL,humidityNoteURL,temperatureNoteURL, apiKey} = variables
   
@@ -51,8 +51,8 @@ export default function PinnedScreen({temperature, setTemperature, humidity, set
   
 
 if( temperature.length === 0 || humidity.length === 0) {
-  return (<View style = {styles.displayBox}>
-    <InfoBox text = "No measurements found" type = "heading" textStyle="subHeadingText"/>
+  return (<View style = { isDarkTheme? darkStyles.displayBox : lightStyles.displayBox}>
+    <InfoBox text = "No measurements found" type = "heading" textStyle="subHeadingText" isDarkTheme={isDarkTheme}/>
   </View>)
 } else {
 
@@ -60,7 +60,7 @@ if( temperature.length === 0 || humidity.length === 0) {
   const pinnedHumItems = humidity.filter(hum => hum.pinned);
   return (
   <ScrollView>
-     <View style = {styles.displayBox}>
+     <View style = { isDarkTheme? darkStyles.displayBox : lightStyles.displayBox}>
      {pinnedTempItems.length > 0 ? (
       pinnedTempItems.map(temp => (
         <View key={temp.id}>
@@ -75,11 +75,12 @@ if( temperature.length === 0 || humidity.length === 0) {
             title={"temperature"}
             onPinPress={onPinPress}
             onAddNote={onAddNote}
+            isDarkTheme={isDarkTheme}
           />
         </View>
       ))
     ) : (
-      <View style = {styles.displayBox}>
+      <View style = {isDarkTheme? darkStyles.displayBox : lightStyles.displayBox}>
       <InfoBox text = "No temperatures pinned" type = "heading" textStyle="subHeadingText"/>
   </View>
     )}
@@ -98,12 +99,13 @@ if( temperature.length === 0 || humidity.length === 0) {
             title={"humidity"}
             onPinPress={onPinPress}
             onAddNote={onAddNote}
+            isDarkTheme={isDarkTheme}
           />
         </View>
       ))
     ) : (
-      <View style = {styles.displayBox}>
-      <InfoBox text = "No humidities pinned" type = "heading" textStyle="subHeadingText"/>
+      <View style = {lightStyles.displayBox}>
+      <InfoBox text = "No humidities pinned" type = "heading" textStyle="subHeadingText" isDarkTheme={isDarkTheme}/>
     </View>
     )}
     </View>

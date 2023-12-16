@@ -1,16 +1,17 @@
 import { View, Text } from 'react-native'
-import { styles } from '../../styles/styles'
+import { lightStyles } from '../../styles/lightStyles'
 import React from 'react'
+import { darkStyles } from '../../styles/darkStyles';
 
-export default function InfoBox({text, type, textStyle}) {
+export default function InfoBox({text, type, textStyle, isDarkTheme}) {
 
   const getBoxStyles = () => { 
      
     const styleMap = {
-      small: styles.smallInfoBox,
-      medium: styles.mediumInfoBox,
-      heading: styles.headingBox,
-      status: styles.statusBox,
+      small: lightStyles.smallInfoBox,
+      medium: lightStyles.mediumInfoBox,
+      heading: lightStyles.headingBox,
+      status: lightStyles.statusBox,
     };
   
     return styleMap[type];
@@ -18,8 +19,8 @@ export default function InfoBox({text, type, textStyle}) {
 
   const getTextStyle = () => {
     const styleMap = {
-      subHeadingText: styles.subHeadingText,
-      headingText: styles.headingText
+      subHeadingText: isDarkTheme? darkStyles.subHeadingText : lightStyles.subHeadingText,
+      headingText: isDarkTheme? darkStyles.headingText : lightStyles.headingText
     }
 
     return [styleMap[textStyle]]

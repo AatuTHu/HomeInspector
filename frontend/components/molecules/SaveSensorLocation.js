@@ -4,10 +4,11 @@ import InfoBox from '../atoms/InfoBox'
 import InputBox from '../atoms/InputBox'
 import Buttons from '../atoms/Buttons'
 import { View, Text } from 'react-native'
-import { styles } from "../../styles/styles"
+import { lightStyles } from "../../styles/lightStyles"
+import { darkStyles } from '../../styles/darkStyles'
 import Icon from "react-native-vector-icons/AntDesign"
 
-export default function saveSensorLocation({selected, setCurrentHumLoc, setCurrentTempLoc, currentHumLoc, currentTempLoc}) {
+export default function saveSensorLocation({selected, setCurrentHumLoc, setCurrentTempLoc, currentHumLoc, currentTempLoc, isDarkTheme}) {
 
     const {apiKey, temperatureLocationURL, humidityLocationURL} = variables
     const [newLocation, setNewLocation] = useState('');
@@ -46,11 +47,11 @@ export default function saveSensorLocation({selected, setCurrentHumLoc, setCurre
     let rememberLocation = selected === "humidity" ? currentHumLoc : currentTempLoc
 
   return (<>
-    <InfoBox text = "Device location" textStyle = 'headingText' type = 'heading'/>  
-        <InputBox placeholder= "update location" text = {rememberLocation} newText = { setNewLocation } onSubmitEditing={ saveLocation }/>
+    <InfoBox text = "Device location" textStyle = 'headingText' type = 'heading' isDarkTheme={isDarkTheme}/>  
+        <InputBox placeholder= "update location" text = {rememberLocation} newText = { setNewLocation } onSubmitEditing={ saveLocation } isDarkTheme={isDarkTheme}/>
     <Buttons text = {<Icon name='save' size={35} color={'white'}/>} textStyle="white" type = "save" onPress={ saveLocation } />
-    <View style = { styles.block}>
-        <Text style = { styles.statusText }>{statusText}</Text>
+    <View style = { isDarkTheme ? darkStyles.block : lightStyles.block }>
+        <Text style = { lightStyles.statusText }>{statusText}</Text>
     </View>
   </>)
 }

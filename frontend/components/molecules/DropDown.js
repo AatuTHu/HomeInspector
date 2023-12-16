@@ -1,10 +1,11 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, {useState} from 'react'
-import { styles } from '../../styles/styles'
+import { lightStyles } from '../../styles/lightStyles'
 import Buttons from '../atoms/Buttons'
 import InfoBox from '../atoms/InfoBox'
+import { darkStyles } from '../../styles/darkStyles'
 
-export default function DropDown({setSelected,selected,options}) {
+export default function DropDown({setSelected,selected,options, isDarkTheme}) {
 
   const [hide, setHide] = useState(true)
 
@@ -18,19 +19,19 @@ export default function DropDown({setSelected,selected,options}) {
     }
 
   return (<>
-  <InfoBox text = "Sensor" textStyle = 'headingText' type = 'heading'/>
-  <Buttons text = 'Select a sensor..' textStyle = 'black' onPress = { onPressDropDown }></Buttons>
-    <View style = { styles.displayBox}>    
+  <InfoBox text = "Sensor" textStyle = 'headingText' type = 'heading' isDarkTheme={isDarkTheme}/>
+  <Buttons text = 'Select a sensor..' textStyle = {isDarkTheme ? "white" : "black"} onPress = { onPressDropDown }></Buttons>
+    <View style = { isDarkTheme ? darkStyles.displayBox : lightStyles.displayBox}>    
     { hide ? (<>
     <View>
-        <Text style = { styles.selectedText }>{selected}</Text>
+        <Text style = { isDarkTheme ? darkStyles.selectedText : lightStyles.selectedText }>{selected}</Text>
     </View>
       </>) : (<>
-          <View style = {styles.dropDownBox}>
+          <View style = { isDarkTheme ? darkStyles.dropDownBox : lightStyles.dropDownBox}>
               {options.map((options) => {
                   return(<View key = {options.id}>
-                    <TouchableOpacity  style = {styles.dropDownTextContainer} onPress = { () => onSelect(options.value)}>
-                      <Text style = {styles.subHeadingText}>{options.name}</Text>
+                    <TouchableOpacity  style = { isDarkTheme ? darkStyles.dropDownTextContainer : lightStyles.dropDownTextContainer} onPress = { () => onSelect(options.value)}>
+                      <Text style = { isDarkTheme? darkStyles.subHeadingText : lightStyles.subHeadingText}>{options.name}</Text>
                     </TouchableOpacity>
                   </View>)
               })}

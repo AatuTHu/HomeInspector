@@ -1,25 +1,25 @@
 import React from "react"
 import { View,ScrollView } from "react-native"
-import { styles } from "../../styles/styles"
+import { lightStyles } from "../../styles/lightStyles"
 import DataCard from "../molecules/DataCard"
 import Buttons from "../atoms/Buttons"
 import InfoBox from "../atoms/InfoBox"
 import Icon from "react-native-vector-icons/EvilIcons"
 
-export default function HomeScreen({latestTemperature, latestHumidity, refreshData}) {
+export default function HomeScreen({latestTemperature, latestHumidity, refreshData, isDarkTheme}) {
 
 
 if(latestTemperature.length === 0 && latestHumidity.length === 0) {
 return(
-    <View style = { styles.controlContainer }>
-      <InfoBox text = "No measurements found" type = "small" textStyle="subHeadingText"/>
-      <Buttons type = "update" textStyle="white" onPress = { refreshData } text = "Refresh"/>
+    <View style = { lightStyles.controlContainer }>
+      <InfoBox text = "No measurements found" type = "small" textStyle="subHeadingText" isDarkTheme={isDarkTheme}/>
+      <Buttons type = "refresh" textStyle="white" onPress = { refreshData } text = {<Icon name="refresh" size={40}/>}/>
     </View>)
 } else { 
 return (
     <ScrollView>
-      <View style = { styles.controlContainer }>
-      <InfoBox text = "Latest Measurements" type = "heading" textStyle="subHeadingText"/>
+      <View style = { lightStyles.controlContainer }>
+      <InfoBox text = "Latest Measurements" type = "heading" textStyle="subHeadingText" isDarkTheme={isDarkTheme}/>
         {latestTemperature.length !== 0  ? <>
         <DataCard 
           data = {latestTemperature.temperature} 
@@ -29,7 +29,8 @@ return (
           title = "Temperature"
           dataType = "temperature" 
           fillingColor= "#880D1E"
-          unit = "°C"/>
+          unit = "°C"
+          isDarkTheme={isDarkTheme}/>
         </> : <></>}
         
         {latestHumidity.length !== 0  ? <>           
@@ -41,10 +42,11 @@ return (
           title = "Humidity"
           dataType = "humidity"
           fillingColor = "#82DDF0"
-          unit = "%"/>
+          unit = "%"
+          isDarkTheme={isDarkTheme}/>
           </> : <></>}
         
-      <Buttons type = "update" textStyle="white" onPress = { refreshData } text = {<Icon name="refresh" size={40}/>}/>
+      <Buttons type = "refresh" textStyle="white" onPress = { refreshData } text = {<Icon name="refresh" size={40}/>}/>
       </View>
     </ScrollView>
   )}

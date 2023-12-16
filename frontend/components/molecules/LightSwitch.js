@@ -1,11 +1,12 @@
 import { View, Text } from 'react-native'
 import { useEffect, useState } from 'react'
-import { styles } from "../../styles/styles"
+import { lightStyles } from "../../styles/lightStyles"
 import Buttons from '../atoms/Buttons'
 import localVariables from '../../env'
 import Icon from 'react-native-vector-icons/Entypo'
+import { darkStyles } from '../../styles/darkStyles'
 
-export default function LightSwitch() {
+export default function LightSwitch({isDarkTheme}) {
 
   const {apiKey,lightURL} = localVariables
   const [lights, setLights] = useState(false)
@@ -44,10 +45,10 @@ export default function LightSwitch() {
       }
 
   return (
-    <View style = { styles.buttonRowContainer }>
+    <View style = { lightStyles.buttonRowContainer }>
         <Buttons text = {<Icon name='light-bulb' size = {30}/>} textStyle="white" type = "start" onPress={ lightSwitch }/>
-      <View style = { styles.statusBox }>
-          <Text style = { styles.subHeadingText }>{lights ? (<Text style = {{"color" : "#A30015"}}>On</Text>) : (<Text>Off</Text>)}</Text>
+      <View style = { isDarkTheme ? darkStyles.statusBox : lightStyles.statusBox }>
+          <Text style = { isDarkTheme ? darkStyles.subHeadingText : lightStyles.subHeadingText }>{lights ? (<Text style = {{"color" : "#A30015"}}>On</Text>) : (<Text>Off</Text>)}</Text>
       </View>
   </View>
   )
